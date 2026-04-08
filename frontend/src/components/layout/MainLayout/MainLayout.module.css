@@ -1,0 +1,16 @@
+.shell {
+  display: flex;
+  height: 100vh;
+  font-family: 'DM Sans', sans-serif;
+  background-color: var(--surface);
+  color: var(--ink);
+  overflow: hidden;
+  background: #f9f9f9;
+}
+.main {
+  margin-left: 220px;
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}

@@ -1,0 +1,133 @@
+.sidebar {
+  width: 220px;
+  height: 100vh;
+  background: #fff;
+  border-right: 1px solid #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 50;
+}
+
+.storeHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 12px;
+  border-bottom: 1px solid #f0f0f0;
+  flex-shrink: 0;
+}
+
+.logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  /* background: #185FA5;
+  color: #E6F1FB; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* font-size: 12px;
+  font-weight: 500; */
+  flex-shrink: 0;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #f0f0f0;
+}
+
+.storeInfo { flex: 1; }
+
+.storeName {
+  font-size: 13px;
+  font-weight: 500;
+  color: #111;
+  margin: 0;
+}
+
+.storeSub {
+  font-size: 11px;
+  color: #888;
+  margin: 0;
+}
+
+.notifBtn {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.notifBtn:hover { background: #f5f5f5; color: #111; }
+
+.nav {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+}
+
+.navGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin-bottom: 4px;
+}
+
+.sectionTitle {
+  font-size: 11px;
+  color: #aaa;
+  padding: 10px 8px 4px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #555;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.navItem:hover { background: #f5f5f5; color: #111; }
+
+.navItem.active {
+  background: #eff6ff;
+  color: #1839a5;
+  font-weight: 500;
+}
+
+.navIcon {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.navLabel { flex: 1; }
+
+.badge {
+  background: #fee2e2;
+  color: #991b1b;
+  font-size: 11px;
+  padding: 1px 7px;
+  border-radius: 99px;
+  font-weight: 500;
+}
+
+.sidebarFooter {
+  padding: 8px;
+  border-top: 1px solid #f0f0f0;
+  flex-shrink: 0;
+}

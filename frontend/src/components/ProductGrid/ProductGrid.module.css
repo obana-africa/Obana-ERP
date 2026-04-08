@@ -1,0 +1,22 @@
+.grid {
+  flex: 1;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+  align-content: start;
+  overflow-y: auto;
+}
+.card {
+  background: #fff;
+  border: 1px solid #f0f0f0;
+  border-radius: 12px;
+  padding: 12px;
+  cursor: pointer;
+  transition: border-color 0.15s, transform 0.1s;
+}
+.card:hover { border-color: #2563eb; transform: translateY(-2px); }
+.image { font-size: 28px; margin-bottom: 8px; text-align: center; }
+.name { font-size: 13px; font-weight: 500; color: #111; margin-bottom: 4px; }
+.price { font-size: 13px; color: #2563eb; font-weight: 500; }
+.stock { font-size: 11px; color: #999; margin-top: 2px; }
