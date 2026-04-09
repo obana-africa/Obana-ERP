@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
-import "./POS.css";
+import "./POS.module.css";
 
 // ── Icons ─────────────────────────────────────────────────────────
 const Icon = {
