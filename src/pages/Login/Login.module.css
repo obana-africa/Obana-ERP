@@ -20,8 +20,8 @@
 }
 
 .brandLogo {
-  width: 36px;
-  height: 36px;
+  /* width: 36px;
+  height: 36px; */
   background: #fff;
   border-radius: 8px;
   display: flex;

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './LandingPage.module.css';
+import logo from '/src/assets/images/logo/obana-logo.svg';
 
 const features = [
   {
@@ -87,7 +88,7 @@ const LandingPage = () => {
       <nav className={`${styles.navbar} ${scrolled ? styles.navScrolled : ''}`}>
         <div className={styles.navInner}>
           <div className={styles.brand}>
-            <div className={styles.brandLogo}><img src="/src/assets/images/logo/obana-logo.svg" alt="Obana Logo" /></div>
+            <div className={styles.brandLogo}><img src={logo} alt="Obana Logo" /></div>
             {/* <span className={styles.brandName}>OBANA</span> */}
           </div>
           <div className={styles.navLinks}>

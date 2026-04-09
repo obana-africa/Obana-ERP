@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styles from './Login.module.css';
+import logo from '/src/assets/images/logo/obana-logo.svg';
 
 function Login() {
   const navigate = useNavigate();
@@ -45,8 +46,8 @@ function Login() {
     <div className={styles.page}>
       <div className={styles.leftPanel}>
         <div className={styles.brand}>
-          <div className={styles.brandLogo}>O</div>
-          <span className={styles.brandName}>obana</span>
+          <div className={styles.brandLogo}><img src={logo} alt="Obana Logo" /></div>
+          {/* <span className={styles.brandName}>obana</span> */}
         </div>
         <div className={styles.leftBody}>
           <h1 className={styles.leftHeading}>Sell smarter,<br />grow faster.</h1>

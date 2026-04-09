@@ -52,20 +52,24 @@
 }
 
 .logo {
+  width: 140px;
+  height: 48px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  border-radius: 8px;
+  font-size: 17px;
+  font-weight: 700;
   flex-shrink: 0;
   background-color: #fff;
 }
 
-.logoName {
+/* .logoName {
   font-family: 'Fraunces', serif;
   font-size: 22px;
   font-weight: 700;
   color: #042869;
   letter-spacing: -0.02em;
-}
+} */
 
 .hero {
   flex: 1;

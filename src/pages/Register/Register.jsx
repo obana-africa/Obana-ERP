@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import styles from './Register.module.css'
+import { useNavigate } from 'react-router-dom'
+import logo from '/src/assets/images/logo/obana-logo.svg'
 
 const TESTIMONIALS = [
   {
@@ -98,12 +100,13 @@ export default function SignUp() {
 
           {/* Logo */}
           <div className={styles.logo}>
-            <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+            <img src={logo} alt="Obana Logo" />
+            {/* <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
               <circle cx="18" cy="18" r="16" fill="white" fillOpacity="0.08" stroke="white" strokeOpacity="0.15" strokeWidth="1" />
               <circle cx="18" cy="18" r="10" fill="none" stroke="#094488" strokeWidth="2.5" />
               <circle cx="18" cy="18" r="3.5" fill="#083374" />
             </svg>
-            <span className={styles.logoName}>obana</span>
+            <span className={styles.logoName}>obana</span> */}
           </div>
 
           {/* Headline */}
