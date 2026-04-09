@@ -87,8 +87,8 @@ const LandingPage = () => {
       <nav className={`${styles.navbar} ${scrolled ? styles.navScrolled : ''}`}>
         <div className={styles.navInner}>
           <div className={styles.brand}>
-            <div className={styles.brandLogo}>O</div>
-            <span className={styles.brandName}>OBANA</span>
+            <div className={styles.brandLogo}><img src="/src/assets/images/logo/obana-logo.svg" alt="Obana Logo" /></div>
+            {/* <span className={styles.brandName}>OBANA</span> */}
           </div>
           <div className={styles.navLinks}>
             <a href="#features" className={styles.navLink}>Features</a>
@@ -236,8 +236,8 @@ const LandingPage = () => {
       <footer className={styles.footer}>
         <div className={styles.footerInner}>
           <div className={styles.footerBrand}>
-            <div className={styles.brandLogo}>O</div>
-            <span className={styles.brandName}>OBANA POS</span>
+            <div className={styles.brandLogo}><img src="/src/assets/images/logo/obana-logo.svg" alt="" /></div>
+            {/* <span className={styles.brandName}>OBANA POS</span> */}
           </div>
           <p className={styles.footerCopy}>© 2026 OBANA. All rights reserved.</p>
           <div className={styles.footerLinks}>

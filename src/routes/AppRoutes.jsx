@@ -7,6 +7,7 @@ import Inventory from '../pages/Inventory/Inventory';
 import Dashboard from '../pages/Dashboard/Dashboard';
 import OnlineStore from '../pages/OnlineStore/OnlineStore';
 import Products from '../pages/Products/Products';
+import Customers from '../pages/Customers/Customers';
 import Register from '../pages/Register/Register';
 import MainLayout from '../components/layout/MainLayout/MainLayout';
 
@@ -21,10 +22,11 @@ const AppRoutes = () => (
         <MainLayout>
           <Routes>
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/pos" element={<POS />} />
             <Route path="/products" element={<Products />} />
             <Route path="/orders" element={<Orders />} />
+            <Route path="/customers" element={<Customers />} />
             <Route path="/inventory" element={<Inventory />} />
+            <Route path="/pos" element={<POS />} />
             <Route path="/online-store" element={<OnlineStore />} />
           </Routes>
         </MainLayout>

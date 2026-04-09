@@ -1,5 +1,32 @@
 /* ── Base ── */
 .page {
+  --color-white: #fff;
+  --color-black: #000;
+   --light-blue: rgba(171, 238, 239, 0.353);
+  --light-blu-1:rgba(233, 250, 250, 0.353);
+
+  --color-primary: #1b3b5f;
+  --color-primary-light: #dcfbf9;
+  --color-primary-dark: #111111;
+
+  --color-secondary: #ecedf0;
+  --color-secondary-light: #B8B4B480;
+  --color-secondary-dark: #49494D;
+
+	/* Accent colors */
+  --color-accent: #9A9DAF;
+  --color-accent-light: #fbbf24;
+  --color-accent-dark: #d97706;
+
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-info: #3b82f6;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, monospace;
+
   font-family: 'Georgia', serif;
   background: #fff;
   color: #111;
@@ -41,26 +68,26 @@
 }
 
 .brandLogo {
-  width: 32px;
+  /* width: 32px;
   height: 32px;
   background: #185FA5;
   color: #E6F1FB;
-  border-radius: 8px;
+  border-radius: 8px; */
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 15px;
-  font-weight: 700;
+  /* font-size: 15px; */
+  font-weight: 200;
   font-family: sans-serif;
   flex-shrink: 0;
 }
 
-.brandName {
+/* .brandName {
   font-size: 16px;
   font-weight: 600;
   color: #111;
   font-family: sans-serif;
-}
+} */
 
 .navLinks {
   display: flex;
@@ -70,13 +97,13 @@
 
 .navLink {
   font-size: 14px;
-  color: #555;
+  color: var(--color-primary);
   text-decoration: none;
   font-family: sans-serif;
   transition: color 0.15s;
 }
 
-.navLink:hover { color: #185FA5; }
+.navLink:hover { color: var(--color-accent); }
 
 .navActions {
   display: flex;
@@ -89,7 +116,7 @@
   padding: 9px 20px;
   border-radius: 8px;
   border: none;
-  background: #185FA5;
+  background: var(--color-primary);
   color: #E6F1FB;
   font-size: 14px;
   font-family: sans-serif;
@@ -97,28 +124,28 @@
   transition: background 0.15s;
 }
 
-.btnPrimary:hover { background: #0C447C; }
+.btnPrimary:hover { background: var(--light-blue); border: 1px solid var(--color-primary); color: var(--color-primary); }
 
 .btnOutline {
   padding: 9px 20px;
   border-radius: 8px;
   border: 1px solid #d0d0d0;
   background: #fff;
-  color: #333;
+  color: var(--color-primary);
   font-size: 14px;
   font-family: sans-serif;
   cursor: pointer;
   transition: border-color 0.15s;
 }
 
-.btnOutline:hover { border-color: #185FA5; color: #185FA5; }
+.btnOutline:hover { border-color: var(--color-primary); color: var(--color-accent); }
 
 .btnGhost {
   padding: 9px 20px;
   border-radius: 8px;
   border: 1px solid #e0e0e0;
   background: transparent;
-  color: #333;
+  color: var(--color-primary);
   font-size: 14px;
   font-family: sans-serif;
   cursor: pointer;
@@ -146,7 +173,7 @@
 .heroBadge {
   display: inline-block;
   background: #E6F1FB;
-  color: #0C447C;
+  color: var(--color-primary);
   font-size: 12px;
   font-family: sans-serif;
   padding: 5px 14px;
@@ -164,7 +191,7 @@
   letter-spacing: -0.02em;
 }
 
-.heroAccent { color: #185FA5; }
+.heroAccent { color: var(--color-primary); }
 
 .heroSub {
   font-size: 17px;
@@ -275,9 +302,9 @@
 
 .mockBar {
   flex: 1;
-  background: #185FA5;
+  background: var(--color-primary);
   border-radius: 3px 3px 0 0;
-  opacity: 0.15;
+  /* opacity: 0.15; */
   animation: barGrow 0.6s ease forwards;
 }
 
