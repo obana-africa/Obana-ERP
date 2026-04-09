@@ -10,8 +10,8 @@ import styles from './Sidebar.module.css';
 
 const mainNav = [
   { to: '/dashboard', icon: <MdDashboard />, label: 'Home' },
-  { to: '/orders', icon: <MdShoppingCart />, label: 'Orders',  },
   { to: '/products', icon: <MdStorefront />, label: 'Products' },
+  { to: '/orders', icon: <MdShoppingCart />, label: 'Orders',  },
   { to: '/customers', icon: <MdPeople />, label: 'Customers' },
   { to: '/inventory', icon: <MdInventory />, label: 'Inventory' },
   { to: '/discounts', icon: <MdLocalOffer />, label: 'Discounts' },
