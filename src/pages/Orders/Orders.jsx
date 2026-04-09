@@ -61,6 +61,14 @@ const REVIEWS = [
   { id: 4, customer: 'Anonymous', orderId: 'ORD-1002', product: 'Leather Crossbody Bag', rating: 2, comment: 'The colour was slightly different from the photos online. Disappointed with the delivery time as well.', date: '2026-03-29', status: 'flagged' },
 ]
 
+const SAMPLE_PRODUCTS = [
+  { id: 1, name: 'Classic Ankara Dress', price: 15000, stock: 25 },
+  { id: 2, name: 'Leather Bag', price: 22000, stock: 12 },
+  { id: 3, name: 'Premium Shea Butter', price: 4500, stock: 50 },
+  { id: 4, name: "Men's Kaftan Set", price: 28000, stock: 8 },
+  { id: 5, name: 'Leather Crossbody Bag', price: 22000, stock: 15 },
+]
+
 const STATUS_CONFIG = {
   completed:  { label: 'Completed',  bg: '#ECFDF5', color: '#059669' },
   pending:    { label: 'Pending',    bg: '#FFFBEB', color: '#D97706' },
@@ -237,14 +245,41 @@ function CreateOrderModal({ onClose, onSave }) {
               <p className={styles.secHead} style={{ margin: 0 }}>Order Items</p>
               <button className={styles.btnOutline} style={{ padding: '0.3rem 0.75rem', fontSize: 12 }} onClick={addItem}><Ico path={icons.plus} size={12} /> Add Item</button>
             </div>
-            {form.items.map((item, i) => (
-              <div key={i} className={styles.itemEditRow}>
-                <div className={styles.fg} style={{ flex: 2 }}><label>Product Name</label><input value={item.name} onChange={e => setItem(i, 'name', e.target.value)} placeholder="Product name" /></div>
-                <div className={styles.fg} style={{ flex: 0.6 }}><label>Qty</label><input type="number" min="1" value={item.qty} onChange={e => setItem(i, 'qty', e.target.value)} /></div>
-                <div className={styles.fg} style={{ flex: 1 }}><label>Unit Price (₦)</label><input type="number" value={item.price} onChange={e => setItem(i, 'price', e.target.value)} placeholder="0" /></div>
-                {form.items.length > 1 && <button className={styles.removeItemBtn} onClick={() => removeItem(i)}><Ico path={icons.close} size={13} /></button>}
-              </div>
-            ))}
+           {form.items.map((item, i) => (
+            <div key={i} className={styles.itemEditRow}>
+             <div className={styles.fg} style={{ flex: 2 }}>
+             <label>Product</label>
+              <select
+               value={item.name}
+               onChange={e => {
+                 const selected = SAMPLE_PRODUCTS.find(p => p.name === e.target.value)
+                   setItem(i, 'name', e.target.value)
+                   if (selected) setItem(i, 'price', selected.price)
+                 }}
+              >
+                 <option value="">Select a product</option>
+                 {SAMPLE_PRODUCTS.map(p => (
+                 <option key={p.id} value={p.name} disabled={p.stock === 0}>
+                   {p.name}{p.stock === 0 ? ' — Out of stock' : ` — ₦${p.price.toLocaleString()}`}
+                  </option>
+               ))}
+              </select>
+             </div>
+               <div className={styles.fg} style={{ flex: 0.6 }}>
+             <label>Qty</label>
+             <input type="number" min="1" value={item.qty} onChange={e => setItem(i, 'qty', e.target.value)} />
+           </div>
+           <div className={styles.fg} style={{ flex: 1 }}>
+             <label>Unit Price (₦)</label>
+             <input type="number" value={item.price} onChange={e => setItem(i, 'price', e.target.value)} placeholder="0" />
+             </div>
+             {form.items.length > 1 && (
+             <button className={styles.removeItemBtn} onClick={() => removeItem(i)}>
+             <Ico path={icons.close} size={13} />
+             </button>
+             )}
+             </div>
+           ))}
             <div className={styles.orderTotalRow}><span>Order Total</span><strong>{fmt(total)}</strong></div>
           </div>
 

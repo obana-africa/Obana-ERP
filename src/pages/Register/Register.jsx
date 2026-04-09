@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import styles from './Register.module.css'
 
 const TESTIMONIALS = [
@@ -176,7 +177,7 @@ export default function SignUp() {
             <div className={styles.eyebrow}>Get started for free</div>
             <h2 className={styles.formTitle}>Create your account</h2>
             <p className={styles.formDesc}>
-              Already have an account? <a href="/login" className={styles.link}>Sign in</a>
+              Already have an account?<Link to="/login" className={styles.link}>Sign in</Link>
             </p>
           </div>
 

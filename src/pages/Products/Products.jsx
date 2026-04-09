@@ -434,6 +434,7 @@ export default function ProductsDashboard() {
   const [editColl, setEditColl] = useState(null)
   const [search, setSearch] = useState('')
   // const [sidebarOpen, setSidebarOpen] = useState(true)
+  const [previewProduct, setPreviewProduct] = useState(null)
 
   const totalRetail = products.reduce((a, p) => a + p.price * p.stock, 0)
   const totalInventory = products.reduce((a, p) => a + p.stock, 0)
@@ -572,9 +573,13 @@ export default function ProductsDashboard() {
                           </span>
                         </td>
                         <td>
-                          <div className={s.rowActions}>
-                            <button className={s.btnIconSm} title="Edit">
-                              <Ic size={13}><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" /></Ic>
+                         <div className={s.rowActions}>
+                           <button className={s.btnIconSm} title="Edit">
+                             <Ic size={13}><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" /></Ic>
+                            </button>
+                            <button className={s.btnIconSm} title="Preview"
+                             onClick={() => setPreviewProduct(p)}>
+                              <Ic size={13}><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><path d="M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6z" /></Ic>
                             </button>
                             <button className={s.btnIconSm} title="Delete"
                               onClick={() => setProducts(products.filter(x => x.id !== p.id))}>
@@ -644,6 +649,58 @@ export default function ProductsDashboard() {
           }])} />
       )}
       {modal === 'import' && <ImportModal onClose={() => setModal(null)} />}
+        {previewProduct && (
+  <div className={s.overlay} onClick={() => setPreviewProduct(null)}>
+    <div className={s.modal} onClick={e => e.stopPropagation()}>
+      <div className={s.modalHead}>
+        <span className={s.modalTitle}>Product Preview</span>
+        <button className={s.modalClose} onClick={() => setPreviewProduct(null)}>
+          <Ic size={18}><path d="M18 6 6 18M6 6l12 12" /></Ic>
+        </button>
+      </div>
+      <div className={s.modalBody}>
+        <div className={s.previewImgBox}>
+          {previewProduct.img
+            ? <img src={previewProduct.img} alt={previewProduct.name} className={s.previewImg} />
+            : <div className={s.previewImgPlaceholder}>
+                <Ic size={36}><rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" /><polyline points="21 15 16 10 5 21" /></Ic>
+                <span>No image uploaded</span>
+              </div>
+          }
+        </div>
+        <div className={s.previewName}>{previewProduct.name}</div>
+        <div className={s.previewMeta}>
+          <span className={s.categoryBadge}>{previewProduct.category}</span>
+          {previewProduct.variants && <span className={s.variantBadge}>Has variants</span>}
+        </div>
+        <div className={s.previewStats}>
+          {[
+            { label: 'Price', value: `₦${previewProduct.price.toLocaleString()}` },
+            { label: 'Stock', value: previewProduct.stock },
+            { label: 'Units Sold', value: previewProduct.sold },
+          ].map(stat => (
+            <div key={stat.label} className={s.previewStat}>
+              <div className={s.previewStatVal}>{stat.value}</div>
+              <div className={s.previewStatLbl}>{stat.label}</div>
+            </div>
+          ))}
+        </div>
+        <div className={s.previewStatusRow}>
+          <span className={`${s.statusBadge} ${previewProduct.stock === 0 ? s.statusOut : s.statusIn}`}>
+            {previewProduct.stock === 0 ? 'Out of stock' : 'In stock'}
+          </span>
+        </div>
+      </div>
+      <div className={s.modalFooter}>
+        <button className={s.btnGhost} onClick={() => setPreviewProduct(null)}>Close</button>
+        <button className={s.btnPrimary} onClick={() => { setPreviewProduct(null); setModal('add') }}>
+          <Ic size={13}><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" /></Ic>
+          Edit Product
+        </button>
+      </div>
+    </div>
+  </div>
+)}
       {(modal === 'collection' || modal === 'editCollection') && (
         <CollectionModal
           collection={modal === 'editCollection' ? editColl : null}
