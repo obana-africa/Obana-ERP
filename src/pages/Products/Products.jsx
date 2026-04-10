@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react'
+import { useLocation } from 'react-router-dom'
 import s from './Products.module.css'
 
 // ── Tiny SVG icon helper ─────────────────────────────────
@@ -427,13 +428,16 @@ function EmptyState({ tab, onAdd, onImport }) {
 
 // ── Main Dashboard ───────────────────────────────────────
 export default function ProductsDashboard() {
-  const [tab, setTab] = useState('products')
+  const location = useLocation()
+  const [tab, setTab] = useState(new URLSearchParams(location.search).get('tab') === 'collections' ? 'collections' : 'products')
   const [products, setProducts] = useState(SAMPLE_PRODUCTS)
-  const [collections, setCollections] = useState(SAMPLE_COLLECTIONS)
+  // const [collections, setCollections] = useState(SAMPLE_COLLECTIONS)
   const [modal, setModal] = useState(null)
-  const [editColl, setEditColl] = useState(null)
+  // const [editColl, setEditColl] = useState(null)
   const [search, setSearch] = useState('')
   // const [sidebarOpen, setSidebarOpen] = useState(true)
+  const [previewProduct, setPreviewProduct] = useState(null)
+  const [showSearchDrop, setShowSearchDrop] = useState(false);
 
   const totalRetail = products.reduce((a, p) => a + p.price * p.stock, 0)
   const totalInventory = products.reduce((a, p) => a + p.stock, 0)
@@ -448,22 +452,28 @@ export default function ProductsDashboard() {
     <div className={s.page}>
       {/* ── Main ── */}
       <main className={s.main}>
-
         {/* Topbar */}
         <header className={s.topbar}>
           <div className={s.topbarLeft}>
             {/* <button className={s.hamburger} onClick={() => setSidebarOpen(v => !v)}>
               <Ic size={18}><line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="21" y2="18" /></Ic>
-            </button> */}    
+            </button> */}
             <h1 className={s.pageTitle}>Products</h1>
           </div>
           <div className={s.topbarRight}>
             <button className={s.btnViewStore}>
-              <Ic size={13}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" /></Ic>
+              <Ic size={13}>
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </Ic>
               View Store
             </button>
             <button className={s.btnIcon} title="Notifications">
-              <Ic size={17}><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" /><path d="M13.73 21a2 2 0 0 1-3.46 0" /></Ic>
+              <Ic size={17}>
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+              </Ic>
             </button>
             <div className={s.avatar}></div>
           </div>
@@ -472,15 +482,42 @@ export default function ProductsDashboard() {
         {/* Stats */}
         <div className={s.statsRow}>
           {[
-            { label: 'Total Retail Value', value: `₦${totalRetail.toLocaleString()}`, icon: '', color: '#edfaf5', iconColor: '#19a97b' },
-            { label: 'Total Inventory Value', value: `₦${totalInventory.toLocaleString()}`, icon: '', color: '#fef9ec', iconColor: '#d4a017' },
-            { label: 'Products Sold', value: totalSold, icon: '', color: '#eef4ff', iconColor: '#3b5fe2' },
-            { label: 'Out of Stock', value: outOfStock, icon: '', color: '#fff3f3', iconColor: '#e24b4a' },
-          ].map(stat => (
+            {
+              label: "Total Retail Value",
+              value: `₦${totalRetail.toLocaleString()}`,
+              icon: "",
+              color: "#edfaf5",
+              iconColor: "#19a97b",
+            },
+            {
+              label: "Total Inventory Value",
+              value: `₦${totalInventory.toLocaleString()}`,
+              icon: "",
+              color: "#fef9ec",
+              iconColor: "#d4a017",
+            },
+            {
+              label: "Products Sold",
+              value: totalSold,
+              icon: "",
+              color: "#eef4ff",
+              iconColor: "#3b5fe2",
+            },
+            {
+              label: "Out of Stock",
+              value: outOfStock,
+              icon: "",
+              color: "#fff3f3",
+              iconColor: "#e24b4a",
+            },
+          ].map((stat) => (
             <div key={stat.label} className={s.statCard}>
               <div className={s.statRow}>
                 <span className={s.statValue}>{stat.value}</span>
-                <div className={s.statBadge} style={{ background: stat.color, color: stat.iconColor }}>
+                <div
+                  className={s.statBadge}
+                  style={{ background: stat.color, color: stat.iconColor }}
+                >
                   {stat.icon}
                 </div>
               </div>
@@ -492,47 +529,139 @@ export default function ProductsDashboard() {
         {/* Tab bar */}
         <div className={s.tabBar}>
           <div className={s.tabs}>
-            <button className={`${s.tab} ${tab === 'products' ? s.tabActive : ''}`}
+            <button className={`${s.tab} ${s.tabActive}`}>Products</button>
+            {/* <button className={`${s.tab} ${tab === 'products' ? s.tabActive : ''}`}
               onClick={() => setTab('products')}>Products</button>
             <button className={`${s.tab} ${tab === 'collections' ? s.tabActive : ''}`}
-              onClick={() => setTab('collections')}>Collections</button>
+              onClick={() => setTab('collections')}>Collections</button> */}
           </div>
           <div className={s.tabActions}>
-            {tab === 'products' && (
+            {tab === "products" && (
               <>
-                <div className={s.searchWrap}>
-                  <Ic size={13}><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></Ic>
-                  <input className={s.searchInput} placeholder="Search products..."
-                    value={search} onChange={e => setSearch(e.target.value)} />
+                <div className={s.searchWrap} style={{ position: "relative" }}>
+                  <Ic size={13}>
+                    <circle cx="11" cy="11" r="8" />
+                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                  </Ic>
+                  <input
+                    className={s.searchInput}
+                    placeholder="Search products..."
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    onFocus={() => setShowSearchDrop(true)}
+                    onBlur={() =>
+                      setTimeout(() => setShowSearchDrop(false), 150)
+                    }
+                  />
+                  {showSearchDrop && (
+                    <div className={s.searchDrop}>
+                      {(search
+                        ? products.filter((p) =>
+                            p.name.toLowerCase().includes(search.toLowerCase()),
+                          )
+                        : products
+                      ).length === 0 ? (
+                        <div className={s.searchDropEmpty}>
+                          No products found
+                        </div>
+                      ) : (
+                        (search
+                          ? products.filter((p) =>
+                              p.name
+                                .toLowerCase()
+                                .includes(search.toLowerCase()),
+                            )
+                          : products
+                        ).map((p) => (
+                          <div
+                            key={p.id}
+                            className={s.searchDropItem}
+                            onMouseDown={() => {
+                              setSearch(p.name);
+                              setShowSearchDrop(false);
+                            }}
+                          >
+                            <div className={s.searchDropThumb}>
+                              {p.img ? (
+                                <img src={p.img} alt={p.name} />
+                              ) : (
+                                p.name[0]
+                              )}
+                            </div>
+                            <div className={s.searchDropInfo}>
+                              <div className={s.searchDropName}>{p.name}</div>
+                              <div className={s.searchDropMeta}>
+                                {p.category} · ₦{p.price.toLocaleString()}
+                              </div>
+                            </div>
+                            <span
+                              className={s.searchDropStock}
+                              style={{
+                                color: p.stock === 0 ? "#EF4444" : "#059669",
+                              }}
+                            >
+                              {p.stock === 0
+                                ? "Out of stock"
+                                : `${p.stock} in stock`}
+                            </span>
+                          </div>
+                        ))
+                      )}
+                    </div>
+                  )}
                 </div>
-                <button className={s.btnOutline} onClick={() => setModal('import')}>
-                  <Ic size={13}><path d="M8 17l4 4 4-4M12 12v9" /><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29" /></Ic>
+                <button
+                  className={s.btnOutline}
+                  onClick={() => setModal("import")}
+                >
+                  <Ic size={13}>
+                    <path d="M8 17l4 4 4-4M12 12v9" />
+                    <path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29" />
+                  </Ic>
                   Import
                 </button>
-                <button className={s.btnPrimary} onClick={() => setModal('add')}>
-                  <Ic size={13}><path d="M12 5v14M5 12h14" /></Ic>
+                <button
+                  className={s.btnPrimary}
+                  onClick={() => setModal("add")}
+                >
+                  <Ic size={13}>
+                    <path d="M12 5v14M5 12h14" />
+                  </Ic>
                   Add Product
                 </button>
               </>
             )}
-            {tab === 'collections' && (
-              <button className={s.btnPrimary} onClick={() => { setEditColl(null); setModal('collection') }}>
-                <Ic size={13}><path d="M12 5v14M5 12h14" /></Ic>
+            {/* {tab === "collections" && (
+              <button
+                className={s.btnPrimary}
+                onClick={() => {
+                  setEditColl(null);
+                  setModal("collection");
+                }}
+              >
+                <Ic size={13}>
+                  <path d="M12 5v14M5 12h14" />
+                </Ic>
                 Create Collection
               </button>
-            )}
+            )} */}
           </div>
         </div>
 
         {/* Content */}
         <div className={s.content}>
-
-          {tab === 'products' && (
-            filtered.length === 0 && !search ? (
-              <EmptyState tab="products" onAdd={() => setModal('add')} onImport={() => setModal('import')} />
+          {tab === "products" &&
+            (filtered.length === 0 && !search ? (
+              <EmptyState
+                tab="products"
+                onAdd={() => setModal("add")}
+                onImport={() => setModal("import")}
+              />
             ) : filtered.length === 0 ? (
               <div className={s.emptyState}>
-                <p style={{ color: '#888' }}>No products match "<strong>{search}</strong>"</p>
+                <p style={{ color: "#888" }}>
+                  No products match "<strong>{search}</strong>"
+                </p>
               </div>
             ) : (
               <div className={s.tableWrap}>
@@ -549,36 +678,73 @@ export default function ProductsDashboard() {
                     </tr>
                   </thead>
                   <tbody>
-                    {filtered.map(p => (
+                    {filtered.map((p) => (
                       <tr key={p.id}>
                         <td>
                           <div className={s.productCell}>
                             <div className={s.productThumb}>
-                              {p.img ? <img src={p.img} alt={p.name} /> : p.name[0]}
+                              {p.img ? (
+                                <img src={p.img} alt={p.name} />
+                              ) : (
+                                p.name[0]
+                              )}
                             </div>
                             <div>
                               <div className={s.productName}>{p.name}</div>
-                              {p.variants && <span className={s.variantBadge}>Has variants</span>}
+                              {p.variants && (
+                                <span className={s.variantBadge}>
+                                  Has variants
+                                </span>
+                              )}
                             </div>
                           </div>
                         </td>
-                        <td><span className={s.categoryBadge}>{p.category}</span></td>
-                        <td className={s.priceCell}>₦{p.price.toLocaleString()}</td>
+                        <td>
+                          <span className={s.categoryBadge}>{p.category}</span>
+                        </td>
+                        <td className={s.priceCell}>
+                          ₦{p.price.toLocaleString()}
+                        </td>
                         <td>{p.stock}</td>
                         <td>{p.sold}</td>
                         <td>
-                          <span className={`${s.statusBadge} ${p.stock === 0 ? s.statusOut : s.statusIn}`}>
-                            {p.stock === 0 ? 'Out of stock' : 'In stock'}
+                          <span
+                            className={`${s.statusBadge} ${p.stock === 0 ? s.statusOut : s.statusIn}`}
+                          >
+                            {p.stock === 0 ? "Out of stock" : "In stock"}
                           </span>
                         </td>
                         <td>
                           <div className={s.rowActions}>
                             <button className={s.btnIconSm} title="Edit">
-                              <Ic size={13}><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" /></Ic>
+                              <Ic size={13}>
+                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                              </Ic>
                             </button>
-                            <button className={s.btnIconSm} title="Delete"
-                              onClick={() => setProducts(products.filter(x => x.id !== p.id))}>
-                              <Ic size={13}><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" /><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /></Ic>
+                            <button
+                              className={s.btnIconSm}
+                              title="Preview"
+                              onClick={() => setPreviewProduct(p)}
+                            >
+                              <Ic size={13}>
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                <circle cx="12" cy="12" r="3" />
+                              </Ic>
+                            </button>
+                            <button
+                              className={s.btnIconSm}
+                              title="Delete"
+                              onClick={() =>
+                                setProducts(
+                                  products.filter((x) => x.id !== p.id),
+                                )
+                              }
+                            >
+                              <Ic size={13}>
+                                <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                                <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                              </Ic>
                             </button>
                           </div>
                         </td>
@@ -587,32 +753,49 @@ export default function ProductsDashboard() {
                   </tbody>
                 </table>
               </div>
-            )
-          )}
-
-          {tab === 'collections' && (
-            collections.length === 0 ? (
-              <EmptyState tab="collections" onAdd={() => { setEditColl(null); setModal('collection') }} />
+            ))}
+          {/* 
+          {tab === "collections" &&
+            (collections.length === 0 ? (
+              <EmptyState
+                tab="collections"
+                onAdd={() => {
+                  setEditColl(null);
+                  setModal("collection");
+                }}
+              />
             ) : (
               <div className={s.collGrid}>
-                {collections.map(c => (
+                {collections.map((c) => (
                   <div key={c.id} className={s.collCard}>
                     <div className={s.collCover}>
-                      {c.img
-                        ? <img src={c.img} alt={c.name} />
-                        : <div className={s.collPlaceholder}>
-                            <Ic size={32}><rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" /><polyline points="21 15 16 10 5 21" /></Ic>
-                          </div>
-                      }
+                      {c.img ? (
+                        <img src={c.img} alt={c.name} />
+                      ) : (
+                        <div className={s.collPlaceholder}>
+                          <Ic size={32}>
+                            <rect x="3" y="3" width="18" height="18" rx="2" />
+                            <circle cx="8.5" cy="8.5" r="1.5" />
+                            <polyline points="21 15 16 10 5 21" />
+                          </Ic>
+                        </div>
+                      )}
                       <div className={s.collOverlay}>
-                        <button className={s.collAction}
-                          onClick={() => { setEditColl(c); setModal('editCollection') }}>
-                          <Ic size={13}><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" /></Ic>
+                        <button className={s.collAction} onClick={() => {
+                            setEditColl(c);
+                            setModal("editCollection");
+                          }}
+                        >
+                          <Ic size={13}>
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                          </Ic>
                           Edit
                         </button>
                         <button className={`${s.collAction} ${s.collActionDanger}`}
-                          onClick={() => setCollections(collections.filter(x => x.id !== c.id))}>
-                          <Ic size={13}><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" /></Ic>
+                          onClick={() => setCollections( collections.filter((x) => x.id !== c.id), )
+                        }>
+                          <Ic size={13}> <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" /> </Ic>
                           Delete
                         </button>
                       </div>
@@ -623,39 +806,154 @@ export default function ProductsDashboard() {
                     </div>
                   </div>
                 ))}
-                <button className={s.collAddCard}
-                  onClick={() => { setEditColl(null); setModal('collection') }}>
-                  <Ic size={26}><path d="M12 5v14M5 12h14" /></Ic>
+                <button
+                  className={s.collAddCard}
+                  onClick={() => {
+                    setEditColl(null);
+                    setModal("collection");
+                  }}
+                >
+                  <Ic size={26}>
+                    <path d="M12 5v14M5 12h14" />
+                  </Ic>
                   <span>New Collection</span>
                 </button>
               </div>
-            )
-          )}
+            ))} */}
         </div>
       </main>
 
       {/* Modals */}
-      {modal === 'add' && (
-        <AddProductModal onClose={() => setModal(null)}
-          onAdd={(form) => setProducts([...products, {
-            id: Date.now(), name: form.name || 'Untitled Product',
-            price: parseFloat(form.price) || 0, stock: parseInt(form.stock) || 0,
-            sold: 0, img: null, category: form.collection || 'General', variants: false
-          }])} />
+      {modal === "add" && (
+        <AddProductModal
+          onClose={() => setModal(null)}
+          onAdd={(form) =>
+            setProducts([
+              ...products,
+              {
+                id: Date.now(),
+                name: form.name || "Untitled Product",
+                price: parseFloat(form.price) || 0,
+                stock: parseInt(form.stock) || 0,
+                sold: 0,
+                img: null,
+                category: form.collection || "General",
+                variants: false,
+              },
+            ])
+          }
+        />
       )}
-      {modal === 'import' && <ImportModal onClose={() => setModal(null)} />}
-      {(modal === 'collection' || modal === 'editCollection') && (
+      {modal === "import" && <ImportModal onClose={() => setModal(null)} />}
+      {previewProduct && (
+        <div className={s.overlay} onClick={() => setPreviewProduct(null)}>
+          <div className={s.modal} onClick={(e) => e.stopPropagation()}>
+            <div className={s.modalHead}>
+              <span className={s.modalTitle}>Product Preview</span>
+              <button
+                className={s.modalClose}
+                onClick={() => setPreviewProduct(null)}
+              >
+                <Ic size={18}>
+                  <path d="M18 6 6 18M6 6l12 12" />
+                </Ic>
+              </button>
+            </div>
+            <div className={s.modalBody}>
+              <div className={s.previewImgBox}>
+                {previewProduct.img ? (
+                  <img
+                    src={previewProduct.img}
+                    alt={previewProduct.name}
+                    className={s.previewImg}
+                  />
+                ) : (
+                  <div className={s.previewImgPlaceholder}>
+                    <Ic size={36}>
+                      <rect x="3" y="3" width="18" height="18" rx="2" />
+                      <circle cx="8.5" cy="8.5" r="1.5" />
+                      <polyline points="21 15 16 10 5 21" />
+                    </Ic>
+                    <span>No image uploaded</span>
+                  </div>
+                )}
+              </div>
+              <div className={s.previewName}>{previewProduct.name}</div>
+              <div className={s.previewMeta}>
+                <span className={s.categoryBadge}>
+                  {previewProduct.category}
+                </span>
+                {previewProduct.variants && (
+                  <span className={s.variantBadge}>Has variants</span>
+                )}
+              </div>
+              <div className={s.previewStats}>
+                {[
+                  {
+                    label: "Price",
+                    value: `₦${previewProduct.price.toLocaleString()}`,
+                  },
+                  { label: "Stock", value: previewProduct.stock },
+                  { label: "Units Sold", value: previewProduct.sold },
+                ].map((stat) => (
+                  <div key={stat.label} className={s.previewStat}>
+                    <div className={s.previewStatVal}>{stat.value}</div>
+                    <div className={s.previewStatLbl}>{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+              <div className={s.previewStatusRow}>
+                <span
+                  className={`${s.statusBadge} ${previewProduct.stock === 0 ? s.statusOut : s.statusIn}`}
+                >
+                  {previewProduct.stock === 0 ? "Out of stock" : "In stock"}
+                </span>
+              </div>
+            </div>
+            <div className={s.modalFooter}>
+              <button
+                className={s.btnGhost}
+                onClick={() => setPreviewProduct(null)}
+              >
+                Close
+              </button>
+              <button
+                className={s.btnPrimary}
+                onClick={() => {
+                  setPreviewProduct(null);
+                  setModal("add");
+                }}
+              >
+                <Ic size={13}>
+                  <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                  <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                </Ic>
+                Edit Product
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* {(modal === "collection" || modal === "editCollection") && (
         <CollectionModal
-          collection={modal === 'editCollection' ? editColl : null}
+          collection={modal === "editCollection" ? editColl : null}
           onClose={() => setModal(null)}
           onSave={(data) => {
-            if (modal === 'editCollection') {
-              setCollections(collections.map(c => c.id === editColl.id ? { ...c, ...data } : c))
+            if (modal === "editCollection") {
+              setCollections(
+                collections.map((c) =>
+                  c.id === editColl.id ? { ...c, ...data } : c,
+                ),
+              );
             } else {
-              setCollections([...collections, { id: Date.now(), products: 0, ...data }])
+              setCollections([
+                ...collections,
+                { id: Date.now(), products: 0, ...data },
+              ]);
             }
-          }} />
-      )}
+          }}
+        />
+      )} */}
     </div>
-  )
+  );
 }

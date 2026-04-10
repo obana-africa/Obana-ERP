@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import styles from './Orders.module.css'
 
 // ── Icons ────────────────────────────────────────────────
@@ -38,6 +38,110 @@ const icons = {
   copy:        ['M8 10a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-8a2 2 0 0 1-2-2v-8z','M4 14a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2'],
 }
 
+// ── Searchable Dropdown ──────────────────────────────────
+function SearchDropdown({ label, placeholder, value, onChange, options, renderOption, renderSelected }) {
+  const [open, setOpen] = useState(false)
+  const [query, setQuery] = useState('')
+  const ref = useRef(null)
+
+  useEffect(() => {
+    const handler = (e) => { if (ref.current && !ref.current.contains(e.target)) setOpen(false) }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [])
+
+  const filtered = options.filter(o =>
+    renderOption(o).toLowerCase().includes(query.toLowerCase())
+  )
+
+  const selected = options.find(o => o.id === value || o.name === value)
+
+  return (
+    <div style={{ position: 'relative' }} ref={ref}>
+      <div
+        onClick={() => { setOpen(v => !v); setQuery('') }}
+        style={{
+          width: '100%', padding: '0.55rem 0.75rem',
+          fontFamily: 'DM Sans, sans-serif', fontSize: 13.5,
+          color: selected ? 'var(--ink)' : '#C4C9D4',
+          background: 'var(--white)',
+          border: `1.5px solid ${open ? 'var(--green)' : 'var(--border)'}`,
+          borderRadius: 8, cursor: 'pointer',
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          boxShadow: open ? '0 0 0 3px rgba(45,189,151,0.1)' : 'none',
+          transition: 'border-color 0.2s, box-shadow 0.2s',
+          userSelect: 'none',
+        }}
+      >
+        <span>{selected ? renderSelected(selected) : placeholder}</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+          style={{ transform: open ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.25s', flexShrink: 0, color: 'var(--ink3)' }}>
+          <path d="M6 9l6 6 6-6" />
+        </svg>
+      </div>
+
+      <div style={{
+        position: 'absolute', top: 'calc(100% + 6px)', left: 0, right: 0, zIndex: 999,
+        background: 'var(--white)', border: '1.5px solid var(--border)',
+        borderRadius: 10, boxShadow: '0 8px 30px rgba(0,0,0,0.12)',
+        overflow: 'hidden',
+        maxHeight: open ? 260 : 0,
+        opacity: open ? 1 : 0,
+        transition: 'max-height 0.28s cubic-bezier(0.4,0,0.2,1), opacity 0.2s ease',
+        pointerEvents: open ? 'auto' : 'none',
+      }}>
+        <div style={{ padding: '8px 8px 4px' }}>
+          <div style={{ position: 'relative' }}>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+              style={{ position: 'absolute', left: 9, top: '50%', transform: 'translateY(-50%)', color: 'var(--ink4)' }}>
+              <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+            <input
+              autoFocus
+              value={query}
+              onChange={e => setQuery(e.target.value)}
+              placeholder={`Search ${label.toLowerCase()}...`}
+              style={{
+                width: '100%', padding: '0.45rem 0.75rem 0.45rem 30px',
+                fontFamily: 'DM Sans, sans-serif', fontSize: 13,
+                border: '1.5px solid var(--border)', borderRadius: 7,
+                outline: 'none', color: 'var(--ink)', background: 'var(--surface)',
+              }}
+              onClick={e => e.stopPropagation()}
+            />
+          </div>
+        </div>
+
+        <div style={{ overflowY: 'auto', maxHeight: 195 }}>
+          {filtered.length === 0 ? (
+            <div style={{ padding: '1rem', textAlign: 'center', fontSize: 13, color: 'var(--ink3)' }}>
+              No results found
+            </div>
+          ) : filtered.map((o, i) => (
+            <div key={i}
+              onClick={() => { onChange(o); setOpen(false); setQuery('') }}
+              style={{
+                padding: '0.6rem 0.85rem', cursor: 'pointer', fontSize: 13,
+                color: (o.id === value || o.name === value) ? 'var(--green-dk)' : 'var(--ink2)',
+                background: (o.id === value || o.name === value) ? 'var(--green-lt)' : 'transparent',
+                transition: 'background 0.12s',
+                opacity: o.disabled ? 0.4 : 1,
+                pointerEvents: o.disabled ? 'none' : 'auto',
+              }}
+              onMouseEnter={e => { if (!o.disabled) e.currentTarget.style.background = '#F0FDF9' }}
+              onMouseLeave={e => { e.currentTarget.style.background = (o.id === value || o.name === value) ? 'var(--green-lt)' : 'transparent' }}
+            >
+              {renderOption(o)}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 // ── Sample Data ──────────────────────────────────────────
 const SAMPLE_ORDERS = [
   { id: 'ORD-1001', customer: 'Adaeze Okonkwo', email: 'adaeze@gmail.com', phone: '+234 803 123 4567', items: [{ name: 'Classic Ankara Dress', qty: 2, price: 15000 }, { name: 'Leather Bag', qty: 1, price: 22000 }], total: 52000, status: 'completed', payment: 'paid', shipping: 'delivered', date: '2026-04-01', channel: 'Website', address: '14 Adeola Odeku, VI, Lagos' },
@@ -46,6 +150,20 @@ const SAMPLE_ORDERS = [
   { id: 'ORD-1004', customer: 'Chukwuemeka Ibe', email: 'emeka.ibe@gmail.com', phone: '+234 909 876 5432', items: [{ name: 'Classic Ankara Dress', qty: 1, price: 15000 }, { name: 'Premium Shea Butter', qty: 2, price: 4500 }], total: 24000, status: 'completed', payment: 'paid', shipping: 'delivered', date: '2026-03-30', channel: 'Website', address: '5 Rumuola Road, Port Harcourt' },
   { id: 'ORD-1005', customer: 'Ngozi Eze', email: 'ngozi.e@gmail.com', phone: '+234 803 456 7890', items: [{ name: 'Leather Crossbody Bag', qty: 1, price: 22000 }], total: 22000, status: 'cancelled', payment: 'refunded', shipping: 'cancelled', date: '2026-03-28', channel: 'Website', address: '19 Ogui Road, Enugu' },
   { id: 'ORD-1006', customer: 'Bola Adesanya', email: 'bola.a@outlook.com', phone: '+234 817 654 3210', items: [{ name: 'Classic Ankara Dress', qty: 3, price: 15000 }], total: 45000, status: 'pending', payment: 'partial', shipping: 'pending', date: '2026-04-04', channel: 'Facebook', address: '8 Bodija Market, Ibadan' },
+]
+
+const SAMPLE_CUSTOMERS = [
+  { id: 'CUST-001', name: 'Adaeze Okonkwo', email: 'adaeze@gmail.com', phone: '+234 803 123 4567', address: '14 Adeola Odeku, VI, Lagos' },
+  { id: 'CUST-002', name: 'Emmanuel Bassey', email: 'emma.b@yahoo.com', phone: '+234 812 987 6543', address: '7 Wuse Zone 4, Abuja' },
+  { id: 'CUST-003', name: 'Fatima Kabir', email: 'fatimak@hotmail.com', phone: '+234 706 234 5678', address: '22 Ahmadu Bello Way, Kano' },
+  { id: 'CUST-004', name: 'Chukwuemeka Ibe', email: 'emeka.ibe@gmail.com', phone: '+234 909 876 5432', address: '5 Rumuola Road, Port Harcourt' },
+]
+
+const SAMPLE_PRODUCTS = [
+  { id: 'PROD-001', name: 'Classic Ankara Dress', price: 15000, stock: 5 },
+  { id: 'PROD-002', name: 'Leather Bag', price: 22000, stock: 3 },
+  { id: 'PROD-003', name: 'Premium Shea Butter', price: 4500, stock: 12 },
+  { id: 'PROD-004', name: "Men's Kaftan Set", price: 28000, stock: 2 },
 ]
 
 const ABANDONED = [
@@ -218,7 +336,18 @@ function CreateOrderModal({ onClose, onSave }) {
         <div className={styles.mBody}>
           <p className={styles.secHead}>Customer Details</p>
           <div className={styles.fRow}>
-            <div className={styles.fg}><label>Customer Name <span className={styles.req}>*</span></label><input value={form.customer} onChange={e => set('customer', e.target.value)} placeholder="Full name" /></div>
+            <div className={styles.fg}>
+        <label>Customer Name <span className={styles.req}>*</span></label>
+         <SearchDropdown
+           label="Customer"
+           placeholder="Select a customer"
+           value={form.customer}
+           onChange={c => { set('customer', c.name); set('email', c.email); set('phone', c.phone); set('address', c.address) }}
+           options={SAMPLE_CUSTOMERS}
+           renderOption={c => `${c.name} — ${c.phone}`}
+           renderSelected={c => c.name}
+                 />
+        </div>
             <div className={styles.fg}><label>Phone</label><input value={form.phone} onChange={e => set('phone', e.target.value)} placeholder="+234 800 000 0000" /></div>
           </div>
           <div className={styles.fRow}>
@@ -239,7 +368,18 @@ function CreateOrderModal({ onClose, onSave }) {
             </div>
             {form.items.map((item, i) => (
               <div key={i} className={styles.itemEditRow}>
-                <div className={styles.fg} style={{ flex: 2 }}><label>Product Name</label><input value={item.name} onChange={e => setItem(i, 'name', e.target.value)} placeholder="Product name" /></div>
+                <div className={styles.fg} style={{ flex: 2 }}>
+           <label>Product</label>
+              <SearchDropdown
+                label="Product"
+                placeholder="Select a product"
+                value={item.name}
+                onChange={p => { setItem(i, 'name', p.name); setItem(i, 'price', p.price) }}
+                options={SAMPLE_PRODUCTS.map(p => ({ ...p, disabled: p.stock === 0 }))}
+                renderOption={p => `${p.name}${p.stock === 0 ? ' — Out of stock' : ` — ₦${p.price.toLocaleString()}`}`}
+                renderSelected={p => p.name}
+              />
+              </div>
                 <div className={styles.fg} style={{ flex: 0.6 }}><label>Qty</label><input type="number" min="1" value={item.qty} onChange={e => setItem(i, 'qty', e.target.value)} /></div>
                 <div className={styles.fg} style={{ flex: 1 }}><label>Unit Price (₦)</label><input type="number" value={item.price} onChange={e => setItem(i, 'price', e.target.value)} placeholder="0" /></div>
                 {form.items.length > 1 && <button className={styles.removeItemBtn} onClick={() => removeItem(i)}><Ico path={icons.close} size={13} /></button>}
