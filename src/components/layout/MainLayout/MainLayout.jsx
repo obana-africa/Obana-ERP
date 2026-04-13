@@ -1,11 +1,12 @@
+import { Outlet } from 'react-router-dom';
 import Sidebar from '../Sidebar/Sidebar';
 import styles from './MainLayout.module.css';
 
-const MainLayout = ({ children }) => (
+const MainLayout = () => (
   <div className={styles.shell}>
     <Sidebar />
     <main className={styles.main}>
-      {children}
+      <Outlet />
     </main>
   </div>
 );

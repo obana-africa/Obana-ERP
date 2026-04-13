@@ -211,6 +211,7 @@ function POModal({ onClose, onSave, suppliers }) {
   const set = (k, v) => setForm(f => ({ ...f, [k]: v }))
   const setItem = (i, k, v) => setItems(its => its.map((it, j) => j === i ? { ...it, [k]: v } : it))
   const total = items.reduce((a, it) => a + (Number(it.qty) * Number(it.cost) || 0), 0)
+  const [openDropdown, setOpenDropdown] = useState(null)
 
   return (
     <div className={s.overlay} onClick={e => e.target === e.currentTarget && onClose()}>
@@ -243,10 +244,67 @@ function POModal({ onClose, onSave, suppliers }) {
             </div>
             {items.map((item, i) => (
               <div key={i} className={s.poItemRow}>
-                <div className={s.fg} style={{ flex: 2 }}>
-                  <label>Product / SKU</label>
-                  <input value={item.name} onChange={e => setItem(i, 'name', e.target.value)} placeholder="Product name or SKU" />
-                </div>
+               <div className={s.fg} style={{ flex: 2, position: 'relative' }}>
+  <label>Product / SKU</label>
+  <input
+    value={item.name}
+    onChange={e => setItem(i, 'name', e.target.value)}
+    placeholder="Search product name or SKU…"
+    autoComplete="off"
+    onFocus={() => setOpenDropdown(i)}
+    onBlur={() => setTimeout(() => setOpenDropdown(null), 150)}
+  />
+  {openDropdown === i && (
+    <div style={{
+      position: 'absolute', top: 'calc(100% + 4px)', left: 0, right: 0,
+      background: '#fff', border: '1.5px solid #E5E7EB', borderRadius: 8,
+      boxShadow: '0 8px 24px rgba(0,0,0,0.1)', zIndex: 999,
+      maxHeight: 200, overflowY: 'auto',
+    }}>
+      {SAMPLE_INVENTORY
+        .filter(p =>
+          !item.name ||
+          p.name.toLowerCase().includes(item.name.toLowerCase()) ||
+          p.sku.toLowerCase().includes(item.name.toLowerCase())
+        )
+        .map(p => (
+          <div
+            key={p.sku}
+            onMouseDown={() => {
+              setItem(i, 'name', p.name)
+              setItem(i, 'cost', p.costPrice)
+              setOpenDropdown(null)
+            }}
+            style={{
+              display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+              padding: '0.6rem 0.85rem', cursor: 'pointer',
+              borderBottom: '1px solid #F3F4F6', fontSize: 13,
+            }}
+            onMouseEnter={e => e.currentTarget.style.background = '#F0FDF9'}
+            onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+          >
+            <div>
+              <div style={{ fontWeight: 600, color: '#111827' }}>{p.name}</div>
+              <div style={{ fontSize: 11.5, color: '#9CA3AF' }}>{p.sku}</div>
+            </div>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: '#1a1a2e' }}>
+              ₦{p.costPrice.toLocaleString()}
+            </div>
+          </div>
+        ))
+      }
+      {SAMPLE_INVENTORY.filter(p =>
+        !item.name ||
+        p.name.toLowerCase().includes(item.name.toLowerCase()) ||
+        p.sku.toLowerCase().includes(item.name.toLowerCase())
+      ).length === 0 && (
+        <div style={{ padding: '1rem', textAlign: 'center', fontSize: 13, color: '#9CA3AF' }}>
+          No products found
+        </div>
+      )}
+    </div>
+  )}
+</div>
                 <div className={s.fg} style={{ flex: 0.6 }}>
                   <label>Qty</label>
                   <input type="number" min="1" value={item.qty} onChange={e => setItem(i, 'qty', e.target.value)} />

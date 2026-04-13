@@ -6,25 +6,30 @@ import {
   MdInventory, MdPeople, MdLocalOffer,
   MdBarChart, MdSettings, MdStorefront,
   MdNotifications, MdContentPaste, MdHub,
-  MdCollections, MdKeyboardArrowDown,
-} from 'react-icons/md';
+  MdCollections, MdKeyboardArrowDown, MdSwapHoriz,
+  MdArticle, MdMenu, MdFolder, MdDataObject,
+} from "react-icons/md";
 import styles from './Sidebar.module.css';
 
 const mainNav = [
-  // { to: '/dashboard', icon: <MdDashboard />, label: 'Home' },
-  // { to: '/products', icon: <MdStorefront />, label: 'Products' },
   { to: '/orders', icon: <MdShoppingCart />, label: 'Orders',  },
   { to: '/customers', icon: <MdPeople />, label: 'Customers' },
-  // { to: '/inventory', icon: <MdInventory />, label: 'Inventory' },
   { to: '/discounts', icon: <MdLocalOffer />, label: 'Discounts' },
-  { to: '/content', icon: <MdContentPaste />, label: 'Content' },
   { to: '/analytics', icon: <MdBarChart />, label: 'Analytics' },
 ];
 
 const productSubNav = [
   { to: '/collections', icon: <MdCollections />, label: 'Collections' },
   { to: '/inventory', icon: <MdInventory />, label: 'Inventory' },
+  { to: 'transfers', icon: <MdSwapHoriz />, label: 'Transfers' },
 ];
+
+const contentSubNav = [
+  { to: '/content/blog-posts',   icon: <MdArticle />,    label: 'Blog Posts'   },
+  { to: '/content/menus',        icon: <MdMenu />,       label: 'Menus'        },
+  { to: '/content/files',        icon: <MdFolder />,     label: 'Files'        },
+  { to: '/content/metaobjects',  icon: <MdDataObject />, label: 'Metaobjects'  },
+]
 
 const salesNav = [
   {to: '/online-store', icon: <MdStorefront />, label: 'Online Store' },
@@ -38,8 +43,10 @@ const appNav = [
 
 const Sidebar = () => {
   const location = useLocation()
-  const isProductsActive = location.pathname.startsWith('/products') || location.pathname.startsWith('/collections' ) || location.pathname.startsWith('/inventory')
+  const isProductsActive = location.pathname.startsWith('/products') || location.pathname.startsWith('/inventory') || location.pathname.startsWith('/transfers')
+  const isContentActive = location.pathname.startsWith('/content')
   const [productsOpen, setProductsOpen] = useState(isProductsActive)
+  const [contentOpen, setContentOpen] = useState(isContentActive)
 
   return (
     <aside className={styles.sidebar}>
@@ -107,6 +114,42 @@ const Sidebar = () => {
 ))}
             </div>
           </div>
+
+      {/* Content expandable group */}
+<div className={styles.navExpandGroup}>
+  <div className={`${styles.navItem} ${styles.navExpandBtn} ${isContentActive ? styles.active : ''}`}>
+    <NavLink
+      to="/content"
+      style={{ display:'flex', alignItems:'center', gap:0, flex:1, textDecoration:'none', color:'inherit' }}
+    >
+      <span className={styles.navIcon}><MdContentPaste /></span>
+      <span className={styles.navLabel}>Content</span>
+    </NavLink>
+    <button
+      style={{ background:'none', border:'none', cursor:'pointer', padding:'0 4px', display:'flex', alignItems:'center', color:'inherit' }}
+      onClick={() => setContentOpen(v => !v)}
+    >
+      <span className={`${styles.navArrow} ${contentOpen ? styles.navArrowOpen : ''}`}>
+        <MdKeyboardArrowDown size={18} />
+      </span>
+    </button>
+  </div>
+
+  <div className={`${styles.subNav} ${contentOpen ? styles.subNavOpen : ''}`}>
+    {contentSubNav.map(({ to, icon, label }) => (
+      <NavLink
+        key={to}
+        to={to}
+        className={({ isActive }) =>
+          `${styles.subNavItem} ${isActive ? styles.subNavActive : ''}`
+        }
+      >
+        <span className={styles.subNavIcon}>{icon}</span>
+        <span>{label}</span>
+      </NavLink>
+    ))}
+  </div>
+</div>
 
           {/* Rest of mainNav */}
           {mainNav.map(({ to, icon, label, badge }) => (
