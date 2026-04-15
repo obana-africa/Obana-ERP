@@ -12,6 +12,7 @@ import Collections from '../pages/Collections/Collections'
 import Transfers from '../pages/Transfers/Transfers'
 import Customers from '../pages/Customers/Customers'
 import Content from '../pages/Content/Content'
+import Discounts from '../pages/Discounts/Discounts'
 import Analytics from '../pages/Analytics/Analytics'
 import MainLayout from '../components/layout/MainLayout/MainLayout'
 
@@ -39,6 +40,7 @@ const AppRoutes = () => (
         <Route path="/content/menus"            element={<Content />} />
         <Route path="/content/files"            element={<Content />} />
         <Route path="/content/metaobjects"      element={<Content />} />
+        <Route path="/discounts"   element={<Discounts />} />
         <Route path="/analytics"   element={<Analytics />} />
         <Route path="/pos"         element={<POS />} />
         <Route path="/online-store"element={<OnlineStore />} />

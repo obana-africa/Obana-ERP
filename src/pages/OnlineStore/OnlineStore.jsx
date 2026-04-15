@@ -1,5 +1,5 @@
 import { useState } from "react";
-import './OnlineStore.module.css'
+import styles from './OnlineStore.module.css'
 
 const products = [
   {
