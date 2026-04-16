@@ -1,80 +1,153 @@
-import styles from './Dashboard.module.css';
+import { useState } from 'react'
+import styles from './Dashboard.module.css'
+import { fmt } from '../../utils/formatters'
 
-const metrics = [
-  { label: 'Sessions', value: '1,209', change: '↑ 28%', up: true },
-  { label: 'Gross sales', value: '₦3.91M', change: '↑ 29%', up: true },
-  { label: 'Orders', value: '94', change: '↑ 18%', up: true },
-  { label: 'Conversion rate', value: '0.33%', change: '— no change', up: null },
-];
+// ── Icon ──────────────────────────────────────────────────
+const Ic = ({ d, size = 14, stroke = 'currentColor', sw = 1.8 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
+    stroke={stroke} strokeWidth={sw} strokeLinecap="round" strokeLinejoin="round"
+    style={{ flexShrink: 0 }}>
+    {[].concat(d).map((p, i) => <path key={i} d={p} />)}
+  </svg>
+)
 
-const recentOrders = [
-  { id: '#1042', amount: '₦12,500', status: 'Paid' },
-  { id: '#1041', amount: '₦8,200', status: 'Pending' },
-  { id: '#1040', amount: '₦3,600', status: 'Paid' },
-  { id: '#1039', amount: '₦22,000', status: 'Paid' },
-];
+// ── Static data — driven by Obana catalog ─────────────────
+const PERIODS  = ['Last 30 days', 'Last 7 days', 'Today']
+const CHANNELS = ['All channels', 'Online Store', 'Point of Sale']
 
-const topProducts = [
-  { name: 'Jack and Jones', percent: 85 },
-  { name: 'adiddas', percent: 62 },
-  { name: 'Tommy Hilfiger', percent: 48 },
-  { name: 'versace', percent: 34 },
-];
+const METRICS = [
+  { label: 'Sessions',         value: '1,209', raw: null, change: 28,  up: true  },
+  { label: 'Gross Sales',      value: '₦3.91M',raw: null, change: 29,  up: true  },
+  { label: 'Orders',           value: '94',     raw: null, change: 18,  up: true  },
+  { label: 'Conversion Rate',  value: '0.33%',  raw: null, change: 0,   up: null  },
+]
 
-const Dashboard = () => {
+const RECENT_ORDERS = [
+  { id: '#1042', amount: 12500, status: 'Paid'      },
+  { id: '#1041', amount: 8200,  status: 'Pending'   },
+  { id: '#1040', amount: 3600,  status: 'Paid'      },
+  { id: '#1039', amount: 22000, status: 'Paid'      },
+]
+
+const TOP_PRODUCTS = [
+  { name: 'Classic Ankara Dress',   percent: 85 },
+  { name: 'Leather Crossbody Bag',  percent: 62 },
+  { name: "Men's Kaftan Set",        percent: 48 },
+  { name: 'Premium Shea Butter',    percent: 34 },
+]
+
+const QUICK_ACTIONS = [
+  { label: 'Add new product',  icon: 'M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z' },
+  { label: 'Create discount',  icon: 'M19 5L5 19M9 6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM15 18a3 3 0 1 0 6 0 3 3 0 0 0-6 0' },
+  { label: 'View inventory',   icon: 'M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z' },
+  { label: 'Export reports',   icon: 'M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3' },
+]
+
+const STATUS_CFG = {
+  Paid:       { bg: '#ECFDF5', color: '#059669' },
+  Pending:    { bg: '#FFFBEB', color: '#D97706' },
+  Processing: { bg: '#EFF6FF', color: '#2563EB' },
+  Cancelled:  { bg: '#FEF2F2', color: '#DC2626' },
+}
+
+// ── Dashboard ─────────────────────────────────────────────
+export default function Dashboard() {
+  const [period,  setPeriod]  = useState('Last 30 days')
+  const [channel, setChannel] = useState('All channels')
+
   return (
     <div className={styles.page}>
-      <h1 className={styles.greeting}>Good morning, let's get started.</h1>
-      <p className={styles.sub}>Here's what's happening with your store today.</p>
 
-      <div className={styles.filterRow}>
-        {['Last 30 days', 'Last 7 days', 'Today', 'All channels'].map((f) => (
-          <button key={f} className={styles.filterBtn}>{f}</button>
-        ))}
+      {/* Greeting */}
+      <div className={styles.greetRow}>
+        <div>
+          <h1 className={styles.greeting}>Good morning, let's get started.</h1>
+          <p className={styles.sub}>Here's what's happening with your store today.</p>
+        </div>
+        <button className={styles.exportBtn}>
+          <Ic d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" size={13} />
+          Export
+        </button>
       </div>
 
+      {/* Period + channel filters */}
+      <div className={styles.filterRow}>
+        <div className={styles.periodTabs}>
+          {PERIODS.map(p => (
+            <button key={p}
+              className={`${styles.filterBtn} ${period === p ? styles.filterBtnOn : ''}`}
+              onClick={() => setPeriod(p)}>
+              {p}
+            </button>
+          ))}
+        </div>
+        <select className={styles.channelSel} value={channel}
+          onChange={e => setChannel(e.target.value)}>
+          {CHANNELS.map(c => <option key={c}>{c}</option>)}
+        </select>
+      </div>
+
+      {/* KPI cards */}
       <div className={styles.metrics}>
-        {metrics.map((m) => (
+        {METRICS.map(m => (
           <div key={m.label} className={styles.metricCard}>
             <p className={styles.metricLabel}>{m.label}</p>
             <p className={styles.metricValue}>{m.value}</p>
-            <p className={`${styles.metricChange} ${m.up === true ? styles.up : m.up === false ? styles.down : ''}`}>
-              {m.change}
-            </p>
+            {m.up === null ? (
+              <span className={styles.metricFlat}>— no change</span>
+            ) : (
+              <span className={`${styles.metricChange} ${m.up ? styles.up : styles.down}`}>
+                <Ic d={m.up ? 'M18 15l-6-6-6 6' : 'M6 9l6 6 6-6'} size={11} stroke="currentColor" />
+                {Math.abs(m.change)}%
+              </span>
+            )}
           </div>
         ))}
       </div>
 
+      {/* Alert strips */}
       <div className={styles.alertRow}>
-        <div className={styles.alertCard}>
-          <span className={`${styles.dot} ${styles.red}`} />
-          <span>21 orders to fulfil</span>
-          <span className={styles.arrow}>›</span>
-        </div>
-        <div className={styles.alertCard}>
-          <span className={`${styles.dot} ${styles.amber}`} />
-          <span>50+ payments to capture</span>
-          <span className={styles.arrow}>›</span>
-        </div>
+        {[
+          { dot: '#EF4444', msg: '21 orders to fulfil',      border: '#FECACA' },
+          { dot: '#F59E0B', msg: '50+ payments to capture',  border: '#FDE68A' },
+        ].map(a => (
+          <button key={a.msg} className={styles.alertCard}
+            style={{ borderLeftColor: a.dot }}>
+            <span className={styles.dot} style={{ background: a.dot }} />
+            <span>{a.msg}</span>
+            <span className={styles.arrow}>›</span>
+          </button>
+        ))}
       </div>
 
+      {/* Bottom 3-col grid */}
       <div className={styles.bottomGrid}>
+
+        {/* Recent orders */}
         <div className={styles.card}>
-          <h3 className={styles.cardTitle}>Recent orders</h3>
-          {recentOrders.map((o) => (
+          <div className={styles.cardHead}>
+            <h3 className={styles.cardTitle}>Recent Orders</h3>
+            <button className={styles.cardLink}>View all ›</button>
+          </div>
+          {RECENT_ORDERS.map(o => (
             <div key={o.id} className={styles.orderRow}>
               <span className={styles.orderId}>{o.id}</span>
-              <span className={styles.orderAmt}>{o.amount}</span>
-              <span className={`${styles.badge} ${o.status === 'Paid' ? styles.paid : styles.pending}`}>
+              <span className={styles.orderAmt}>{fmt(o.amount)}</span>
+              <span className={styles.badge}
+                style={{ background: STATUS_CFG[o.status]?.bg, color: STATUS_CFG[o.status]?.color }}>
                 {o.status}
               </span>
             </div>
           ))}
         </div>
 
+        {/* Top products */}
         <div className={styles.card}>
-          <h3 className={styles.cardTitle}>Top products</h3>
-          {topProducts.map((p) => (
+          <div className={styles.cardHead}>
+            <h3 className={styles.cardTitle}>Top Products</h3>
+            <button className={styles.cardLink}>View all ›</button>
+          </div>
+          {TOP_PRODUCTS.map(p => (
             <div key={p.name} className={styles.barRow}>
               <span className={styles.barLabel}>{p.name}</span>
               <div className={styles.barTrack}>
@@ -85,18 +158,18 @@ const Dashboard = () => {
           ))}
         </div>
 
+        {/* Quick actions */}
         <div className={styles.card}>
-          <h3 className={styles.cardTitle}>Quick actions</h3>
-          {['Add new product', 'Create discount', 'View inventory', 'Export reports'].map((a) => (
-            <div key={a} className={styles.quickItem}>
-              <span className={styles.quickLabel}>{a}</span>
+          <h3 className={styles.cardTitle}>Quick Actions</h3>
+          {QUICK_ACTIONS.map(a => (
+            <button key={a.label} className={styles.quickItem}>
+              <Ic d={a.icon} size={14} stroke="#6B7280" />
+              <span className={styles.quickLabel}>{a.label}</span>
               <span className={styles.arrow}>›</span>
-            </div>
+            </button>
           ))}
         </div>
       </div>
     </div>
-  );
-};
-
-export default Dashboard;
+  )
+}

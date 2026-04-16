@@ -1,14 +1,22 @@
-import { Outlet } from 'react-router-dom';
-import Sidebar from '../Sidebar/Sidebar';
-import styles from './MainLayout.module.css';
+import { Outlet, useLocation } from 'react-router-dom'
+import Sidebar from '../Sidebar/Sidebar'
+import styles from './MainLayout.module.css'
 
-const MainLayout = () => (
-  <div className={styles.shell}>
-    <Sidebar />
-    <main className={styles.main}>
-      <Outlet />
-    </main>
-  </div>
-);
+// Routes that render without the sidebar
+const NO_SIDEBAR_ROUTES = ['/online-store', '/pos']
 
-export default MainLayout;
+const MainLayout = () => {
+  const { pathname } = useLocation()
+  const showSidebar = !NO_SIDEBAR_ROUTES.some(r => pathname.startsWith(r))
+
+  return (
+    <div className={styles.shell}>
+      {showSidebar && <Sidebar />}
+      <main className={showSidebar ? styles.main : styles.mainFull}>
+        <Outlet />
+      </main>
+    </div>
+  )
+}
+
+export default MainLayout

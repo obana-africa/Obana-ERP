@@ -1,16 +1,42 @@
 .shell {
   display: flex;
   height: 100vh;
-  font-family: 'DM Sans', sans-serif;
-  background-color: var(--surface);
-  color: var(--ink);
   overflow: hidden;
-  background: #f9f9f9;
+  font-family: 'DM Sans', sans-serif;
+  background: #F9FAFB;
+  color: #111827;
 }
+
+/* ── Main content area (with sidebar) ─────────────────────── */
 .main {
   margin-left: 220px;
   flex: 1;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+  min-width: 0; /* prevent flex overflow */
+  transition: margin-left 0.2s ease;
+}
+
+/* Scrollbar */
+.main::-webkit-scrollbar { width: 5px; }
+.main::-webkit-scrollbar-track { background: transparent; }
+.main::-webkit-scrollbar-thumb { background: #E5E7EB; border-radius: 3px; }
+.main::-webkit-scrollbar-thumb:hover { background: #D1D5DB; }
+
+/* ── Full-width (no sidebar — POS, Online Store) ──────────── */
+.mainFull {
+  flex: 1;
+  width: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .main {
+    margin-left: 0;
+  }
 }
