@@ -19,12 +19,12 @@
 }
 
 .brand { display: flex; align-items: center; }
-.brandName {
-  font-family: 'Fraunces', serif;
-  font-size: 22px; font-weight: 900;
-  color: #fff; letter-spacing: -0.04em;
+.brandLogo {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  display: block;
 }
-.brandDot { color: #2DBD97; }
 
 .leftBody {
   display: flex; flex-direction: column; gap: 18px;

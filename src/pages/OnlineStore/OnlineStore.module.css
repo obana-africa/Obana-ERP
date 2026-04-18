@@ -52,11 +52,13 @@
 }
 .headerLeft { display: flex; align-items: center; gap: 48px; }
 .logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 22px; font-weight: 900; letter-spacing: -0.04em;
-  color: var(--ink); margin: 0; cursor: pointer;
+  height: 36px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  cursor: pointer;
+  flex-shrink: 0;
 }
-.logo span { color: var(--green); }
 
 .nav { display: flex; gap: 28px; }
 .navLink {

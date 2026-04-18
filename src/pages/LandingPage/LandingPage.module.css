@@ -44,12 +44,12 @@
 
 /* Brand */
 .brand { display: flex; align-items: center; gap: 9px; text-decoration: none; }
-.brandName {
-  font-family: 'Fraunces', serif;
-  font-size: 20px; font-weight: 900;
-  color: var(--navy); letter-spacing: -0.04em;
+.brandLogo {
+  height: 36px;
+  width: auto;
+  object-fit: contain;
+  display: block;
 }
-.brandDot { color: var(--green); }
 
 /* Nav links */
 .navLinks { display: flex; gap: 24px; margin-left: auto; }
@@ -280,8 +280,10 @@
   display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
 }
 .footerBrand {
-  font-family: 'Fraunces', serif;
-  font-size: 16px; font-weight: 900; color: var(--navy); letter-spacing: -0.03em;
+  height: 28px;
+  width: auto;
+  object-fit: contain;
+  display: block;
 }
 .footerCopy  { font-size: 12px; color: var(--ink4); margin-left: auto; }
 .footerLinks { display: flex; gap: 16px; }

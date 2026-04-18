@@ -1,5 +1,12 @@
 import { ACTIVE_DISCOUNTS } from '../data/discounts'
 
+const fmt = (n) => `₦${Number(n || 0).toLocaleString()}`
+
+/**
+ * Apply a manual discount code to an order.
+ * @returns { savings, code, label } | { error }
+ */
+
 export const applyDiscount = (code, cartItems, subtotal) => {
   const disc = ACTIVE_DISCOUNTS.find(
     d => d.code === code?.toUpperCase() && d.status === 'active'
@@ -15,6 +22,11 @@ export const applyDiscount = (code, cartItems, subtotal) => {
     return { code: disc.code, label: `Buy ${disc.buyQty} Get ${disc.getQty} Free`, type: 'bogo', buyQty: disc.buyQty, getQty: disc.getQty }
   return { error: 'Code not applicable to this order' }
 }
+
+/**
+ * Get automatic discounts that apply without a code.
+ * @returns Array<{ savings?, freeShipping?, label }>
+ */
 
 export const getAutoDiscounts = (cartItems, subtotal) => {
   const result = []

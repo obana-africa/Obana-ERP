@@ -50,9 +50,11 @@ export default function Login() {
       {/* ── Left panel ── */}
       <div className={styles.leftPanel}>
         <div className={styles.brand}>
-          <span className={styles.brandName}>
-            OBANA<span className={styles.brandDot}>.</span>
-          </span>
+          <img
+            src="/src/assets/images/logo/taja_logo_white.png"
+            alt="taja by Obana.Africa"
+            className={styles.brandLogo}
+          />
         </div>
 
         <div className={styles.leftBody}>

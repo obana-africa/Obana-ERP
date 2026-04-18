@@ -69,7 +69,11 @@ export default function LandingPage() {
       <nav className={`${styles.navbar} ${scrolled ? styles.navScrolled : ''}`}>
         <div className={styles.navInner}>
           <div className={styles.brand}>
-            <span className={styles.brandName}>OBANA<span className={styles.brandDot}>.</span></span>
+            <img
+              src="/src/assets/images/logo/taja_logo_blue.png"
+              alt="taja by Obana.Africa"
+              className={styles.brandLogo}
+            />
           </div>
           <div className={styles.navLinks}>
             <a href="#features"     className={styles.navLink}>Features</a>
@@ -218,9 +222,11 @@ export default function LandingPage() {
       {/* ── Footer ── */}
       <footer className={styles.footer}>
         <div className={styles.footerInner}>
-          <span className={styles.footerBrand}>
-            OBANA<span className={styles.brandDot}>.</span>
-          </span>
+          <img
+              src="/src/assets/images/logo/taja_logo_blue.png"
+              alt="taja by Obana.Africa"
+              className={styles.footerBrand}
+            />
           <p className={styles.footerCopy}>© 2026 Obana Africa Ltd. All rights reserved.</p>
           <div className={styles.footerLinks}>
             <a href="#" className={styles.footerLink}>Privacy</a>
