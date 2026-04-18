@@ -45,14 +45,15 @@
 }
 
 .brand { 
-  margin-top: 0;
-  padding: 0;
+  display: flex; 
+  align-items: center;
+  width: 80px;
+  height: 48px; 
+  flex-shrink: 0;
 }
 .brandLogo {
-  height: 250px;
-  /* width: auto; */
-  /* object-fit: contain;
-  display: block; */
+  object-fit: contain;
+  display: block;
 }
 
 .leftBody {
