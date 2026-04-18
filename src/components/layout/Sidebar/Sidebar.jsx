@@ -121,12 +121,9 @@ const Sidebar = () => {
       {/* Store header */}
       <div className={styles.storeHeader}>
         <div className={styles.logo}>
-          <img src="/src/assets/images/logo/taja_logo_blue.png" alt="taja logo" className={styles.logoImg} />
+          <img src="/public/logos/taja logo blue.png" alt="taja logo" className={styles.logoImg} />
         </div>
-        <div className={styles.storeInfo}>
-          <p className={styles.storeName}>taja</p>
-          <p className={styles.storeSub}>by Obana.Africa</p>
-        </div>
+       
         <button className={styles.notifBtn} aria-label="Notifications">
           <Ic d={ICON.bell} size={17} />
         </button>

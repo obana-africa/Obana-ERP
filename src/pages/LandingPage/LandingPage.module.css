@@ -1,8 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700;900&display=swap');
 
-/* ── Tokens ───────────────────────────────────────────────── */
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 .page {
-  --navy:    #1a1a2e;
+  --navy:    #1b3b5f;
   --navy-lt: #252545;
   --navy-mid:#0C2B4E;
   --green:   #2DBD97;
@@ -21,11 +26,16 @@
   background: var(--white);
   color: var(--ink);
   overflow-x: hidden;
+ 
 }
 
 /* ── Navbar ───────────────────────────────────────────────── */
 .navbar {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  z-index: 100;
   transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
   border-bottom: 1px solid transparent;
 }
@@ -43,9 +53,12 @@
 }
 
 /* Brand */
-.brand { display: flex; align-items: center; gap: 9px; text-decoration: none; }
+.brand { 
+  display: flex; 
+  align-items: center;   
+}
 .brandLogo {
-  height: 36px;
+  height: 100px;
   width: auto;
   object-fit: contain;
   display: block;
@@ -280,7 +293,7 @@
   display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
 }
 .footerBrand {
-  height: 28px;
+  height: 100px;
   width: auto;
   object-fit: contain;
   display: block;

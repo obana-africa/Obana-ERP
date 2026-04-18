@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styles from './LandingPage.module.css'
 
+
 // ── Static data ───────────────────────────────────────────
 const FEATURES = [
   { icon: '⚡', title: 'Fast Checkout',        desc: 'Process sales in seconds with an intuitive POS built for speed and reliability.' },
@@ -47,7 +48,7 @@ const MOCK_ITEMS = [
 // ── LandingPage ───────────────────────────────────────────
 export default function LandingPage() {
   const navigate = useNavigate()
-  const [scrolled,          setScrolled]          = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const [activeTestimonial, setActiveTestimonial] = useState(0)
 
   useEffect(() => {
@@ -70,7 +71,7 @@ export default function LandingPage() {
         <div className={styles.navInner}>
           <div className={styles.brand}>
             <img
-              src="/src/assets/images/logo/taja_logo_blue.png"
+              src="/public/logos/taja logo blue.png"
               alt="taja by Obana.Africa"
               className={styles.brandLogo}
             />
@@ -101,7 +102,7 @@ export default function LandingPage() {
           </h1>
           <p className={styles.heroSub}>
             Sell faster, track smarter, and grow confidently — with a point of sale
-            and online store system designed for how Nigerian businesses actually work.
+            and online store system designed for how businesses actually work.
           </p>
           <div className={styles.heroActions}>
             <button className={styles.btnPrimaryLg} onClick={() => navigate('/login')}>
@@ -223,7 +224,7 @@ export default function LandingPage() {
       <footer className={styles.footer}>
         <div className={styles.footerInner}>
           <img
-              src="/src/assets/images/logo/taja_logo_blue.png"
+              src="/public/logos/taja logo blue.png"
               alt="taja by Obana.Africa"
               className={styles.footerBrand}
             />

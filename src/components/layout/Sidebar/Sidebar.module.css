@@ -1,6 +1,4 @@
-/* ─────────────────────────────────────────────────────────
-   Path: src/components/layout/Sidebar/Sidebar.module.css
-───────────────────────────────────────────────────────── */
+
 
 .sidebar {
   --navy:     #1a1a2e;
@@ -16,6 +14,32 @@
   --border:   #F0F0F3;
   --surface:  #F9FAFB;
   --white:    #FFFFFF;
+
+   --color-white: #fff;
+	--color-black: #000;
+
+	--color-primary: #1b3b5f;
+	--color-primary-light: #dcfbf9;
+	--color-primary-dark: #111111;
+
+	--color-secondary: #ecedf0;
+	--color-secondary-light: #B8B4B480;
+	--color-secondary-dark: #49494D;
+
+	/* Accent colors */
+	--color-accent: #9A9DAF;
+	--color-accent-light: #fbbf24;
+	--color-accent-dark: #d97706;
+
+	--color-success: #22c55e;
+	--color-warning: #f59e0b;
+	--color-error: #ef4444;
+	--color-info: #3b82f6;
+
+	--font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+	--font-heading: "Inter", ui-sans-serif, system-ui, sans-serif;
+	--font-mono: ui-monospace, SFMono-Regular, monospace;
+
 
   width: 220px;
   height: 100vh;
@@ -33,28 +57,24 @@
 .storeHeader {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 9px;
-  padding: 14px 12px;
+  padding: 8px 10px;
   border-bottom: 1px solid var(--border);
   flex-shrink: 0;
 }
 
 .logo {
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
-  background: var(--white);
-  border: 1px solid var(--border);
+  width: 80px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  padding: 3px;
   overflow: hidden;
 }
 .logoImg {
   width: 100%;
-  height: 100%;
   object-fit: contain;
 }
 
@@ -62,7 +82,7 @@
 .storeName {
   font-size: 13px;
   font-weight: 700;
-  color: var(--ink);
+  color: var(--color-primary);
   margin: 0;
   white-space: nowrap;
   overflow: hidden;
@@ -70,7 +90,11 @@
   font-family: "Fraunces", serif;
   letter-spacing: -0.02em;
 }
-.storeSub  { font-size: 11px; color: var(--ink4); margin: 0; }
+.storeSub  { 
+  font-size: 11px; 
+  color: var(--color-accent); 
+  margin: 0; 
+}
 
 .notifBtn {
   width: 28px;
@@ -79,7 +103,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--ink4);
+  color: var(--color-accent);
   cursor: pointer;
   flex-shrink: 0;
   border: none;

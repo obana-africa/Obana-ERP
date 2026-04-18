@@ -141,7 +141,7 @@ export default function POS() {
       <div className={styles.posTopbar}>
         <div className={styles.posTopLeft}>
           <div className={styles.posLogo}>
-            <img src="/src/assets/images/logo/taja_logo_white.png" alt="taja" className={styles.posLogoImg} />
+            <img src="/logos/taja_logo_white.png" alt="taja" className={styles.posLogoImg} />
             <span className={styles.posLogoTag}>POS</span>
           </div>
           <select className={styles.locSelect} value={location} onChange={e => setLocation(e.target.value)}>

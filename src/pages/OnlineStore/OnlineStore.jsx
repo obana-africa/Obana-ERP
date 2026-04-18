@@ -77,7 +77,7 @@ export default function OnlineStore() {
         <div className={styles.headerInner}>
           <div className={styles.headerLeft}>
             <img
-              src="/src/assets/images/logo/taja_logo_blue.png"
+              src="/logos/taja_logo_blue.png"
               alt="taja by Obana.Africa"
               className={styles.logo}
             />

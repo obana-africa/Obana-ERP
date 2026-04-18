@@ -51,7 +51,7 @@ export default function Login() {
       <div className={styles.leftPanel}>
         <div className={styles.brand}>
           <img
-            src="/src/assets/images/logo/taja_logo_white.png"
+            src="/src/assets/images/logo/taja logo white.png"
             alt="taja by Obana.Africa"
             className={styles.brandLogo}
           />

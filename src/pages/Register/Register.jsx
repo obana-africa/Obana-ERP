@@ -130,7 +130,7 @@ export default function Register() {
           {/* Logo */}
           <div className={styles.logo}>
             <img
-              src="/src/assets/images/logo/taja_logo_white.png"
+              src="/src/assets/images/logo/taja logo white.png"
               alt="taja by Obana.Africa"
               className={styles.logoImg}
             />
