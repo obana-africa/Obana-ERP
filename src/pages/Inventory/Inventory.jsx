@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import s from './Inventory.module.css'
 
 // ── Icon helper ──────────────────────────────────────────
@@ -365,6 +365,15 @@ export default function Inventory() {
   const [reportType, setReportType] = useState('stock_status')
 
   const activeLoc = LOCATIONS.find(l => l.id === location)
+
+   // Auto-open modal when navigated here from Quick Actions
+  useEffect(() => {
+    if (location.state?.openModal) {
+      setModal(location.state.openModal)
+      // Clear the state so refreshing doesn't re-open it
+      window.history.replaceState({}, document.title)
+    }
+  }, [location.state])
 
   const totalItems = inventory.length
   const totalValue = inventory.reduce((a, i) => a + i.costPrice * i.stock, 0)

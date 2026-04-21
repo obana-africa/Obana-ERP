@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './Discounts.module.css'
 import { fmt, fmtD } from '../../utils/formatters'
 import { SEED_DISCOUNTS, DISC_TYPES, STATUS_CFG } from '../../data/discounts'
@@ -23,6 +23,15 @@ export default function Discounts() {
   const [filterType,   setFilterType]   = useState('All')
   const [filterStatus, setFilterStatus] = useState('all')
   const [selected,     setSelected]     = useState([])
+
+   // Auto-open modal when navigated here from Quick Actions
+  useEffect(() => {
+    if (location.state?.openModal) {
+      setModal(location.state.openModal)
+      // Clear the state so refreshing doesn't re-open it
+      window.history.replaceState({}, document.title)
+    }
+  }, [location.state])
 
   const stats = {
     total:     discounts.length,

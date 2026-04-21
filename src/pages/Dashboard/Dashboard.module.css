@@ -68,7 +68,7 @@
 .sub {
   font-size: 13.5px; color: var(--color-primary); margin: 0;
 }
-.exportBtn {
+/* .exportBtn {
   display: inline-flex; 
   align-items: center; 
   gap: 5px;
@@ -84,7 +84,7 @@
   white-space: nowrap; 
   transition: border-color 0.2s;
 }
-.exportBtn:hover { border-color: var(--color-accent); }
+.exportBtn:hover { border-color: var(--color-accent); } */
 
 /* ── Filters ──────────────────────────────────────────────── */
 .filterRow {

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import styles from './Dashboard.module.css'
 import { fmt } from '../../utils/formatters'
 
@@ -37,10 +38,10 @@ const TOP_PRODUCTS = [
 ]
 
 const QUICK_ACTIONS = [
-  { label: 'Add new product',  icon: 'M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z' },
-  { label: 'Create discount',  icon: 'M19 5L5 19M9 6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM15 18a3 3 0 1 0 6 0 3 3 0 0 0-6 0' },
-  { label: 'View inventory',   icon: 'M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z' },
-  { label: 'Export reports',   icon: 'M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3' },
+  { label: 'Add new product',  icon: 'M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z', to: '/products',   state: { openModal: 'add'      } },
+  { label: 'Create discount',  icon: 'M19 5L5 19M9 6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM15 18a3 3 0 1 0 6 0 3 3 0 0 0-6 0', to: '/discounts',  state: { openModal: 'create'   } },
+  { label: 'View inventory',   icon: 'M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z', to: '/inventory',  state: null                  },
+  { label: 'Export reports',   icon: 'M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3', to: '/analytics',  state: { openExport: true      } },
 ]
 
 const STATUS_CFG = {
@@ -54,6 +55,7 @@ const STATUS_CFG = {
 export default function Dashboard() {
   const [period,  setPeriod]  = useState('Last 30 days')
   const [channel, setChannel] = useState('All channels')
+  const navigate = useNavigate()
 
   return (
     <div className={styles.page}>
@@ -64,10 +66,10 @@ export default function Dashboard() {
           <h1 className={styles.greeting}>Good morning, let's get started.</h1>
           <p className={styles.sub}>Here's what's happening with your store today.</p>
         </div>
-        <button className={styles.exportBtn}>
+        {/* <button className={styles.exportBtn}>
           <Ic d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" size={13} />
           Export
-        </button>
+        </button> */}
       </div>
 
       {/* Period + channel filters */}
@@ -162,7 +164,8 @@ export default function Dashboard() {
         <div className={styles.card}>
           <h3 className={styles.cardTitle}>Quick Actions</h3>
           {QUICK_ACTIONS.map(a => (
-            <button key={a.label} className={styles.quickItem}>
+            <button key={a.label} className={styles.quickItem}
+              onClick={() => navigate(a.to, a.state ? { state: a.state } : undefined)}>
               <Ic d={a.icon} size={14} stroke="#6B7280" />
               <span className={styles.quickLabel}>{a.label}</span>
               <span className={styles.arrow}>›</span>

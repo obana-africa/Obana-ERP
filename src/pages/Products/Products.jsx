@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import s from './Products.module.css'
 import { fmt } from '../../utils/formatters'
 import { SAMPLE_PRODUCTS } from '../../data/products'
@@ -117,6 +118,17 @@ export default function Products() {
   const [previewProduct, setPreviewProduct] = useState(null)
   const [search,         setSearch]         = useState('')
   const [showSearchDrop, setShowSearchDrop] = useState(false)
+
+  const location = useLocation()
+
+  // Auto-open modal when navigated here from Quick Actions
+  useEffect(() => {
+    if (location.state?.openModal) {
+      setModal(location.state.openModal)
+      // Clear the state so refreshing doesn't re-open it
+      window.history.replaceState({}, document.title)
+    }
+  }, [location.state])
 
   // ── Derived stats ─────────────────────────────────────
   const totalRetail    = products.reduce((a,p) => a + p.price * p.stock, 0)
