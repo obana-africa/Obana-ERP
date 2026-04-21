@@ -1,5 +1,7 @@
+/* ── Shell: full viewport column ─────────────────────────── */
 .shell {
   display: flex;
+  flex-direction: column;
   height: 100vh;
   overflow: hidden;
   font-family: 'DM Sans', sans-serif;
@@ -7,21 +9,29 @@
   color: #111827;
 }
 
-/* ── Main content area (with sidebar) ─────────────────────── */
+/* ── Body: row below the topbar ──────────────────────────── */
+.body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  /* push down below the fixed 56px topbar */
+  margin-top: 56px;
+}
+
+/* ── Main content (with sidebar: offset 220px) ───────────── */
 .main {
   margin-left: 220px;
   flex: 1;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  min-width: 0; /* prevent flex overflow */
-  transition: margin-left 0.2s ease;
+  min-width: 0;
 }
 
 /* Scrollbar */
-.main::-webkit-scrollbar { width: 5px; }
-.main::-webkit-scrollbar-track { background: transparent; }
-.main::-webkit-scrollbar-thumb { background: #E5E7EB; border-radius: 3px; }
+.main::-webkit-scrollbar        { width: 5px; }
+.main::-webkit-scrollbar-track  { background: transparent; }
+.main::-webkit-scrollbar-thumb  { background: #E5E7EB; border-radius: 3px; }
 .main::-webkit-scrollbar-thumb:hover { background: #D1D5DB; }
 
 /* ── Full-width (no sidebar — POS, Online Store) ──────────── */
@@ -35,7 +45,7 @@
 }
 
 /* ── Responsive ───────────────────────────────────────────── */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .main {
     margin-left: 0;
   }

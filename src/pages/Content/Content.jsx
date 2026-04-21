@@ -37,10 +37,10 @@ const BtnPrimary = ({ onClick, children, disabled }) => (
 )
 
 const TABS = [
-  { key:'blog-posts',  label:'Blog Posts'  },
-  { key:'pages',       label:'Pages'       },
-  { key:'menus',       label:'Menus'       },
-  { key:'files',       label:'Files'       },
+  { key:'blog-posts', label:'Blog Posts' },
+  { key:'pages', label:'Pages' },
+  { key:'menus', label:'Menus' },
+  { key:'files', label:'Files' },
   { key:'metaobjects', label:'Metaobjects' },
 ]
 
@@ -60,18 +60,18 @@ export default function Content() {
     if (match) setActiveTab(match.key)
   }, [location.pathname])
 
-  const [blogs,       setBlogs]       = useState(SEED_BLOGS)
-  const [pages,       setPages]       = useState(SEED_PAGES)
-  const [menus,       setMenus]       = useState(SEED_MENUS)
-  const [files,       setFiles]       = useState(SEED_FILES)
+  const [blogs, setBlogs] = useState(SEED_BLOGS)
+  const [pages, setPages] = useState(SEED_PAGES)
+  const [menus, setMenus] = useState(SEED_MENUS)
+  const [files, setFiles] = useState(SEED_FILES)
   const [metaobjects, setMetaobjects] = useState(SEED_METAOBJECTS)
 
-  const [modal,         setModal]         = useState(null)
-  const [editTarget,    setEditTarget]    = useState(null)
-  const [entryTarget,   setEntryTarget]   = useState(null)
+  const [modal, setModal] = useState(null)
+  const [editTarget, setEditTarget] = useState(null)
+  const [entryTarget, setEntryTarget] = useState(null)
   const [activeMetaDef, setActiveMetaDef] = useState(SEED_METAOBJECTS[0]?.id)
 
-  const [search,       setSearch]       = useState('')
+  const [search, setSearch] = useState('')
   const [filterStatus, setFilterStatus] = useState('all')
 
   const activeDef = metaobjects.find(m => m.id === activeMetaDef)
@@ -139,7 +139,7 @@ export default function Content() {
       </select>
       {onCreate && (
         <BtnPrimary onClick={onCreate}>
-          <Ic d="M12 5v14M5 12h14" size={13} stroke="#fff" /> {createLabel}
+          <Ic d="M12 5v14M5 12h14" size={13} /> {createLabel}
         </BtnPrimary>
       )}
     </div>
@@ -153,18 +153,6 @@ export default function Content() {
       <header className={styles.topbar}>
         <h1 className={styles.pgTitle}>Content</h1>
       </header>
-
-      <div className={styles.tabBar}>
-        <div className={styles.tabs}>
-          {TABS.map(t => (
-            <button key={t.key}
-              className={`${styles.tab} ${activeTab === t.key ? styles.tabOn : ''}`}
-              onClick={() => { setActiveTab(t.key); setSearch(''); setFilterStatus('all') }}>
-              {t.label}
-            </button>
-          ))}
-        </div>
-      </div>
 
       <div className={styles.content}>
 
@@ -238,7 +226,7 @@ export default function Content() {
           <div className={styles.actionBar}>
             <span className={styles.actionBarTitle}>{menus.length} menus</span>
             <BtnPrimary onClick={() => { setEditTarget(null); setModal('menu') }}>
-              <Ic d="M12 5v14M5 12h14" size={13} stroke="#fff" /> Create Menu
+              <Ic d="M12 5v14M5 12h14" size={13} /> Create Menu
             </BtnPrimary>
           </div>
           <div className={styles.menusGrid}>
@@ -281,7 +269,7 @@ export default function Content() {
                 value={search} onChange={e => setSearch(e.target.value)} />
             </div>
             <button className={styles.btnPrimary} onClick={() => fileUploadRef.current?.click()}>
-              <Ic d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12" size={13} stroke="#fff" /> Upload Files
+              <Ic d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12" size={13}  /> Upload Files
             </button>
           </div>
           <div className={styles.filesGrid}>
@@ -361,7 +349,7 @@ export default function Content() {
                     <div className={styles.metaEntriesHandle}>api: {activeDef.apiHandle}</div>
                   </div>
                   <BtnPrimary onClick={() => { setEntryTarget(null); setModal('metaEntry') }}>
-                    <Ic d="M12 5v14M5 12h14" size={13} stroke="#fff" /> Add Entry
+                    <Ic d="M12 5v14M5 12h14" size={13}  /> Add Entry
                   </BtnPrimary>
                 </div>
                 <div className={styles.fieldSchema}>
@@ -374,7 +362,7 @@ export default function Content() {
                 </div>
                 {activeDef.entries.length === 0 ? (
                   <div className={styles.emptyState}>
-                    <Ic d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" size={32} stroke="#9CA3AF" />
+                    <Ic d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" size={32}  />
                     <p>No entries yet</p>
                     <BtnPrimary onClick={() => { setEntryTarget(null); setModal('metaEntry') }}>Add first entry</BtnPrimary>
                   </div>

@@ -51,7 +51,7 @@ const EmptyState = ({ onAdd, onImport }) => (
         <Ic d={ICON.import} size={14} /> Import Products
       </button>
       <button className={s.btnPrimary} onClick={onAdd}>
-        <Ic d={ICON.plus} size={14} stroke="#fff" /> Add New Product
+        <Ic d={ICON.plus} size={14} stroke="#f8f2f2" /> Add New Product
       </button>
     </div>
   </div>
@@ -224,7 +224,7 @@ export default function Products() {
               <Ic d={ICON.import} size={13} /> Import
             </button>
             <button className={s.btnPrimary} onClick={() => setModal('add')}>
-              <Ic d={ICON.plus} size={13} stroke="#fff" /> Add Product
+              <Ic d={ICON.plus} size={13}  /> Add Product
             </button>
           </div>
         </div>

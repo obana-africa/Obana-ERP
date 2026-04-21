@@ -1,6 +1,4 @@
-/* ─────────────────────────────────────────────────────────
-   Path: src/pages/Content/components/MenuModal.jsx
-───────────────────────────────────────────────────────── */
+
 import { useState } from 'react'
 import styles from '../Content.module.css'
 

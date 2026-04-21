@@ -1,6 +1,4 @@
-/* ─────────────────────────────────────────────────────────
-   Path: src/pages/Content/components/BlogModal.jsx
-───────────────────────────────────────────────────────── */
+
 import { useState, useRef } from 'react'
 import styles from '../Content.module.css'
 

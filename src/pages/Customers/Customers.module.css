@@ -26,9 +26,13 @@
 /* ── Topbar ───────────────────────────────────────────────── */
 .topbar {
   height: 60px;
-  display: flex; align-items: center; justify-content: space-between;
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between;
   padding: 0 1.5rem;
-  background: var(--white); border-bottom: 1px solid var(--border);
+  background: var(--white); 
+  border-bottom: 1px solid var(--border);
+  border-radius: 0 16px 16px ;
   flex-shrink: 0; position: sticky; top: 0; z-index: 10;
 }
 .pgTitle {

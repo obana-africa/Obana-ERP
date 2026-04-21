@@ -1,6 +1,4 @@
-/* ─────────────────────────────────────────────────────────
-   Path: src/pages/Content/components/MetaobjectEntryModal.jsx
-───────────────────────────────────────────────────────── */
+
 import { useState } from 'react'
 import styles from '../Content.module.css'
 import { FIELD_TYPE_LABELS } from '../../../data/content'

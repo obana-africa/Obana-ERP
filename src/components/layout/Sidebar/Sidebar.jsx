@@ -37,6 +37,7 @@ const ICON = {
 
 /* ─── Nav definitions ─────────────────────────────────────── */
 const PRODUCT_SUB = [
+  {to: '/collections', icon: ICON.collections, label:'Collections' },
   { to: '/inventory',  icon: ICON.inventory,   label: 'Inventory'  },
   { to: '/transfers',  icon: ICON.transfers,   label: 'Transfers'  },
 ]
@@ -103,20 +104,45 @@ const ExpandGroup = ({ to, icon, label, isActive, isOpen, onToggle, children }) 
   </div>
 )
 
+/* ─── Hamburger button ───────────────────────────────────── */
+const Hamburger = ({ isOpen, onClick }) => (
+  <button
+    className={styles.hamburger}
+    onClick={onClick}
+    aria-label={isOpen ? 'Close menu' : 'Open menu'}
+    aria-expanded={isOpen}
+  >
+    <span className={`${styles.hBar} ${styles.hBar1} ${isOpen ? styles.hBar1Open : ''}`} />
+    <span className={`${styles.hBar} ${styles.hBar2} ${isOpen ? styles.hBar2Open : ''}`} />
+    <span className={`${styles.hBar} ${styles.hBar3} ${isOpen ? styles.hBar3Open : ''}`} />
+  </button>
+)
+
 /* ─── SIDEBAR ─────────────────────────────────────────────── */
 const Sidebar = () => {
   const location = useLocation()
 
   const isProductsActive = location.pathname.startsWith('/products')
+    || location.pathname.startsWith('/collections')
     || location.pathname.startsWith('/inventory')
     || location.pathname.startsWith('/transfers')
   const isContentActive = location.pathname.startsWith('/content')
 
   const [productsOpen, setProductsOpen] = useState(isProductsActive)
   const [contentOpen,  setContentOpen]  = useState(isContentActive)
+  const [sidebarOpen,  setSidebarOpen]  = useState(false)
+
+  const closeSidebar = () => setSidebarOpen(false)
 
   return (
-    <aside className={styles.sidebar}>
+    <>
+      <Hamburger isOpen={sidebarOpen} onClick={() => setSidebarOpen(v => !v)} />
+
+      {sidebarOpen && (
+        <div className={styles.backdrop} onClick={closeSidebar} aria-hidden="true" />
+      )}
+
+      <aside className={`${styles.sidebar} ${sidebarOpen ? styles.sidebarOpen : ''}`}>
 
       {/* Store header */}
       <div className={styles.storeHeader}>
@@ -176,8 +202,10 @@ const Sidebar = () => {
       <div className={styles.sidebarFooter}>
         <NavItem to="/settings" icon={ICON.settings} label="Settings" />
       </div>
-    </aside>
+      </aside>
+    </>
   )
 }
 
 export default Sidebar
+

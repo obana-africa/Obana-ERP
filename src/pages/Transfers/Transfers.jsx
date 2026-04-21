@@ -59,7 +59,7 @@ export default function Transfers() {
       <header className={styles.topbar}>
         <h1 className={styles.pgTitle}>Transfers</h1>
         <button className={styles.btnPrimary} onClick={() => setShowCreate(true)}>
-          <Ic d="M12 5v14M5 12h14" size={14} stroke="#fff" /> Create Transfer
+          <Ic d="M12 5v14M5 12h14" size={14} /> Create Transfer
         </button>
       </header>
 

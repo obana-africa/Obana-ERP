@@ -42,20 +42,21 @@
 
 
   width: 220px;
-  height: 100vh;
+  height: calc(100vh - 56px); /* full height minus topbar */
   background: var(--white);
   border-right: 1px solid var(--border);
+  border-radius: 4px 4px 4px 4px;
   display: flex;
   flex-direction: column;
   position: fixed;
   left: 0;
-  top: 0;
-  z-index: 50;
+  top: 56px; /* sit below the topbar */
+  z-index: 49; /* below topbar z-index: 60 */
 }
 
 /* ── Store header ────────────────────────────────────────── */
 .storeHeader {
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: space-between;
   gap: 9px;
