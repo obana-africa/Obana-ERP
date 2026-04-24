@@ -4,6 +4,7 @@ import Login        from '../pages/Login/Login'
 import Register     from '../pages/Register/Register'
 import Dashboard    from '../pages/Dashboard/Dashboard'
 import Products     from '../pages/Products/Products'
+import Collections from '../pages/Collections/Collections'
 import Orders       from '../pages/Orders/Orders'
 import Customers    from '../pages/Customers/Customers'
 import Inventory    from '../pages/Inventory/Inventory'
@@ -28,9 +29,9 @@ const AppRoutes = () => (
     <Route element={<MainLayout />}>
       <Route path="/dashboard"            element={<Dashboard />} />
       <Route path="/products"             element={<Products />} />
+      <Route path='/collections' element={<Collections/>} />
       <Route path="/orders"               element={<Orders />} />
       <Route path="/customers"            element={<Customers />} />
-      {/* <Route path='/collection' element={<Collections/>} /> */}
       <Route path="/inventory"            element={<Inventory />} />
       <Route path="/transfers"            element={<Transfers />} />
       <Route path="/content"              element={<Content />} />
@@ -44,7 +45,7 @@ const AppRoutes = () => (
       <Route path="/online-store"         element={<OnlineStore />} />
 
       {/* Collections tab lives inside Products — redirect legacy path */}
-      <Route path="/collections" element={<Navigate to="/products" replace />} />
+      {/* <Route path="/collections" element={<Navigate to="/products" replace />} /> */}
 
       {/* Catch-all unknown paths → dashboard */}
       <Route path="*" element={<Navigate to="/dashboard" replace />} />
