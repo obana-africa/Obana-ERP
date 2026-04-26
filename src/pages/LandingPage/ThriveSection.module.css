@@ -1,0 +1,155 @@
+/* ═══════════════════════════════════════════════════
+   ThriveSection.module.css
+   "Everything Your Business Needs To Thrive"
+   ═══════════════════════════════════════════════════ */
+
+.section {
+  display: none;
+  padding: 96px 32px;
+  background: #ffffff;
+}
+
+/* ── Header ── */
+.header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 56px;
+}
+
+.title {
+  font-family: 'Fraunces', serif;
+  font-size: 44px;
+  font-weight: 700;
+  color: #1b3b5f;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+
+.sub {
+  font-size: 16px;
+  color: #374151;
+  line-height: 1.7;
+}
+
+/* ── 3-column × 2-row grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ── Individual card ── */
+.card {
+  background: #ffffff;
+  border: 1px solid #E5E7EB;
+  border-radius: 18px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.card:hover {
+  box-shadow: 0 12px 40px rgba(0,0,0,0.09);
+  transform: translateY(-3px);
+}
+
+/* ── Screenshot image area ── */
+.imgWrap {
+  width: 100%;
+  aspect-ratio: 4 / 2.8;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  transition: transform 0.35s ease;
+}
+.card:hover .img { transform: scale(1.03); }
+
+/* ── Card body ── */
+.body {
+  padding: 24px 24px 28px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.cardTitle {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 10px;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.cardDesc {
+  font-size: 13.5px;
+  color: #6B7280;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  flex: 1;
+  text-align: center;
+}
+
+/* CTA buttons */
+.ctaDark {
+  display: block;
+  width: 100%;
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: none;
+  background: #1b3b5f;
+  color: #ffffff;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+  text-align: center;
+}
+.ctaDark:hover { background: #2DBD97; }
+
+.ctaGold {
+  display: block;
+  width: 100%;
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: none;
+  background: #E8C547;
+  color: #1a1200;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+  text-align: center;
+}
+.ctaGold:hover { background: #c9a82e; }
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .title { font-size: 36px; }
+  .grid  { gap: 18px; }
+}
+
+@media (max-width: 768px) {
+  .section { padding: 64px 20px; }
+  .title   { font-size: 28px; }
+  .grid    { grid-template-columns: 1fr; max-width: 480px; }
+}
+
+@media (max-width: 520px) {
+  .grid { grid-template-columns: 1fr; }
+}

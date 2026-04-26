@@ -4,10 +4,12 @@ import Sidebar from '../Sidebar/Sidebar'
 import styles from './MainLayout.module.css'
 
 const NO_SIDEBAR_ROUTES = ['/online-store', '/pos']
+const FORCE_SIDEBAR_ROUTES = ['/online-store/themes']
 
 const MainLayout = () => {
   const { pathname } = useLocation()
-  const showSidebar = !NO_SIDEBAR_ROUTES.some(r => pathname.startsWith(r))
+  const showSidebar = FORCE_SIDEBAR_ROUTES.some(r => pathname.startsWith(r)) ||
+    !NO_SIDEBAR_ROUTES.some(r => pathname.startsWith(r))
 
   return (
     <div className={styles.shell}>

@@ -49,6 +49,10 @@ const CONTENT_SUB = [
   { to: '/content/metaobjects', icon: ICON.metaobjects, label: 'Metaobjects' },
 ]
 
+const ONLINE_STORE_SUB = [
+  { to: '/online-store/themes', icon: ICON.collections, label: 'Themes' },
+]
+
 const MAIN_NAV = [
   { to: '/orders',    icon: ICON.orders,    label: 'Orders'    },
   { to: '/customers', icon: ICON.customers, label: 'Customers' },
@@ -57,8 +61,7 @@ const MAIN_NAV = [
 ]
 
 const SALES_NAV = [
-  { to: '/online-store', icon: ICON.store, label: 'Online Store'   },
-  { to: '/pos',          icon: ICON.pos,   label: 'Point of Sale'  },
+  { to: '/pos', icon: ICON.pos, label: 'Point of Sale' },
 ]
 
 const APP_NAV = [
@@ -126,11 +129,13 @@ const Sidebar = () => {
     || location.pathname.startsWith('/collections')
     || location.pathname.startsWith('/inventory')
     || location.pathname.startsWith('/transfers')
-  const isContentActive = location.pathname.startsWith('/content')
+  const isContentActive     = location.pathname.startsWith('/content')
+  const isOnlineStoreActive = location.pathname.startsWith('/online-store')
 
-  const [productsOpen, setProductsOpen] = useState(isProductsActive)
-  const [contentOpen,  setContentOpen]  = useState(isContentActive)
-  const [sidebarOpen,  setSidebarOpen]  = useState(false)
+  const [productsOpen,    setProductsOpen]    = useState(isProductsActive)
+  const [contentOpen,     setContentOpen]     = useState(isContentActive)
+  const [onlineStoreOpen, setOnlineStoreOpen] = useState(isOnlineStoreActive)
+  const [sidebarOpen,     setSidebarOpen]     = useState(false)
 
   const closeSidebar = () => setSidebarOpen(false)
 
@@ -189,6 +194,15 @@ const Sidebar = () => {
 
         <p className={styles.sectionTitle}>Sales Channels</p>
         <div className={styles.navGroup}>
+          <ExpandGroup
+            to="/online-store"
+            icon={ICON.store}
+            label="Online Store"
+            isActive={isOnlineStoreActive}
+            isOpen={onlineStoreOpen}
+            onToggle={() => setOnlineStoreOpen(v => !v)}>
+            {ONLINE_STORE_SUB.map(s => <SubLink key={s.to} {...s} />)}
+          </ExpandGroup>
           {SALES_NAV.map(item => <NavItem key={item.to} {...item} />)}
         </div>
 

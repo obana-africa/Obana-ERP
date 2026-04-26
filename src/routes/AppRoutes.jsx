@@ -13,6 +13,7 @@ import Content      from '../pages/Content/Content'
 import Discounts    from '../pages/Discounts/Discounts'
 import Analytics    from '../pages/Analytics/Analytics'
 import OnlineStore  from '../pages/OnlineStore/OnlineStore'
+import OnlineStoreThemes from '../pages/OnlineStore/OnlineStoreThemes'
 import POS          from '../pages/POS/POS'
 import MainLayout   from '../components/layout/MainLayout/MainLayout'
 
@@ -43,9 +44,7 @@ const AppRoutes = () => (
       <Route path="/analytics"            element={<Analytics />} />
       <Route path="/pos"                  element={<POS />} />
       <Route path="/online-store"         element={<OnlineStore />} />
-
-      {/* Collections tab lives inside Products — redirect legacy path */}
-      {/* <Route path="/collections" element={<Navigate to="/products" replace />} /> */}
+      <Route path="/online-store/themes" element={<OnlineStoreThemes/>} />
 
       {/* Catch-all unknown paths → dashboard */}
       <Route path="*" element={<Navigate to="/dashboard" replace />} />

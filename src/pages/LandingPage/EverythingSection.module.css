@@ -1,0 +1,248 @@
+
+/* ── Outer section ── */
+.section {
+  display: none;
+  padding: 80px 48px 96px;
+  background: #fff;
+  border: 1.5px solid #C8DBF0;
+  border-radius: 16px;
+  margin: 32px 32px;
+}
+
+/* ── Header ── */
+.header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 72px;
+}
+.title {
+  font-family: 'Fraunces', serif;
+  font-size: 42px;
+  font-weight: 700;
+  color: #1b3b5f;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 14px;
+}
+.sub {
+  font-size: 16px;
+  color: #374151;
+  line-height: 1.65;
+}
+
+/* ── Feature rows ── */
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto 96px;
+}
+.row:last-child { margin-bottom: 0; }
+
+/* ── Text column ── */
+.textCol {
+  display: flex;
+  flex-direction: column;
+}
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #22a080;
+  margin-bottom: 14px;
+}
+.tagDot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #2DBD97;
+  display: inline-block; flex-shrink: 0;
+}
+.rowTitle {
+  font-family: 'Fraunces', serif;
+  font-size: 36px; font-weight: 700;
+  color: #111827; line-height: 1.2;
+  letter-spacing: -0.02em; margin-bottom: 14px;
+}
+.rowDesc {
+  font-size: 15px; color: #6B7280;
+  line-height: 1.75; margin-bottom: 28px;
+}
+.primaryBtn, .darkBtn {
+  display: inline-flex; align-items: center;
+  padding: 13px 26px; border-radius: 8px; border: none;
+  background: #1b3b5f; color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px; font-weight: 700;
+  cursor: pointer; transition: background 0.15s;
+  align-self: flex-start;
+}
+.primaryBtn:hover, .darkBtn:hover { background: #2DBD97; }
+
+/* ── Row 1 visual: screenshot ── */
+.visualCol {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.screenshotWrap {
+  position: relative;
+  width: 100%;
+}
+.screenshot {
+  width: 100%;
+  border-radius: 14px;
+  box-shadow: 0 16px 56px rgba(0,0,0,0.1);
+  display: block;
+  border: 1px solid #E5E7EB;
+}
+
+/* ── Floating badges (shared) ── */
+.badge {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 9px 16px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #111827;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.14);
+  white-space: nowrap;
+  border: 1px solid #F3F4F6;
+  z-index: 10;
+}
+.badgeIcon       { font-size: 14px; }
+.badgeIconYellow { font-size: 14px; }
+
+/* Row 1 badge positions */
+.badgeInstant {
+  top: 32px;
+  left: -48px;    /* pushed well outside screenshot */
+}
+.badgeSell {
+  bottom: 56px;
+  left: -48px;    /* pushed well outside screenshot */
+}
+
+/* ══════════════════════════════════════════════════════
+   ROW 2: TWO OVERLAPPING PHONES
+   Left column is phones, right column is text
+   ══════════════════════════════════════════════════════ */
+.phonesCol {
+  position: relative;
+  height: 560px;           /* fixed height to contain the layered phones */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Back phone: shows top, slides left behind front phone ── */
+.phoneBack {
+  position: absolute;
+  left: 20px;              /* slightly left of centre */
+  top: 0;
+  width: 240px;
+  height: 400px;           /* only top portion visible */
+  overflow: hidden;        /* clips the bottom — gives "top showing" effect */
+  border-radius: 32px;
+  z-index: 1;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.14);
+}
+.phoneImgBack {
+  width: 100%;
+  display: block;
+  border-radius: 32px;
+}
+
+/* ── Front phone: top clipped, bottom (payment) showing ── */
+.phoneFront {
+  position: absolute;
+  right: 20px;             /* slightly right of centre */
+  bottom: 0;
+  width: 240px;
+  z-index: 2;
+  border-radius: 32px;
+  overflow: visible;
+}
+.phoneImgFront {
+  width: 100%;
+  display: block;
+  border-radius: 32px;
+  box-shadow: 0 20px 56px rgba(0,0,0,0.18);
+  /* Clip the top ~35% so only payment methods section shows */
+  clip-path: inset(32% 0 0 0 round 32px);
+}
+
+/* Payment methods card — overlapping the front phone */
+.paymentCard {
+  position: absolute;
+  top: 28%;               /* sits over the visible payment area */
+  left: -60px;            /* extends left past the phone edge */
+  width: 240px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.16);
+  border: 1px solid #F3F4F6;
+  z-index: 5;
+}
+.paymentHeader {
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #F3F4F6;
+}
+.paymentAmt {
+  font-family: 'Fraunces', serif;
+  font-size: 18px; font-weight: 700; color: #111827;
+}
+.payMethod {
+  display: flex; align-items: center; gap: 8px;
+  padding: 7px 8px; border-radius: 8px;
+}
+.payMethodOn { background: #F3F4F6; }
+.payIcon     { font-size: 14px; flex-shrink: 0; }
+.payText     { flex: 1; min-width: 0; }
+.payLabel    { font-size: 11px; font-weight: 600; color: #111827; margin: 0; line-height: 1.2; }
+.paySub      { font-size: 9.5px; color: #9CA3AF; margin: 0; line-height: 1.2; }
+.radio {
+  width: 14px; height: 14px; border-radius: 50%;
+  border: 1.5px solid #D1D5DB; flex-shrink: 0;
+}
+.radioOn {
+  border-color: #111827;
+  background: radial-gradient(circle, #111827 40%, transparent 40%);
+}
+
+/* Badge positions for phone row — pushed aggressively outside */
+.badgeEasy {
+  top: 60px;
+  left: -80px;            /* well outside left edge of phone column */
+}
+.badgeSeamless {
+  bottom: 60px;
+  left: -80px;            /* well outside left edge of phone column */
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .section  { margin: 0 16px; padding: 60px 32px 72px; }
+  .title    { font-size: 34px; }
+  .rowTitle { font-size: 28px; }
+  .badgeInstant, .badgeSell { left: -24px; }
+  .badgeEasy, .badgeSeamless { left: -32px; }
+}
+@media (max-width: 768px) {
+  .section  { margin: 0 12px; padding: 48px 20px 56px; }
+  .row      { grid-template-columns: 1fr; gap: 40px; }
+  .phonesCol{ height: 480px; }
+  .title    { font-size: 28px; }
+  .badgeInstant, .badgeSell,
+  .badgeEasy, .badgeSeamless { display: none; }
+}

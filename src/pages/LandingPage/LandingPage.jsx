@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styles from './LandingPage.module.css'
+import EverythingSection from './EverythingSection'
+import ThriveSection from './ThriveSection'
 
 // ── Static data ───────────────────────────────────────────
 const STATS = [
@@ -178,18 +180,16 @@ export default function LandingPage() {
         <div className={styles.heroBgOverlay} />
         <div className={styles.heroInner}>
           <h1 className={styles.heroTitle}>
-            The ERP That Keeps<br />
-            <span className={styles.heroAccent}>Your Business Moving</span>
+            The ERP That Keeps<br />Your Business Moving
           </h1>
           <p className={styles.heroSub}>
-            Sell faster, track smarter, and grow confidently with a point of sale
-            and online store system designed for how businesses actually work.
+            Sell faster, track smarter, and grow confidently with <br />a point of sale
+            and online store system designed for <br />how businesses actually work.
           </p>
           <div className={styles.heroActions}>
             <WaitlistForm />
             <NotifyForm />
           </div>
-          <p className={styles.heroNote}>No credit card required · Free 14-day trial</p>
         </div>
       </section>
 
@@ -264,26 +264,11 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════
-           SECOND HERO: The Easiest Way To Sell
-           ══════════════════════════════════════════════ */}
-      {/* <section className={styles.hero2}>
-        <img src="/images/hero-bg.png" alt="" aria-hidden="true" className={styles.hero2BgImage} />
-        <div className={styles.hero2Overlay} />
-        <div className={styles.hero2Inner}>
-          <h1 className={styles.hero2Title}>
-            The Easiest Way To<br />Sell Online And Offline.
-          </h1>
-          <p className={styles.hero2Sub}>
-            Taja gives you everything you need to create your online store,
-            manage sales, and run your business seamlessly online and in-person.
-          </p>
-          <div className={styles.heroActions}>
-            <WaitlistForm />
-            <NotifyBtn />
-          </div>
-        </div>
-      </section> */}
+        {/* Everything you to start a business section */}
+            <EverythingSection />
+
+        {/* Thrive section */}
+              <ThriveSection />        
 
       {/* ══════════════════════════════════════════════
            PRICING PLANS
@@ -442,30 +427,31 @@ export default function LandingPage() {
               </a>
             </div>
           </div>
-
-          <div className={styles.footerCol}>
+          <div className={styles.footerCols}>
+           <div className={styles.footerCol}>
             <p className={styles.footerColTitle}>About taja</p>
             <a href="#" className={styles.footerLink}>About Us</a>
             <a href="#" className={styles.footerLink}>Blog</a>
             <a href="#" className={styles.footerLink}>FAQs</a>
-          </div>
-          <div className={styles.footerCol}>
+           </div>
+           <div className={styles.footerCol}>
             <p className={styles.footerColTitle}>Sourcing Solutions</p>
             <a href="#" className={styles.footerLink}>Circular Sourcing</a>
             <a href="#" className={styles.footerLink}>African Inspired Sourcing</a>
             <a href="#" className={styles.footerLink}>Request for Sourcing</a>
-          </div>
-          <div className={styles.footerCol}>
+           </div>
+           <div className={styles.footerCol}>
             <p className={styles.footerColTitle}>Partnership & Growth</p>
             <a href="#" className={styles.footerLink}>Request Shipment</a>
             <a href="#" className={styles.footerLink}>Order Now & Pay Small Small (ONPSS) </a>
             <a href="#" className={styles.footerLink}>Partner With Us</a>
-          </div>
-          <div className={styles.footerCol}>
+           </div>
+           <div className={styles.footerCol}>
             <p className={styles.footerColTitle}>Start Trading</p>
             <a href="#" className={styles.footerLink}>Sell on Obana</a>
             <a href="#" className={styles.footerLink}>Buy in Bulk</a>
             <a href="#" className={styles.footerLink}>Earn as a Sales Partner</a>
+           </div>
           </div>
         </div>
 
@@ -474,8 +460,8 @@ export default function LandingPage() {
         <div className={styles.footerBottom}>
           <div className={styles.footerBottomLeft}>
           <p className={styles.footerCopy}>
-            © 2025 Obana.Africa (An ICON Tech &amp; Ecom Services Ltd Trademark). All Rights Reserved.{' '}
-            <a href="#" className={styles.footerBottomLink}>Terms &amp; Conditions</a>
+            © 2025 Obana.Africa (An ICON Tech &amp; Ecom Services Ltd Trademark). <br />All Rights Reserved.{' '}
+            <br /><a href="#" className={styles.footerBottomLink}>Terms &amp; Conditions</a>
             {' | '}
             <a href="#" className={styles.footerBottomLink}>Privacy Policy</a>
           </p>
