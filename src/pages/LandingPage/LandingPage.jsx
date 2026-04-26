@@ -10,24 +10,6 @@ const STATS = [
   { value: '4.9★',   label: 'Average Rating'         },
 ]
 
-const TESTIMONIALS = [
-  {
-    name: 'Adaeze Okonkwo', initials: 'AO',
-    role: "Owner, Ada's Boutique — Lagos",
-    text: 'Since switching to Obana, my checkout time dropped by half. My staff love how easy it is to use across both our store and online.',
-  },
-  {
-    name: 'Emeka Nwosu', initials: 'EN',
-    role: 'Manager, TechHub Store — Abuja',
-    text: 'The inventory alerts alone saved us from running out of our top products three times this month. The cross-location sync is excellent.',
-  },
-  {
-    name: 'Fatima Bello', initials: 'FB',
-    role: 'CEO, FashionFirst — Port Harcourt',
-    text: 'We integrated the online store with our POS in one day. The Ankara collections are selling beautifully and stock updates instantly.',
-  },
-]
-
 // ── Helpers ───────────────────────────────────────────────
 const isValidEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())
 
@@ -55,13 +37,12 @@ function WaitlistForm({ onSuccess }) {
     catch { setErr('Something went wrong. Try again.') }
     finally { setSubmitting(false) }
   }
-  // Inside WaitlistForm, after setDone(true):
-useEffect(() => {
-  if (done) {
-    const t = setTimeout(() => setDone(false), 3000)
-    return () => clearTimeout(t)
-  }
-}, [done])
+  useEffect(() => {
+    if (done) {
+      const t = setTimeout(() => setDone(false), 3000)
+      return () => clearTimeout(t)
+    }
+  }, [done])
   if (done) return <div className={styles.successMsg}>🎉 You're on the list!</div>
 
   return (
@@ -93,11 +74,11 @@ function NotifyForm() {
   }
 
   useEffect(() => {
-  if (done) {
-    const t = setTimeout(() => setDone(false), 3000)
-    return () => clearTimeout(t)
-  }
-}, [done])
+    if (done) {
+      const t = setTimeout(() => setDone(false), 3000)
+      return () => clearTimeout(t)
+    }
+  }, [done])
 
   if (done) return <div className={styles.successMsg}>🔔 Done! We'll notify you at launch.</div>
   if (!show) return (
@@ -150,16 +131,15 @@ export default function LandingPage() {
   const [showAllFeatures,   setShowAllFeatures]   = useState(false)
 
   useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 40)
+    const fn = () => {
+      const hero = document.getElementById('hero-section')
+      const threshold = hero ? hero.offsetHeight : window.innerHeight
+      setScrolled(window.scrollY > threshold)
+    }
     window.addEventListener('scroll', fn)
     return () => window.removeEventListener('scroll', fn)
   }, [])
 
-  useEffect(() => {
-    const t = setInterval(() =>
-      setActiveTestimonial(p => (p + 1) % TESTIMONIALS.length), 4000)
-    return () => clearInterval(t)
-  }, [])
 
   useEffect(() => {
     document.body.style.overflow = showNavModal ? 'hidden' : ''
@@ -193,7 +173,7 @@ export default function LandingPage() {
       </nav>
 
       {/* ── Hero ── */}
-      <section className={styles.hero}>
+      <section className={styles.hero} id="hero-section">
         <img src="/images/hero-bg.png" alt="" aria-hidden="true" className={styles.heroBgImage} />
         <div className={styles.heroBgOverlay} />
         <div className={styles.heroInner}>
@@ -284,33 +264,143 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── Testimonials ── */}
-      <section className={styles.testimonials} id="testimonials">
-        <div className={styles.sectionHeader}>
-          <p className={styles.sectionEyebrow}>Trusted by thousands</p>
-          <h2 className={styles.sectionTitle}>What our merchants say</h2>
+      {/* ══════════════════════════════════════════════
+           SECOND HERO: The Easiest Way To Sell
+           ══════════════════════════════════════════════ */}
+      <section className={styles.hero2}>
+        <img src="/images/hero-bg.png" alt="" aria-hidden="true" className={styles.hero2BgImage} />
+        <div className={styles.hero2Overlay} />
+        <div className={styles.hero2Inner}>
+          <h1 className={styles.hero2Title}>
+            The Easiest Way To<br />Sell Online And Offline.
+          </h1>
+          <p className={styles.hero2Sub}>
+            Taja gives you everything you need to create your online store,
+            manage sales, and run your business seamlessly online and in-person.
+          </p>
+          <div className={styles.heroActions}>
+            <WaitlistForm />
+            <NotifyBtn />
+          </div>
         </div>
-        <div className={styles.testimonialCards}>
-          {TESTIMONIALS.map((t, i) => (
-            <div key={t.name}
-              className={`${styles.testimonialCard} ${i === activeTestimonial ? styles.testimonialActive : ''}`}>
-              <p className={styles.testimonialText}>"{t.text}"</p>
-              <div className={styles.testimonialAuthor}>
-                <div className={styles.testimonialAvatar}>{t.initials}</div>
-                <div>
-                  <p className={styles.testimonialName}>{t.name}</p>
-                  <p className={styles.testimonialRole}>{t.role}</p>
-                </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════
+           PRICING PLANS
+           ══════════════════════════════════════════════ */}
+      <section className={styles.pricingSection} id="pricing">
+        <h2 className={styles.pricingTitle}>Pricing Plans</h2>
+
+        <div className={styles.pricingGrid}>
+          {/* Starter */}
+          <div className={styles.pricingCard}>
+            <p className={styles.pricingTier}>Starter</p>
+            <div className={styles.pricingPrice}>
+              <span className={styles.pricingCurrency}>₦</span>
+              <span className={styles.pricingAmount}>0</span>
+              <span className={styles.pricingPer}>/month</span>
+            </div>
+            <p className={styles.pricingDesc}>Best for new sellers just getting started</p>
+            <button className={styles.pricingCta}>Get started for free</button>
+            <ul className={styles.pricingFeatures}>
+              {['Online Store Setup','Basic Analytics','Order Management','Product Listing (Limited)','Basic Website Customization'].map(f => (
+                <li key={f} className={styles.pricingFeature}>
+                  <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}><path d="M20 6L9 17l-5-5"/></svg>
+                  {f}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Growth — recommended */}
+          <div className={`${styles.pricingCard} ${styles.pricingCardFeatured}`}>
+            <div className={styles.pricingBadge}>Recommended</div>
+            <p className={styles.pricingTier}>Growth</p>
+            <div className={styles.pricingPrice}>
+              <span className={styles.pricingCurrency}>₦</span>
+              <span className={styles.pricingAmount}>7,500</span>
+              <span className={styles.pricingPer}>/month</span>
+            </div>
+            <p className={styles.pricingDesc}>Growing businesses ready to scale</p>
+            <button className={styles.pricingCtaFeatured}>Upgrade to Growth</button>
+            <ul className={styles.pricingFeatures}>
+              {['Everything In Starter','Unlimited Products','Advanced Store Customization','Inventory Management','POS System (In-Store Sales)','Sales Analytics & Reports'].map(f => (
+                <li key={f} className={styles.pricingFeature}>
+                  <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}><path d="M20 6L9 17l-5-5"/></svg>
+                  {f}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Professional */}
+          <div className={styles.pricingCard}>
+            <p className={styles.pricingTier}>Professional</p>
+            <div className={styles.pricingPrice}>
+              <span className={styles.pricingCurrency}>₦</span>
+              <span className={styles.pricingAmount}>20,000</span>
+              <span className={styles.pricingPer}>/month</span>
+            </div>
+            <p className={styles.pricingDesc}>Established businesses & high-volume sellers</p>
+            <button className={styles.pricingCta}>Scale Your Business</button>
+            <ul className={styles.pricingFeatures}>
+              {['Everything In Growth','Multi-Location Inventory Tracking','Staff Accounts & Permissions','Automated Reports','Customer Management (CRM Tools)','Advanced Analytics & Insights'].map(f => (
+                <li key={f} className={styles.pricingFeature}>
+                  <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}><path d="M20 6L9 17l-5-5"/></svg>
+                  {f}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════
+           GET STARTED FAST
+           ══════════════════════════════════════════════ */}
+      <section className={styles.getStartedSection}>
+        <h2 className={styles.getStartedTitle}>Get Started Fast</h2>
+
+        <div className={styles.getStartedRow}>
+          {/* Phone mockup visual */}
+          <div className={styles.getStartedVisual}>
+            <div className={styles.getStartedPhoneWrap}>
+              <img
+                src="/images/pos-phone.png"
+                alt="Taja POS on mobile"
+                className={styles.getStartedPhone}
+                onError={e => { e.target.style.display='none' }}
+              />
+              {/* Fallback dashboard card behind phone */}
+              <div className={styles.getStartedDashCard}>
+                <img
+                  src="/images/products-screenshot.png"
+                  alt="Products dashboard"
+                  className={styles.getStartedDash}
+                  onError={e => { e.target.style.display='none' }}
+                />
               </div>
             </div>
-          ))}
-        </div>
-        <div className={styles.testimonialDots}>
-          {TESTIMONIALS.map((_, i) => (
-            <button key={i}
-              className={`${styles.dot} ${i === activeTestimonial ? styles.dotActive : ''}`}
-              onClick={() => setActiveTestimonial(i)} />
-          ))}
+          </div>
+
+          {/* Steps */}
+          <div className={styles.getStartedSteps}>
+            {[
+              { n: 1, label: 'Customize your store'     },
+              { n: 2, label: 'Set up payments'           },
+              { n: 3, label: 'Start selling everywhere'  },
+            ].map(s => (
+              <div key={s.n} className={styles.getStartedStep}>
+                <div className={styles.getStartedNum}>{s.n}</div>
+                <p className={styles.getStartedStepLabel}>{s.label}</p>
+              </div>
+            ))}
+
+            <div className={styles.getStartedCtaRow}>
+              <button className={styles.getStartedPrimary}>Get started for free</button>
+              <button className={styles.getStartedSecondary}>Install now</button>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -334,27 +424,20 @@ export default function LandingPage() {
           <div className={styles.footerBrandCol}>
             <img src="/logos/taja logo white.png" alt="taja" className={styles.footerLogo} />
             <div className={styles.footerSocials}>
-              <a href="#" className={styles.footerSocial} aria-label="Facebook">
-                <svg width={15} height={15} viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+              <a href="https://facebook.com" target="_blank" rel="noreferrer" className={styles.footerSocial} aria-label="Facebook">
+                <svg width={20} height={20} viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+              </a>
+              <a href="https://instagram.com" target="_blank" rel="noreferrer" className={styles.footerSocial} aria-label="Instagram">
+                <svg width={20} height={20} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8}>
+                  <rect x={2} y={2} width={20} height={20} rx={5}/><circle cx={12} cy={12} r={4}/><circle cx={17.5} cy={6.5} r={0.5} fill="currentColor" stroke="none"/>
                 </svg>
               </a>
-              <a href="#" className={styles.footerSocial} aria-label="Instagram">
-                <svg width={15} height={15} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8}>
-                  <rect x={2} y={2} width={20} height={20} rx={5}/>
-                  <circle cx={12} cy={12} r={4}/>
-                  <circle cx={17.5} cy={6.5} r={0.5} fill="currentColor" stroke="none"/>
-                </svg>
+              <a href="https://x.com" target="_blank" rel="noreferrer" className={styles.footerSocial} aria-label="X">
+                <svg width={19} height={19} viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
               </a>
-              <a href="#" className={styles.footerSocial} aria-label="X">
-                <svg width={15} height={15} viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                </svg>
-              </a>
-              <a href="#" className={styles.footerSocial} aria-label="LinkedIn">
-                <svg width={15} height={15} viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/>
-                  <circle cx={4} cy={4} r={2}/>
+              <a href="https://linkedin.com" target="_blank" rel="noreferrer" className={styles.footerSocial} aria-label="LinkedIn">
+                <svg width={20} height={20} viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x={2} y={9} width={4} height={12}/><circle cx={4} cy={4} r={2}/>
                 </svg>
               </a>
             </div>
@@ -375,7 +458,7 @@ export default function LandingPage() {
           <div className={styles.footerCol}>
             <p className={styles.footerColTitle}>Partnership & Growth</p>
             <a href="#" className={styles.footerLink}>Request Shipment</a>
-            <a href="#" className={styles.footerLink}>Order Now & Pay Small Smal </a>
+            <a href="#" className={styles.footerLink}>Order Now & Pay Small Small (ONPSS) </a>
             <a href="#" className={styles.footerLink}>Partner With Us</a>
           </div>
           <div className={styles.footerCol}>
@@ -384,17 +467,19 @@ export default function LandingPage() {
             <a href="#" className={styles.footerLink}>Buy in Bulk</a>
             <a href="#" className={styles.footerLink}>Earn as a Sales Partner</a>
           </div>
-
-         
         </div>
 
+        <div className={styles.footerDivider}></div>
+
         <div className={styles.footerBottom}>
+          <div className={styles.footerBottomLeft}>
           <p className={styles.footerCopy}>
             © 2025 Obana.Africa (An ICON Tech &amp; Ecom Services Ltd Trademark). All Rights Reserved.{' '}
             <a href="#" className={styles.footerBottomLink}>Terms &amp; Conditions</a>
             {' | '}
             <a href="#" className={styles.footerBottomLink}>Privacy Policy</a>
           </p>
+          </div>
           <div className={styles.footerNewsletter}>
             <p className={styles.footerNewsletterTitle}>Stay Connected</p>
             <p className={styles.footerNewsletterSub}>
@@ -403,8 +488,8 @@ export default function LandingPage() {
             <form className={styles.footerNewsletterForm} onSubmit={e => e.preventDefault()}>
               <input type="email" className={styles.footerNewsletterInput} placeholder="Enter your email..." />
               <button type="submit" className={styles.footerNewsletterBtn} aria-label="Subscribe">
-                <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2}>
-                  <path d="M5 12h14M12 5l7 7-7 7"/>
+               <svg width={16} height={16} viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
                 </svg>
               </button>
             </form>
