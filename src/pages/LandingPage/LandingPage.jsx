@@ -267,7 +267,7 @@ export default function LandingPage() {
       {/* ══════════════════════════════════════════════
            SECOND HERO: The Easiest Way To Sell
            ══════════════════════════════════════════════ */}
-      <section className={styles.hero2}>
+      {/* <section className={styles.hero2}>
         <img src="/images/hero-bg.png" alt="" aria-hidden="true" className={styles.hero2BgImage} />
         <div className={styles.hero2Overlay} />
         <div className={styles.hero2Inner}>
@@ -283,7 +283,7 @@ export default function LandingPage() {
             <NotifyBtn />
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* ══════════════════════════════════════════════
            PRICING PLANS

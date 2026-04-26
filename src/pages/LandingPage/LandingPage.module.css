@@ -177,7 +177,7 @@
 /* ── Shared email pill ── */
 .emailWrap {
   display: flex; align-items: center;
-  background: #fff; border-radius: 12px; overflow: hidden;
+  background: transparent; border-radius: 12px; overflow: hidden;
   box-shadow: 0 4px 24px rgba(0,0,0,0.2);
   width: 400px; flex-shrink: 0;
   max-width: 100%;           /* never overflows its container */
