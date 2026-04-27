@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap');
 
 * { padding: 0; margin: 0; box-sizing: border-box; }
 
@@ -18,6 +19,7 @@
   --surface: #F9FAFB;
   --white:   #FFFFFF;
 
+  font-family: "Bricolage Grotesque", sans-serif;
   font-family: 'DM Sans', sans-serif;
   background: var(--white);
   color: var(--ink);
@@ -53,7 +55,14 @@
 }
 .brandLogo   { height: 80px; width: auto; object-fit: contain; display: block; }
 .navLinks    { display: flex; gap: 24px; }
-.navLink     { font-size: 14px; color: #fff; text-decoration: none; font-weight: 500; transition: color 0.15s; }
+.navLink     { 
+  font-size: 14px; 
+  color: #fff; 
+  text-decoration: none; 
+  font-weight: 500; 
+  font-family: "Bricolage Grotesque", sans-serif;
+  transition: color 0.15s; 
+}
 .navLink:hover { color: var(--green); }
 .navActions  { display: flex; gap: 8px; align-items: center; }
 
@@ -63,7 +72,7 @@
   border: 1.5px solid rgba(255,255,255,0.4); 
   background: transparent; 
   color: #fff;
-  font-family: 'DM Sans', sans-serif; 
+  font-family: 'Bricolage Grotesque', sans-serif; 
   font-size: 14px; 
   font-weight: 500;
   cursor: pointer; 
@@ -73,10 +82,17 @@
   border-color: #fff; }
 
 .btnPrimary {
-  padding: 9px 20px; border-radius: 8px; border: none;
-  background: #fff; color: var(--navy);
-  font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 700;
-  cursor: pointer; transition: all 0.15s; white-space: nowrap;
+  padding: 9px 20px; 
+  border-radius: 8px; 
+  border: none;
+  background: #fff; 
+  color: var(--navy);
+  font-family: "Bricolage Grotesque", sans-serif; 
+  font-size: 14px; 
+  font-weight: 700;
+  cursor: pointer; 
+  transition: all 0.15s; 
+  white-space: nowrap;
 }
 .btnPrimary:hover { background: var(--gold); color: #1a1200; }
 
@@ -115,7 +131,12 @@
   transition: background 0.15s;
 }
 .navModalClose:hover { background: rgba(255,255,255,0.2); color: #fff; }
-.navModalTitle { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+.navModalTitle { 
+  font-family: "Bricolage Grotesque", sans-serif; 
+  font-size: 20px; 
+  font-weight: 700; 
+  color: #fff; 
+  margin-bottom: 6px; }
 .navModalSub   { font-size: 13.5px; color: rgba(255,255,255,0.55); margin-bottom: 16px; line-height: 1.5; }
 
 /* ══════════════════════════════════════════════════════════
@@ -160,7 +181,7 @@
 }
 
 .heroTitle {
-  font-family: 'Fraunces', serif;
+  font-family: "Bricolage Grotesque", sans-serif;
   font-size: 70px; 
   font-weight: 700; 
   color: #fff; 
@@ -186,6 +207,7 @@
 .heroNote { 
   font-size: 12px; 
   color: rgba(255,255,255,0.4); 
+  font-family: "Bricolage Grotesque", sans-serif;
 }
 
 /* ── Shared email pill ── */
@@ -647,7 +669,7 @@
   text-align: center;
 }
 .pricingTitle {
-  font-family: 'Fraunces', serif;
+  font-family: "Bricolage Grotesque", sans-serif;
   font-size: 44px; font-weight: 700;
   color: var(--navy); 
   margin-bottom: 52px;
@@ -682,15 +704,16 @@
   top: -12px; left: 50%;
   transform: translateX(-50%);
   background: var(--gold);
-  color: #1a1200;
-  font-size: 11px; font-weight: 700;
+  color:var(--navy);
+  font-size: 11px; 
+  font-weight: 700;
   padding: 4px 16px; border-radius: 99px;
   white-space: nowrap;
 }
 
 .pricingTier {
   font-size: 14px; font-weight: 600;
-  color: var(--ink3); text-align: center;
+  color: var(--navy); text-align: center;
   margin-bottom: 16px;
 }
 
@@ -702,19 +725,19 @@
   margin-bottom: 10px;
 }
 .pricingCurrency {
-  font-family: 'Fraunces', serif;
+  font-family: "Bricolage Grotesque", sans-serif;
   font-size: 28px; font-weight: 700;
-  color: var(--ink);
+  color: var(--navy);
 }
 .pricingAmount {
-  font-family: 'Fraunces', serif;
+  font-family: "Bricolage Grotesque", sans-serif;
   font-size: 48px; font-weight: 700;
-  color: var(--ink); line-height: 1;
+  color: var(--navy); line-height: 1;
   letter-spacing: -0.03em;
 }
 .pricingPer {
   font-size: 16px; 
-  color: var(--ink3); 
+  color: var(--navy); 
   font-weight: 500;
 }
 
@@ -730,7 +753,7 @@
   display: block; width: 100%;
   padding: 12px; border-radius: 8px; border: none;
   background: var(--navy); color: #fff;
-  font-family: 'DM Sans', sans-serif;
+  font-family: "Bricolage Grotesque", sans-serif;
   font-size: 14px; font-weight: 700;
   cursor: pointer; transition: background 0.15s;
   margin-bottom: 28px;
@@ -740,8 +763,8 @@
 .pricingCtaFeatured {
   display: block; width: 100%;
   padding: 12px; border-radius: 8px; border: none;
-  background: var(--gold); color: #1a1200;
-  font-family: 'DM Sans', sans-serif;
+  background: var(--gold); color: var(--navy);
+  font-family: "Bricolage Grotesque", sans-serif;
   font-size: 14px; font-weight: 700;
   cursor: pointer; transition: background 0.15s;
   margin-bottom: 28px;
@@ -754,7 +777,7 @@
 }
 .pricingFeature {
   display: flex; align-items: center; gap: 10px;
-  font-size: 13px; color: var(--ink2); line-height: 1.4;
+  font-size: 13px; color: var(--navy); line-height: 1.4;
 }
 .pricingFeature svg { flex-shrink: 0; color: var(--green); }
 
@@ -762,17 +785,17 @@
    GET STARTED FAST
    ══════════════════════════════════════════════════════════ */
 .getStartedSection {
-  padding: 96px 32px;
+  padding: 30px 32px;
   background: var(--surface);
   text-align: center;
+  overflow: visible;
+  max-height: 900px;
 }
 .getStartedTitle {
-  font-family: 'Fraunces', serif;
+  font-family: "Bricolage Grotesque", sans-serif;
   font-size: 44px; 
   font-weight: 700;
   color: var(--navy); 
-  margin-bottom: 56px;
-  letter-spacing: -0.02em;
 }
 .getStartedRow {
   display: grid;
@@ -784,35 +807,45 @@
 }
 
 /* Phone + dashboard card layered visual */
-.getStartedVisual { position: relative;}
+.getStartedVisual { 
+  position: relative;
+  overflow: visible;
+  max-height: 500px;
+}
 .getStartedPhoneWrap {
   position: relative;
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
   justify-content: center;
-  z-index: 1;
+  overflow: visible;
+  margin-top: 50px;
+
 }
 .getStartedPhone {
-  width: 260px;
+  width: 350px;
   border-radius: 32px;
   box-shadow: 0 24px 60px rgba(0,0,0,0.18);
   position: relative; 
   z-index: 0;
+  clip-path: inset(0 0 320px 0);
+ 
 }
 .getStartedDashCard {
   position: absolute;
-  right: -150px; 
-  bottom: 20px;
-  width: 320px;
+  right: -240px; 
+  width: 400px;
+  top: 260px;
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-  overflow: hidden;
-  z-index: 2;
-  border: 1px solid var(--border);
+  clip-path: inset(0 0 50px 0);
 }
 .getStartedDash {
-  width: 100%; display: block;
+  width: 100%; 
+  display: block;
+  border-radius: 18px;
+  border: 2px solid var(--ink3);
+  z-index: 0;
 }
 
 /* Numbered steps */
@@ -821,7 +854,7 @@
   flex-direction: column;
   gap: 20px;
   text-align: left;
-  margin-bottom: 270px;
+  margin-bottom: 150px;
   
 }
 .getStartedStep {
@@ -833,13 +866,13 @@
   width: 40px; height: 40px;
   border-radius: 50%;
   background: var(--navy); color: #fff;
-  font-family: 'Fraunces', serif;
+  font-family: "Bricolage Grotesque", sans-serif;
   font-size: 18px; font-weight: 700;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
 }
 .getStartedStepLabel {
-  font-family: 'Fraunces', serif;
+  font-family: "Bricolage Grotesque", sans-serif;
   font-size: 28px; 
   font-weight: 700;
   color: var(--navy); 
@@ -850,15 +883,17 @@
 .getStartedPrimary {
   padding: 13px 28px; border-radius: 8px; border: none;
   background: var(--navy); color: #fff;
-  font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 700;
+  font-family: "Bricolage Grotesque", sans-serif; 
+  font-size: 14px; font-weight: 700;
   cursor: pointer; transition: background 0.15s;
 }
 .getStartedPrimary:hover { background: var(--green); }
 .getStartedSecondary {
   padding: 13px 28px; border-radius: 8px;
   border: 1.5px solid var(--border); background: var(--white);
-  color: var(--ink2);
-  font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600;
+  color: var(--navy);
+  font-family: "Bricolage Grotesque", sans-serif; 
+  font-size: 14px; font-weight: 600;
   cursor: pointer; transition: all 0.15s;
 }
 .getStartedSecondary:hover { border-color: var(--navy); color: var(--navy); }
@@ -870,4 +905,55 @@
   .pricingGrid { grid-template-columns: 1fr; max-width: 420px; }
   .getStartedRow { grid-template-columns: 1fr; gap: 48px; }
   .getStartedStepLabel { font-size: 22px; }
+}
+
+/* ── Get Started animations ── */
+.getStartedVisual {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.gsVisualVisible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.getStartedStep {
+  opacity: 0;
+  transform: translateX(60px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.gsStepVisible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.getStartedCtaRow {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.gsCtaVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Button shimmer */
+.getStartedPrimary,
+.getStartedSecondary {
+  position: relative;
+  overflow: hidden;
+}
+.getStartedPrimary::after,
+.getStartedSecondary::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+  transition: left 0.4s ease;
+}
+.getStartedPrimary:hover::after,
+.getStartedSecondary:hover::after {
+  left: 150%;
 }

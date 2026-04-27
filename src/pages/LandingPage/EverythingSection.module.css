@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap');
+
 
 *{
    --navy:    #1b3b5f;
@@ -14,6 +16,9 @@
   --border:  #E5E7EB;
   --surface: #F9FAFB;
   --white:   #FFFFFF;
+
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-family: 'DM Sans', sans-serif;
 }
 
 /* ── Outer section ── */
@@ -31,15 +36,15 @@
   margin: 0 auto 72px;
 }
 .title {
-  font-family: 'Fraunces', serif;
+  font-family: 'Bricolage Grotesque', sans-serif;
   font-size: 42px;
   font-weight: 600;
-  color: #1b3b5f;
-  letter-spacing: -0.02em;
+  color: var(--navy);
   margin-bottom: 14px;
 }
 .sub {
   font-size: 16px;
+  font-family: "Bricolage Grotesque", sans-serif;
   color: var(--navy);
 }
 
@@ -55,6 +60,19 @@
 }
 .row:last-child { margin-bottom: 0; }
 
+.row:last-child .textCol {
+  align-items: flex-end;  /*  pushes content to the right */
+  text-align: right;
+}
+
+.row:last-child .tag {
+  align-self: flex-end;  /*  aligns the POS badge to the right */
+}
+
+.row:last-child .darkBtn {
+  align-self: flex-end;  /*  aligns the Install now button to the right */
+}
+
 /* ── Text column ── */
 .textCol {
   display: flex;
@@ -68,6 +86,7 @@
   align-items: flex-start;
   gap: 7px;
   padding: 4px;
+  font-family: "Bricolage Grotesque", sans-serif;
   font-size: 13px;
   font-weight: 700;
   color: #22a080;
@@ -99,12 +118,13 @@
   display: inline-block; flex-shrink: 0;
 }
 .rowTitle {
-  font-family: 'Fraunces', serif;
+  font-family: "Bricolage Grotesque", sans-serif;
   font-size: 36px; 
   font-weight: 700;
   color: var(--navy); 
 }
 .rowDesc {
+  font-family: "Bricolage Grotesque", sans-serif;
   font-size: 15px; 
   color: var(--navy);
   line-height: 1.75; margin-bottom: 28px;
@@ -113,7 +133,8 @@
   display: inline-flex; align-items: center;
   padding: 13px 26px; border-radius: 8px; border: none;
   background: #1b3b5f; color: #fff;
-  font-family: 'DM Sans', sans-serif;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-family: "Bricolage Grotesque", sans-serif;
   font-size: 14px; font-weight: 700;
   cursor: pointer; transition: background 0.15s;
   align-self: flex-start;
@@ -126,7 +147,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid var(--ink3);
+  /* border: 2px solid var(--ink3); */
   border-radius: 14px;
 }
 .screenshotWrap {
@@ -150,9 +171,10 @@
   background: #fff;
   padding: 4px;
   border-radius: 10px;
+  font-family: "Bricolage Grotesque", sans-serif;
   font-size: 12.5px;
   font-weight: 600;
-  color: #111827;
+  color: var(--navy);
   box-shadow: 0 6px 24px rgba(0,0,0,0.14);
   white-space: nowrap;
   border: 1px solid #F3F4F6;
@@ -258,3 +280,64 @@
   .badgeInstant, .badgeSell,
   .badgeEasy, .badgeSeamless { display: none; }
 }
+
+/* Fade + slide up on scroll */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.row {
+  opacity: 0;
+  animation: fadeSlideUp 0.7s ease forwards;
+}
+
+.row:nth-child(1) { animation-delay: 0.1s; }
+.row:nth-child(2) { animation-delay: 0.3s; }
+
+/* Screenshot hover lift */
+.screenshotWrap {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.screenshotWrap:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 32px 80px rgba(0,0,0,0.15);
+}
+
+/* Badge pulse on load */
+@keyframes badgePop {
+  0%   { opacity: 0; transform: scale(0.8); }
+  70%  { transform: scale(1.05); }
+  100% { opacity: 1; transform: scale(1); }
+}
+.badge {
+  animation: badgePop 0.5s ease forwards;
+}
+.badgeInstant  { animation-delay: 0.6s; opacity: 0; }
+.badgeSell     { animation-delay: 0.8s; opacity: 0; }
+.badgeEasy     { animation-delay: 0.6s; opacity: 0; }
+.badgeSeamless { animation-delay: 0.8s; opacity: 0; }
+
+/* Button shimmer on hover */
+.primaryBtn, .darkBtn {
+  position: relative;
+  overflow: hidden;
+}
+.primaryBtn::after, .darkBtn::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  transition: left 0.4s ease;
+}
+.primaryBtn:hover::after, .darkBtn:hover::after {
+  left: 150%;
+}
+
+/* Phone cards hover */
+.phoneBack, .phoneFront {
+  transition: transform 0.4s ease;
+}
+.phonesCol:hover .phoneBack  { transform: translateX(-8px) translateY(65px); }
+.phonesCol:hover .phoneFront { transform: translateX(8px)  translateY(-75px); }

@@ -1,9 +1,30 @@
-
-
 import styles from './EverythingSection.module.css'
-
+import {useEffect, useRef} from 'react'
 // const [showNavModal, setShowNavModal] = useState(false)
 export default function EverythingSection({ setShowNavModal }) {
+
+   const sectionRef = useRef(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.animationPlayState = 'running'
+          }
+        })
+      },
+      { threshold: 0.15 }
+    )
+
+    const rows = sectionRef.current?.querySelectorAll(`.${styles.row}`)
+    rows?.forEach(row => {
+      row.style.animationPlayState = 'paused'
+      observer.observe(row)
+    })
+
+    return () => observer.disconnect()
+  }, [])
   return (
 
     <section className={styles.section}>

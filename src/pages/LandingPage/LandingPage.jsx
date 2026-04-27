@@ -4,6 +4,7 @@ import styles from './LandingPage.module.css'
 import EverythingSection from './EverythingSection'
 import ThriveSection from './ThriveSection'
 
+
 // ── Static data ───────────────────────────────────────────
 const STATS = [
   { value: '10,000+', label: 'Businesses powered'    },
@@ -27,6 +28,7 @@ const saveToWaitlist = (email, source) => {
       user_email: entry.email, 
       message: 'source: ${source}',
       time: new Date().toLocaleString('en-NG', { timeZone: 'Africa/Lagos' }), 
+      name: entry.email,
     },'9MT_fVS0T1iAhhljE')
   return entry
 }
@@ -155,6 +157,25 @@ export default function LandingPage() {
     return () => { document.body.style.overflow = '' }
   }, [showNavModal])
 
+  const gsRef = useRef(null)
+  const [gsVisible, setGsVisible] = useState(false)
+
+ useEffect(() => {
+  const observer = new IntersectionObserver(
+    ([entry]) => { if (entry.isIntersecting) setGsVisible(true) },
+    { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+  )
+  if (gsRef.current) {
+    // 👇 check if already visible on first load
+    const rect = gsRef.current.getBoundingClientRect()
+    if (rect.top < window.innerHeight) {
+      setGsVisible(true)
+    } else {
+      observer.observe(gsRef.current)
+    }
+  }
+  return () => observer.disconnect()
+}, [])
   return (
     <div className={styles.page}>
 
@@ -373,51 +394,57 @@ Everything in Business Pro +</p>
       {/* ══════════════════════════════════════════════
            GET STARTED FAST
            ══════════════════════════════════════════════ */}
-      <section className={styles.getStartedSection}>
-        <h2 className={styles.getStartedTitle}>Get Started Fast</h2>
+     <section className={styles.getStartedSection} ref={gsRef}>
+  <h2 className={styles.getStartedTitle}>Get Started Fast</h2>
 
-        <div className={styles.getStartedRow}>
-          {/* Phone mockup visual */}
-          <div className={styles.getStartedVisual}>
-            <div className={styles.getStartedPhoneWrap}>
-              <img
-                src="/images/pos-phone.png"
-                alt="Taja POS on mobile"
-                className={styles.getStartedPhone}
-                onError={e => { e.target.style.display='none' }}
-              />
-              {/* Fallback dashboard card behind phone */}
-              <div className={styles.getStartedDashCard}>
-                <img
-                  src="/images/products-screenshot.png"
-                  alt="Products dashboard"
-                  className={styles.getStartedDash}
-                  onError={e => { e.target.style.display='none' }}
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Steps */}
-          <div className={styles.getStartedSteps}>
-            {[
-              { n: 1, label: 'Customize your store'     },
-              { n: 2, label: 'Set up payments'           },
-              { n: 3, label: 'Start selling everywhere'  },
-            ].map(s => (
-              <div key={s.n} className={styles.getStartedStep}>
-                <div className={styles.getStartedNum}>{s.n}</div>
-                <p className={styles.getStartedStepLabel}>{s.label}</p>
-              </div>
-            ))}
-
-            <div className={styles.getStartedCtaRow}>
-              <button className={styles.getStartedPrimary} onClick={() => setShowNavModal(true)}>Get started for free</button>
-              <button className={styles.getStartedSecondary} onClick={() => setShowNavModal(true)}>Install now</button>
-            </div>
-          </div>
+  <div className={styles.getStartedRow}>
+    {/* Phone mockup visual */}
+    <div className={`${styles.getStartedVisual} ${gsVisible ? styles.gsVisualVisible : ''}`}>
+      <div className={styles.getStartedPhoneWrap}>
+        <img
+          src="/images/pos-phone.png"
+          alt="Taja POS on mobile"
+          className={styles.getStartedPhone}
+          onError={e => { e.target.style.display='none' }}
+        />
+        <div className={styles.getStartedDashCard}>
+          <img
+            src="/images/products-screenshot.png"
+            alt="Products dashboard"
+            className={styles.getStartedDash}
+            onError={e => { e.target.style.display='none' }}
+          />
         </div>
-      </section>
+      </div>
+    </div>
+
+    {/* Steps */}
+    <div className={styles.getStartedSteps}>
+      {[
+        { n: 1, label: 'Customize your store'    },
+        { n: 2, label: 'Set up payments'          },
+        { n: 3, label: 'Start selling everywhere' },
+      ].map((s, i) => (
+        <div
+          key={s.n}
+          className={`${styles.getStartedStep} ${gsVisible ? styles.gsStepVisible : ''}`}
+          style={{ transitionDelay: `${0.2 + i * 0.15}s` }}
+        >
+          <div className={styles.getStartedNum}>{s.n}</div>
+          <p className={styles.getStartedStepLabel}>{s.label}</p>
+        </div>
+      ))}
+
+      <div
+        className={`${styles.getStartedCtaRow} ${gsVisible ? styles.gsCtaVisible : ''}`}
+        style={{ transitionDelay: '0.65s' }}
+      >
+        <button className={styles.getStartedPrimary} onClick={() => setShowNavModal(true)}>Get started for free</button>
+        <button className={styles.getStartedSecondary} onClick={() => setShowNavModal(true)}>Install now</button>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* ── CTA ── */}
       {/* <section className={styles.cta} id="cta">

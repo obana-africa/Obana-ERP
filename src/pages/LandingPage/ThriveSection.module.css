@@ -1,3 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap');
+
+* { 
+  padding: 0; 
+  margin: 0; 
+  box-sizing: border-box; 
+
+   --navy:    #1b3b5f;
+  --navy-lt: #252545;
+  --green:   #2DBD97;
+  --green-lt:#E6F7F2;
+  --green-dk:#22a080;
+  --gold:    #E8C547;
+  --gold-dk: #c9a82e;
+  --ink:     #111827;
+  --ink2:    #374151;
+  --ink3:    #6B7280;
+  --ink4:    #9CA3AF;
+  --border:  #E5E7EB;
+  --surface: #F9FAFB;
+  --white:   #FFFFFF;
+
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-family: 'DM Sans', sans-serif;
+}
 
 .section {
   padding: 96px 32px;
@@ -12,17 +37,18 @@
 }
 
 .title {
-  font-family: 'Fraunces', serif;
+  font-family: "Bricolage Grotesque", sans-serif;
   font-size: 44px;
   font-weight: 700;
-  color: #1b3b5f;
+  color: var(--navy);
   letter-spacing: -0.02em;
   margin-bottom: 16px;
 }
 
 .sub {
+  font-family: "Bricolage Grotesque", sans-serif;
   font-size: 16px;
-  color: #374151;
+  color: var(--navy);
 }
 
 /* ── 3-column × 2-row grid ── */
@@ -76,18 +102,19 @@
 }
 
 .cardTitle {
-  font-family: 'Fraunces', serif;
+  font-family: "Bricolage Grotesque", sans-serif;
   font-size: 22px;
   font-weight: 700;
-  color: #111827;
+  color: var(--navy);
   margin-bottom: 10px;
   line-height: 1.2;
   text-align: center;
 }
 
 .cardDesc {
+  font-family: "Bricolage Grotesque", sans-serif;
   font-size: 13.5px;
-  color: #6B7280;
+  color: var(--navy);
   line-height: 1.7;
   margin-bottom: 20px;
   flex: 1;
@@ -103,7 +130,7 @@
   border: none;
   background: #1b3b5f;
   color: #ffffff;
-  font-family: 'DM Sans', sans-serif;
+  font-family: "Bricolage Grotesque", sans-serif;
   font-size: 13.5px;
   font-weight: 700;
   cursor: pointer;
@@ -119,8 +146,8 @@
   border-radius: 8px;
   border: none;
   background: #E8C547;
-  color: #1a1200;
-  font-family: 'DM Sans', sans-serif;
+  color: var(--navy);
+  font-family: "Bricolage Grotesque", sans-serif;
   font-size: 13.5px;
   font-weight: 700;
   cursor: pointer;

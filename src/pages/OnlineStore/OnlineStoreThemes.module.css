@@ -4,28 +4,41 @@
    ═══════════════════════════════════════════════════════════ */
 
 .page {
-  padding: 32px 32px 64px;
+  padding: 0 0 64px;
   max-width: 1100px;
   font-family: 'DM Sans', system-ui, sans-serif;
 }
 
-/* ── Page header ── */
+/* ── Sticky page header ── */
 .pageHeader {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: #F9FAFB;
+  border-bottom: 1px solid #E5E7EB;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 24px;
+  padding: 14px 32px;
+  margin-bottom: 0;
 }
+
+.pageHeaderActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .pageTitle {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 700;
   color: #111827;
   margin: 0;
 }
-.pageTitleIcon { font-size: 20px; }
+.pageTitleIcon { font-size: 18px; }
 
 .viewStoreBtn {
   display: flex;
@@ -42,10 +55,86 @@
   cursor: pointer;
   transition: all 0.15s;
 }
-.viewStoreBtn:hover {
-  border-color: #9CA3AF;
-  background: #F9FAFB;
+.viewStoreBtn:hover { border-color: #9CA3AF; background: #F9FAFB; }
+
+/* ── Import theme button + dropdown ── */
+.importWrap { position: relative; }
+
+.importBtnGroup {
+  display: flex;
+  align-items: stretch;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1.5px solid #111827;
 }
+
+.importBtn {
+  padding: 8px 14px;
+  background: #111827;
+  color: #fff;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.importBtn:hover { background: #1f2937; }
+
+.importChevBtn {
+  padding: 8px 10px;
+  background: #111827;
+  color: #fff;
+  border: none;
+  border-left: 1px solid rgba(255,255,255,0.2);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: background 0.15s;
+}
+.importChevBtn:hover { background: #374151; }
+
+.importBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 48;
+}
+
+.importDropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  background: #fff;
+  border: 1px solid #E5E7EB;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  z-index: 49;
+  min-width: 200px;
+  overflow: hidden;
+  animation: fadeInDown 0.15s ease;
+}
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.importDropItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 11px 16px;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: 13.5px;
+  color: #374151;
+  cursor: pointer;
+  text-align: left;
+  text-decoration: none;
+  transition: background 0.1s;
+}
+.importDropItem:hover { background: #F9FAFB; color: #111827; }
 
 /* ── Performance bar ── */
 .perfBar {
@@ -53,6 +142,7 @@
   align-items: center;
   gap: 0;
   background: #fff;
+  margin: 24px 32px 0;
   border: 1px solid #E5E7EB;
   border-radius: 12px;
   padding: 14px 20px;
@@ -99,7 +189,7 @@
 }
 
 /* ── Sections ── */
-.section { margin-bottom: 32px; }
+.section { margin-bottom: 32px; padding: 0 32px; }
 
 .sectionHeader {
   display: flex;
