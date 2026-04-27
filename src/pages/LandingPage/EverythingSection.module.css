@@ -1,10 +1,25 @@
 
+*{
+   --navy:    #1b3b5f;
+  --navy-lt: #252545;
+  --green:   #2DBD97;
+  --green-lt:#E6F7F2;
+  --green-dk:#22a080;
+  --gold:    #E8C547;
+  --gold-dk: #c9a82e;
+  --ink:     #111827;
+  --ink2:    #374151;
+  --ink3:    #6B7280;
+  --ink4:    #9CA3AF;
+  --border:  #E5E7EB;
+  --surface: #F9FAFB;
+  --white:   #FFFFFF;
+}
+
 /* ── Outer section ── */
 .section {
-  display: none;
   padding: 80px 48px 96px;
   background: #fff;
-  border: 1.5px solid #C8DBF0;
   border-radius: 16px;
   margin: 32px 32px;
 }
@@ -12,22 +27,20 @@
 /* ── Header ── */
 .header {
   text-align: center;
-  max-width: 760px;
+  /* max-width: 760px; */
   margin: 0 auto 72px;
 }
 .title {
   font-family: 'Fraunces', serif;
   font-size: 42px;
-  font-weight: 700;
+  font-weight: 600;
   color: #1b3b5f;
-  line-height: 1.15;
   letter-spacing: -0.02em;
   margin-bottom: 14px;
 }
 .sub {
   font-size: 16px;
-  color: #374151;
-  line-height: 1.65;
+  color: var(--navy);
 }
 
 /* ── Feature rows ── */
@@ -38,6 +51,7 @@
   align-items: center;
   max-width: 1100px;
   margin: 0 auto 96px;
+  position: relative;
 }
 .row:last-child { margin-bottom: 0; }
 
@@ -45,15 +59,38 @@
 .textCol {
   display: flex;
   flex-direction: column;
+  margin-bottom: 90px;
+
+  
 }
-.tag {
+.tag1 {
   display: inline-flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 7px;
+  padding: 4px;
   font-size: 13px;
   font-weight: 700;
   color: #22a080;
   margin-bottom: 14px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.14);
+  width: 150px;
+  border: 2px solid var(--ink4);
+}
+.tag {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 7px;
+  padding: 4px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #22a080;
+  margin-bottom: 14px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.14);
+  width: 150px;
 }
 .tagDot {
   width: 8px; height: 8px;
@@ -63,12 +100,13 @@
 }
 .rowTitle {
   font-family: 'Fraunces', serif;
-  font-size: 36px; font-weight: 700;
-  color: #111827; line-height: 1.2;
-  letter-spacing: -0.02em; margin-bottom: 14px;
+  font-size: 36px; 
+  font-weight: 700;
+  color: var(--navy); 
 }
 .rowDesc {
-  font-size: 15px; color: #6B7280;
+  font-size: 15px; 
+  color: var(--navy);
   line-height: 1.75; margin-bottom: 28px;
 }
 .primaryBtn, .darkBtn {
@@ -88,6 +126,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 2px solid var(--ink3);
+  border-radius: 14px;
 }
 .screenshotWrap {
   position: relative;
@@ -108,8 +148,8 @@
   align-items: center;
   gap: 7px;
   background: #fff;
+  padding: 4px;
   border-radius: 10px;
-  padding: 9px 16px;
   font-size: 12.5px;
   font-weight: 600;
   color: #111827;
@@ -124,11 +164,13 @@
 /* Row 1 badge positions */
 .badgeInstant {
   top: 32px;
-  left: -48px;    /* pushed well outside screenshot */
+  left: -78px;    
 }
 .badgeSell {
   bottom: 56px;
-  left: -48px;    /* pushed well outside screenshot */
+  left: -88px;   
+  background: var(--navy);
+  color: var(--white);
 }
 
 /* ══════════════════════════════════════════════════════
@@ -137,97 +179,67 @@
    ══════════════════════════════════════════════════════ */
 .phonesCol {
   position: relative;
-  height: 560px;           /* fixed height to contain the layered phones */
+  height: 300px;
+  border: 2.5px solid #CBD5E1;
+  border-radius: 24px;
+  background: #fff;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  gap: 20px;
+  overflow: hidden;
 }
 
 /* ── Back phone: shows top, slides left behind front phone ── */
 .phoneBack {
-  position: absolute;
-  left: 20px;              /* slightly left of centre */
-  top: 0;
   width: 240px;
-  height: 400px;           /* only top portion visible */
-  overflow: hidden;        /* clips the bottom — gives "top showing" effect */
+  flex-shrink: 0;
+  overflow: hidden;
   border-radius: 32px;
-  z-index: 1;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.14);
+  border: 1.5px solid #CBD5E1;
+  background: #fff;
+  height: 100%;             
+  position: relative;
+  margin-top: 70px;    
 }
 .phoneImgBack {
-  width: 100%;
-  display: block;
-  border-radius: 32px;
+ width: 100%;
+ display: block;
+ position: absolute;
+ top: 0;
 }
 
 /* ── Front phone: top clipped, bottom (payment) showing ── */
 .phoneFront {
-  position: absolute;
-  right: 20px;             /* slightly right of centre */
-  bottom: 0;
   width: 240px;
-  z-index: 2;
+  flex-shrink: 0;
+  overflow: hidden;
   border-radius: 32px;
-  overflow: visible;
+  border: 1.5px solid #CBD5E1;
+  background: #fff;
+  height: 100%;
+  position: relative;
+  margin-top: -80px;       
 }
 .phoneImgFront {
   width: 100%;
   display: block;
-  border-radius: 32px;
-  box-shadow: 0 20px 56px rgba(0,0,0,0.18);
-  /* Clip the top ~35% so only payment methods section shows */
-  clip-path: inset(32% 0 0 0 round 32px);
-}
-
-/* Payment methods card — overlapping the front phone */
-.paymentCard {
   position: absolute;
-  top: 28%;               /* sits over the visible payment area */
-  left: -60px;            /* extends left past the phone edge */
-  width: 240px;
-  background: #fff;
-  border-radius: 14px;
-  padding: 14px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.16);
-  border: 1px solid #F3F4F6;
-  z-index: 5;
-}
-.paymentHeader {
-  padding-bottom: 8px;
-  margin-bottom: 8px;
-  border-bottom: 1px solid #F3F4F6;
-}
-.paymentAmt {
-  font-family: 'Fraunces', serif;
-  font-size: 18px; font-weight: 700; color: #111827;
-}
-.payMethod {
-  display: flex; align-items: center; gap: 8px;
-  padding: 7px 8px; border-radius: 8px;
-}
-.payMethodOn { background: #F3F4F6; }
-.payIcon     { font-size: 14px; flex-shrink: 0; }
-.payText     { flex: 1; min-width: 0; }
-.payLabel    { font-size: 11px; font-weight: 600; color: #111827; margin: 0; line-height: 1.2; }
-.paySub      { font-size: 9.5px; color: #9CA3AF; margin: 0; line-height: 1.2; }
-.radio {
-  width: 14px; height: 14px; border-radius: 50%;
-  border: 1.5px solid #D1D5DB; flex-shrink: 0;
-}
-.radioOn {
-  border-color: #111827;
-  background: radial-gradient(circle, #111827 40%, transparent 40%);
+  bottom: 0;
 }
 
 /* Badge positions for phone row — pushed aggressively outside */
 .badgeEasy {
-  top: 60px;
-  left: -80px;            /* well outside left edge of phone column */
+  position: absolute;
+  top: 10%;
+  right: -2px;
+  left: auto;
+  z-index: 10;
 }
 .badgeSeamless {
-  bottom: 60px;
-  left: -80px;            /* well outside left edge of phone column */
+  position: absolute;
+  bottom: 20%;
+  right: -2px;
+  left: auto;
+  z-index: 2;           
 }
 
 /* ── Responsive ── */

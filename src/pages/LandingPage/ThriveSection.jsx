@@ -43,7 +43,7 @@ const CARDS = [
   },
   {
     id: 'payments',
-    img: '/images/thrive-payments.png',
+    img: '/images/multiplepayment.png',
     imgAlt: 'Multiple payments dashboard',
     title: 'Multiple Payments',
     desc: 'Accept cash, card, bank transfer, and mobile money seamlessly at every sale. Give your customers flexible payment options while keeping every transaction fast, secure, and easy to manage.',
@@ -73,7 +73,7 @@ const CARDS = [
   },
   {
     id: 'erp',
-    img: '/images/thrive-erp.png',
+    img: '/images/thrive-online-store.png',
     imgAlt: 'ERP integration dashboard',
     title: 'ERP Integration',
     desc: 'CRM, accounting, inventory, and POS all in one unified system for your business. Manage customers, track finances, control stock, and process sales seamlessly from a single dashboard.',
@@ -83,7 +83,7 @@ const CARDS = [
   },
 ]
 
-export default function ThriveSection() {
+export default function ThriveSection({ setShowNavModal }) {
   return (
     <section className={styles.section}>
 
@@ -104,10 +104,7 @@ export default function ThriveSection() {
           <div key={card.id} className={styles.card}>
 
             {/* Screenshot area */}
-            <div
-              className={styles.imgWrap}
-              style={{ background: card.imgBg }}
-            >
+            <div className={styles.imgWrap} style={{ background: card.imgBg }}>
               <img
                 src={card.img}
                 alt={card.imgAlt}
@@ -126,6 +123,7 @@ export default function ThriveSection() {
                     ? styles.ctaGold
                     : styles.ctaDark
                 }
+                onClick={() => setShowNavModal(true)}
               >
                 {card.cta}
               </button>

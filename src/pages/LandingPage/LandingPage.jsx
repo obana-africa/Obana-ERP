@@ -7,7 +7,7 @@ import ThriveSection from './ThriveSection'
 // ── Static data ───────────────────────────────────────────
 const STATS = [
   { value: '10,000+', label: 'Businesses powered'    },
-  { value: '₦2B+',   label: 'Transactions processed' },
+  { value: '₦2K+',   label: 'Transactions processed' },
   { value: '99.9%',  label: 'Uptime guaranteed'      },
   { value: '4.9★',   label: 'Average Rating'         },
 ]
@@ -17,10 +17,17 @@ const isValidEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())
 
 const saveToWaitlist = (email, source) => {
   const entry = { email: email.trim(), source, joinedAt: new Date().toISOString() }
-  const existing = JSON.parse(localStorage.getItem('obana_waitlist') || '[]')
-  localStorage.setItem('obana_waitlist', JSON.stringify([...existing, entry]))
-  // Uncomment once EmailJS is set up:
-  // emailjs.send('SERVICE_ID','TEMPLATE_ID',{ user_email: entry.email, source },'PUBLIC_KEY')
+  const existing = JSON.parse(localStorage.getItem('taja_waitlist') || '[]')
+  localStorage.setItem('taja_waitlist', JSON.stringify([...existing, entry]))
+  
+   emailjs.send(
+    'service_81lbacv',
+    'template_jooia8e',
+    { 
+      user_email: entry.email, 
+      message: 'source: ${source}',
+      time: new Date().toLocaleString('en-NG', { timeZone: 'Africa/Lagos' }), 
+    },'9MT_fVS0T1iAhhljE')
   return entry
 }
 
@@ -166,7 +173,7 @@ export default function LandingPage() {
             </div>
           </div>
           <div className={styles.navActions}>
-            <button className={styles.btnOutline}>Learn more</button>
+            <button className={styles.btnOutline} onClick={() => setShowNavModal(true)}>Learn more</button>
             <button className={styles.btnPrimary} onClick={() => setShowNavModal(true)}>
               Join waitlist
             </button>
@@ -180,11 +187,10 @@ export default function LandingPage() {
         <div className={styles.heroBgOverlay} />
         <div className={styles.heroInner}>
           <h1 className={styles.heroTitle}>
-            The ERP That Keeps<br />Your Business Moving
+            The easiest way to sell <br/> online and offline.
           </h1>
           <p className={styles.heroSub}>
-            Sell faster, track smarter, and grow confidently with <br />a point of sale
-            and online store system designed for <br />how businesses actually work.
+           Taja gives you everything you need to create your <br/> online store, manage sales, and run your business <br/> seamlessly online and in-person.
           </p>
           <div className={styles.heroActions}>
             <WaitlistForm />
@@ -265,10 +271,10 @@ export default function LandingPage() {
       </section>
 
         {/* Everything you to start a business section */}
-            <EverythingSection />
+            <EverythingSection setShowNavModal={setShowNavModal}/>
 
         {/* Thrive section */}
-              <ThriveSection />        
+              <ThriveSection setShowNavModal={setShowNavModal}/>        
 
       {/* ══════════════════════════════════════════════
            PRICING PLANS
@@ -279,16 +285,18 @@ export default function LandingPage() {
         <div className={styles.pricingGrid}>
           {/* Starter */}
           <div className={styles.pricingCard}>
-            <p className={styles.pricingTier}>Starter</p>
+            <p className={styles.pricingTier}>Starter Sync</p>
             <div className={styles.pricingPrice}>
               <span className={styles.pricingCurrency}>₦</span>
-              <span className={styles.pricingAmount}>0</span>
+              <span className={styles.pricingAmount}>7,500</span>
               <span className={styles.pricingPer}>/month</span>
             </div>
-            <p className={styles.pricingDesc}>Best for new sellers just getting started</p>
-            <button className={styles.pricingCta}>Get started for free</button>
+            <p className={styles.pricingDesc}>Sellers using Zoho or small businesses that need basic selling tools</p>
+            <button className={styles.pricingCta} onClick={() => setShowNavModal(true)}>Get started</button>
             <ul className={styles.pricingFeatures}>
-              {['Online Store Setup','Basic Analytics','Order Management','Product Listing (Limited)','Basic Website Customization'].map(f => (
+              {['Account access', 'Sync with Zoho inventory', 'Manual product creation', 'Barcode scanning for sales', 'Sell using existing/generated barcodes', 
+                'Create orders and sync to inventory', 'Basic order management', 'Basic sales tracking', 'POS access', '1 business location only', 
+                'No online storefront', 'No advanced inventory management'].map(f => (
                 <li key={f} className={styles.pricingFeature}>
                   <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}><path d="M20 6L9 17l-5-5"/></svg>
                   {f}
@@ -300,16 +308,18 @@ export default function LandingPage() {
           {/* Growth — recommended */}
           <div className={`${styles.pricingCard} ${styles.pricingCardFeatured}`}>
             <div className={styles.pricingBadge}>Recommended</div>
-            <p className={styles.pricingTier}>Growth</p>
+            <p className={styles.pricingTier}>Store Growth</p>
             <div className={styles.pricingPrice}>
               <span className={styles.pricingCurrency}>₦</span>
-              <span className={styles.pricingAmount}>7,500</span>
+              <span className={styles.pricingAmount}>9,500</span>
               <span className={styles.pricingPer}>/month</span>
             </div>
-            <p className={styles.pricingDesc}>Growing businesses ready to scale</p>
-            <button className={styles.pricingCtaFeatured}>Upgrade to Growth</button>
+            <p className={styles.pricingDesc}>Businesses ready to sell online and offline	
+              Everything in Starter Sync +</p>
+            <button className={styles.pricingCtaFeatured} onClick={() => setShowNavModal(true)}>Upgrade to Growth</button>
             <ul className={styles.pricingFeatures}>
-              {['Everything In Starter','Unlimited Products','Advanced Store Customization','Inventory Management','POS System (In-Store Sales)','Sales Analytics & Reports'].map(f => (
+              {['Online store creation', 'Website storefront', 'Basic website customization', 'Customer checkout management', 
+                  'Social commerce selling support', 'Basic analytics'].map(f => (
                 <li key={f} className={styles.pricingFeature}>
                   <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}><path d="M20 6L9 17l-5-5"/></svg>
                   {f}
@@ -320,16 +330,36 @@ export default function LandingPage() {
 
           {/* Professional */}
           <div className={styles.pricingCard}>
-            <p className={styles.pricingTier}>Professional</p>
+            <p className={styles.pricingTier}>Business Pro</p>
             <div className={styles.pricingPrice}>
               <span className={styles.pricingCurrency}>₦</span>
-              <span className={styles.pricingAmount}>20,000</span>
+              <span className={styles.pricingAmount}>15,000</span>
               <span className={styles.pricingPer}>/month</span>
             </div>
-            <p className={styles.pricingDesc}>Established businesses & high-volume sellers</p>
-            <button className={styles.pricingCta}>Scale Your Business</button>
+            <p className={styles.pricingDesc}>Businesses that want full operational control	
+                                                Everything in Store Growth +</p>
+            <button className={styles.pricingCta} onClick={() => setShowNavModal(true)}>Scale Your Business</button>
             <ul className={styles.pricingFeatures}>
-              {['Everything In Growth','Multi-Location Inventory Tracking','Staff Accounts & Permissions','Automated Reports','Customer Management (CRM Tools)','Advanced Analytics & Insights'].map(f => (
+              {['Full inventory management', 'Product creation at scale', 'Stock tracking', 'Product variants management' ,'Purchase/order tracking', 'Low stock alerts', 'Multi-channel product management'].map(f => (
+                <li key={f} className={styles.pricingFeature}>
+                  <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}><path d="M20 6L9 17l-5-5"/></svg>
+                  {f}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className={styles.pricingCard}>
+            <p className={styles.pricingTier}>Enterprise Scale	</p>
+            <div className={styles.pricingPrice}>
+              <span className={styles.pricingCurrency}>₦</span>
+              <span className={styles.pricingAmount}>25,000</span>
+              <span className={styles.pricingPer}>/month</span>
+            </div>
+            <p className={styles.pricingDesc}>Established/high-volume sellers managing multiple operations	
+Everything in Business Pro +</p>
+            <button className={styles.pricingCta} onClick={() => setShowNavModal(true)}>Scale Your Business</button>
+            <ul className={styles.pricingFeatures}>
+              {['Multi-location inventory tracking', 'Staff accounts & permissions', 'Advanced analytics & reporting', 'CRM/customer management tools', 'Automated reports', 'Priority support', 'Advanced operational controls'].map(f => (
                 <li key={f} className={styles.pricingFeature}>
                   <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}><path d="M20 6L9 17l-5-5"/></svg>
                   {f}
@@ -382,15 +412,15 @@ export default function LandingPage() {
             ))}
 
             <div className={styles.getStartedCtaRow}>
-              <button className={styles.getStartedPrimary}>Get started for free</button>
-              <button className={styles.getStartedSecondary}>Install now</button>
+              <button className={styles.getStartedPrimary} onClick={() => setShowNavModal(true)}>Get started for free</button>
+              <button className={styles.getStartedSecondary} onClick={() => setShowNavModal(true)}>Install now</button>
             </div>
           </div>
         </div>
       </section>
 
       {/* ── CTA ── */}
-      <section className={styles.cta} id="cta">
+      {/* <section className={styles.cta} id="cta">
         <img src="/images/cta-bg.png" alt="" aria-hidden="true" className={styles.ctaBgImage} />
         <div className={styles.ctaOverlay} />
         <div className={styles.ctaInner}>
@@ -401,7 +431,7 @@ export default function LandingPage() {
             <NotifyForm />
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* ── Footer ── */}
       <footer className={styles.footer}>

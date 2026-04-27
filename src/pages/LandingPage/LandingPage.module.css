@@ -58,12 +58,19 @@
 .navActions  { display: flex; gap: 8px; align-items: center; }
 
 .btnOutline {
-  padding: 9px 20px; border-radius: 8px;
-  border: 1.5px solid rgba(255,255,255,0.4); background: transparent; color: #fff;
-  font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500;
-  cursor: pointer; transition: all 0.15s; white-space: nowrap;
+  padding: 9px 20px; 
+  border-radius: 8px;
+  border: 1.5px solid rgba(255,255,255,0.4); 
+  background: transparent; 
+  color: #fff;
+  font-family: 'DM Sans', sans-serif; 
+  font-size: 14px; 
+  font-weight: 500;
+  cursor: pointer; 
+  transition: all 0.15s; white-space: nowrap;
 }
-.btnOutline:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
+.btnOutline:hover { background: rgba(255,255,255,0.1); 
+  border-color: #fff; }
 
 .btnPrimary {
   padding: 9px 20px; border-radius: 8px; border: none;
@@ -82,7 +89,7 @@
   backdrop-filter: blur(6px);
   z-index: 200;
   display: flex; align-items: flex-start; justify-content: flex-end;
-  padding: 76px 16px 0;   /* reduced side padding so modal stays on screen */
+  padding: 20px 10px 0;
   animation: fadeIn 0.15s ease;
   box-sizing: border-box;
 }
@@ -90,8 +97,8 @@
 
 .navModal {
   background: var(--navy); border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 16px; padding: 28px 20px 24px;
-  width: min(380px, calc(100vw - 32px));  /* never wider than viewport */
+  border-radius: 16px; padding: 20px 20px 24px;
+  width: min(380px, calc(100vw - 32px));
   max-width: 100%;
   box-sizing: border-box;
   box-shadow: 0 16px 48px rgba(0,0,0,0.35); position: relative;
@@ -119,7 +126,8 @@
   display: flex; 
   align-items: flex-end;
   padding: 120px 60px 80px;
-  position: relative; overflow: hidden;
+  position: relative; 
+  overflow: hidden;
 }
 
 .heroBgImage {
@@ -188,7 +196,7 @@
   border-radius: 8px; 
   overflow: hidden;
   box-shadow: 0 4px 24px rgba(0,0,0,0.2);
-  width: 600px; 
+  /* width: 600px;  */
   flex-shrink: 0;          
   box-sizing: border-box;
   border: 1.5px solid rgba(255,255,255,0.15);
@@ -312,6 +320,7 @@
    FEATURES
    ══════════════════════════════════════════════════════════ */
 .features { 
+  display: none;
   padding: 72px 60px; 
   /* max-width: 1200px;  */
   margin: 0 auto; 
@@ -384,6 +393,7 @@
    CTA — Ready To Grow Your Business
    ══════════════════════════════════════════════════════════ */
 .cta {
+  display: none;
   position: relative; 
   overflow: hidden;
   min-height: 420px;
@@ -629,53 +639,9 @@
 }
 
 /* ══════════════════════════════════════════════════════════
-   SECOND HERO — The Easiest Way To Sell
-   ══════════════════════════════════════════════════════════ */
-.hero2 {
-  min-height: 80vh;
-  display: flex;
-  align-items: center;
-  padding: 100px 60px 80px;
-  position: relative;
-  overflow: hidden;
-}
-.hero2BgImage {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  object-position: 70% center;   /* shows right side of image — slightly different crop */
-  z-index: 0;
-}
-.hero2Overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(
-    100deg,
-    rgba(11,28,50,0.82) 0%,
-    rgba(11,28,50,0.50) 55%,
-    rgba(11,28,50,0.18) 100%
-  );
-  z-index: 1;
-}
-.hero2Inner {
-  position: relative; z-index: 2;
-  max-width: 620px;
-}
-.hero2Title {
-  font-family: 'Fraunces', serif;
-  font-size: 56px; font-weight: 700;
-  color: #fff; line-height: 1.1;
-  letter-spacing: -0.03em; margin-bottom: 20px;
-}
-.hero2Sub {
-  font-size: 16px; color: rgba(255,255,255,0.72);
-  line-height: 1.75; margin-bottom: 32px; max-width: 520px;
-}
-
-/* ══════════════════════════════════════════════════════════
    PRICING PLANS
    ══════════════════════════════════════════════════════════ */
 .pricingSection {
-  display: none;
   padding: 96px 32px;
   background: var(--white);
   text-align: center;
@@ -683,7 +649,8 @@
 .pricingTitle {
   font-family: 'Fraunces', serif;
   font-size: 44px; font-weight: 700;
-  color: var(--ink); margin-bottom: 52px;
+  color: var(--navy); 
+  margin-bottom: 52px;
   letter-spacing: -0.02em;
 }
 .pricingGrid {
@@ -697,11 +664,11 @@
 
 .pricingCard {
   background: var(--white);
-  border: 1px solid var(--border);
   border-radius: 20px;
   padding: 32px 28px 36px;
   text-align: left;
   position: relative;
+  box-shadow: 0 12px 40px rgba(0.10,0.10,0.10,0.10);
 }
 
 .pricingCardFeatured {
@@ -746,12 +713,16 @@
   letter-spacing: -0.03em;
 }
 .pricingPer {
-  font-size: 16px; color: var(--ink3); font-weight: 500;
+  font-size: 16px; 
+  color: var(--ink3); 
+  font-weight: 500;
 }
 
 .pricingDesc {
-  font-size: 13px; color: var(--ink3);
-  text-align: center; margin-bottom: 24px;
+  font-size: 13px; 
+  color: var(--navy);
+  text-align: center; 
+  margin-bottom: 24px;
   line-height: 1.5;
 }
 
@@ -791,15 +762,16 @@
    GET STARTED FAST
    ══════════════════════════════════════════════════════════ */
 .getStartedSection {
-  display: none;
   padding: 96px 32px;
   background: var(--surface);
   text-align: center;
 }
 .getStartedTitle {
   font-family: 'Fraunces', serif;
-  font-size: 44px; font-weight: 700;
-  color: var(--ink); margin-bottom: 56px;
+  font-size: 44px; 
+  font-weight: 700;
+  color: var(--navy); 
+  margin-bottom: 56px;
   letter-spacing: -0.02em;
 }
 .getStartedRow {
@@ -812,28 +784,31 @@
 }
 
 /* Phone + dashboard card layered visual */
-.getStartedVisual { position: relative; }
+.getStartedVisual { position: relative;}
 .getStartedPhoneWrap {
   position: relative;
   display: flex;
-  align-items: flex-start;
+  align-items: flex-end;
   justify-content: center;
+  z-index: 1;
 }
 .getStartedPhone {
   width: 260px;
   border-radius: 32px;
   box-shadow: 0 24px 60px rgba(0,0,0,0.18);
-  position: relative; z-index: 2;
+  position: relative; 
+  z-index: 0;
 }
 .getStartedDashCard {
   position: absolute;
-  right: -20px; bottom: 20px;
-  width: 220px;
+  right: -150px; 
+  bottom: 20px;
+  width: 320px;
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.12);
   overflow: hidden;
-  z-index: 1;
+  z-index: 2;
   border: 1px solid var(--border);
 }
 .getStartedDash {
@@ -844,8 +819,10 @@
 .getStartedSteps {
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 20px;
   text-align: left;
+  margin-bottom: 270px;
+  
 }
 .getStartedStep {
   display: flex;
@@ -863,8 +840,9 @@
 }
 .getStartedStepLabel {
   font-family: 'Fraunces', serif;
-  font-size: 28px; font-weight: 700;
-  color: var(--ink); line-height: 1.2;
+  font-size: 28px; 
+  font-weight: 700;
+  color: var(--navy); 
 }
 .getStartedCtaRow {
   display: flex; gap: 12px; margin-top: 12px;

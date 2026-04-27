@@ -1,10 +1,5 @@
-/* ═══════════════════════════════════════════════════
-   ThriveSection.module.css
-   "Everything Your Business Needs To Thrive"
-   ═══════════════════════════════════════════════════ */
 
 .section {
-  display: none;
   padding: 96px 32px;
   background: #ffffff;
 }
@@ -12,7 +7,7 @@
 /* ── Header ── */
 .header {
   text-align: center;
-  max-width: 700px;
+  /* max-width: 700px; */
   margin: 0 auto 56px;
 }
 
@@ -21,7 +16,6 @@
   font-size: 44px;
   font-weight: 700;
   color: #1b3b5f;
-  line-height: 1.15;
   letter-spacing: -0.02em;
   margin-bottom: 16px;
 }
@@ -29,7 +23,6 @@
 .sub {
   font-size: 16px;
   color: #374151;
-  line-height: 1.7;
 }
 
 /* ── 3-column × 2-row grid ── */
@@ -44,16 +37,14 @@
 /* ── Individual card ── */
 .card {
   background: #ffffff;
-  border: 1px solid #E5E7EB;
   border-radius: 18px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: box-shadow 0.2s, transform 0.2s;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.10);
 }
 .card:hover {
   box-shadow: 0 12px 40px rgba(0,0,0,0.09);
-  transform: translateY(-3px);
 }
 
 /* ── Screenshot image area ── */
