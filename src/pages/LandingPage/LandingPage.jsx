@@ -182,25 +182,135 @@ export default function LandingPage() {
       {/* ── Navbar modal ── */}
       {showNavModal && <NavWaitlistModal onClose={() => setShowNavModal(false)} />}
 
-      {/* ── Navbar ── */}
-      <nav className={`${styles.navbar} ${scrolled ? styles.navScrolled : ''}`}>
-        <div className={styles.navInner}>
-          <div className={styles.brand}>
-            <img src="/logos/taja logo white.png" alt="taja" className={styles.brandLogo} />
-            <div className={styles.navLinks}>
-              <a href="#features"     className={styles.navLink}>Features</a>
-              <a href="#stats"        className={styles.navLink}>Why Us</a>
-              <a href="#testimonials" className={styles.navLink}>Reviews</a>
+     {/* ── Navbar ── */}
+<nav className={`${styles.navbar} ${scrolled ? styles.navScrolled : ''}`}>
+  <div className={styles.navInner}>
+    <div className={styles.brand}>
+      <img src="/logos/taja logo white.png" alt="taja" className={styles.brandLogo} />
+      <div className={styles.navLinks}>
+
+        {/* Features dropdown */}
+        <div className={styles.navItem}>
+          <button className={styles.navLink}>
+            Features <span className={styles.navChevron}>▾</span>
+          </button>
+          <div className={styles.dropdown}>
+            <div className={styles.dropdownInner}>
+              <div className={styles.dropdownGrid}>
+                {[
+                  { icon: '', title: 'Online Store', desc: 'Launch a branded storefront in minutes' },
+                  { icon: '', title: 'Point of Sale', desc: 'Fast, reliable in-person checkout' },
+                  { icon: '', title: 'Inventory Tracking', desc: 'Real-time stock across all locations' },
+                  { icon: '', title: 'Sales Analytics', desc: 'Revenue trends and smart insights' },
+                  { icon: '', title: 'Multiple Payments', desc: 'Cash, card, mobile money & more' },
+                  { icon: '', title: 'ERP Integration', desc: 'CRM, accounting and POS unified' },
+                ].map(f => (
+                  <div key={f.title} className={styles.dropdownItem}>
+                    <span className={styles.dropdownIcon}>{f.icon}</span>
+                    <div>
+                      <p className={styles.dropdownItemTitle}>{f.title}</p>
+                      <p className={styles.dropdownItemDesc}>{f.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className={styles.dropdownFooter}>
+                <span className={styles.dropdownFooterText}>All features built for modern African businesses</span>
+                <button className={styles.dropdownFooterBtn} onClick={() => setShowNavModal(true)}>Get early access →</button>
+              </div>
             </div>
           </div>
-          <div className={styles.navActions}>
-            <button className={styles.btnOutline} onClick={() => setShowNavModal(true)}>Learn more</button>
-            <button className={styles.btnPrimary} onClick={() => setShowNavModal(true)}>
-              Join waitlist
-            </button>
+        </div>
+
+        {/* Why Us dropdown */}
+        <div className={styles.navItem}>
+          <button className={styles.navLink}>
+            Why Us <span className={styles.navChevron}>▾</span>
+          </button>
+          <div className={styles.dropdown}>
+            <div className={styles.dropdownInner}>
+              <div className={styles.dropdownWhyUs}>
+                <div className={styles.dropdownWhyCol}>
+                  <p className={styles.dropdownColLabel}>Platform Strengths</p>
+                  {[
+                    { icon: '', title: 'Built for Speed', desc: '99.9% uptime, sub-second load times' },
+                    { icon: '', title: 'Africa-First Design', desc: 'Supports ₦, mobile money, local logistics' },
+                    { icon: '', title: 'Enterprise Security', desc: 'Bank-grade encryption on all transactions' },
+                    { icon: '', title: 'Omnichannel Ready', desc: 'Online, in-store, and mobile — one dashboard' },
+                  ].map(w => (
+                    <div key={w.title} className={styles.dropdownItem}>
+                      <span className={styles.dropdownIcon}>{w.icon}</span>
+                      <div>
+                        <p className={styles.dropdownItemTitle}>{w.title}</p>
+                        <p className={styles.dropdownItemDesc}>{w.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className={styles.dropdownWhyStats}>
+                  <p className={styles.dropdownColLabel}>By The Numbers</p>
+                  {[
+                    { value: '10,000+', label: 'Businesses powered' },
+                    { value: '₦2K+',   label: 'Transactions processed' },
+                    { value: '99.9%',  label: 'Platform uptime' },
+                    { value: '4.9★',   label: 'Average rating' },
+                  ].map(s => (
+                    <div key={s.label} className={styles.dropdownStat}>
+                      <span className={styles.dropdownStatValue}>{s.value}</span>
+                      <span className={styles.dropdownStatLabel}>{s.label}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </nav>
+
+        {/* Reviews dropdown */}
+        <div className={styles.navItem}>
+          <button className={styles.navLink}>
+            Reviews <span className={styles.navChevron}>▾</span>
+          </button>
+          <div className={styles.dropdown}>
+            <div className={styles.dropdownInner}>
+              <p className={styles.dropdownColLabel} style={{marginBottom: '16px'}}>What businesses say</p>
+              <div className={styles.dropdownReviews}>
+                {[
+                  { name: 'Amaka O.', role: 'Fashion Retailer, Lagos', text: 'Taja transformed how I manage my store. Orders, inventory, payments — all in one place.', stars: 5 },
+                  { name: 'Emeka D.', role: 'Electronics Vendor, Abuja', text: 'The POS is incredibly fast. My checkout time dropped by 60% in the first week.', stars: 5 },
+                  { name: 'Fatima B.', role: 'Food Business, Kano', text: 'Finally an ERP that understands Nigerian business. The mobile money integration alone is worth it.', stars: 5 },
+                ].map(r => (
+                  <div key={r.name} className={styles.dropdownReview}>
+                    <div className={styles.dropdownReviewStars}>{'★'.repeat(r.stars)}</div>
+                    <p className={styles.dropdownReviewText}>"{r.text}"</p>
+                    <div className={styles.dropdownReviewAuthor}>
+                      <div className={styles.dropdownReviewAvatar}>{r.name[0]}</div>
+                      <div>
+                        <p className={styles.dropdownReviewName}>{r.name}</p>
+                        <p className={styles.dropdownReviewRole}>{r.role}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className={styles.dropdownFooter}>
+                <span className={styles.dropdownFooterText}>Trusted by 10,000+ businesses across Nigeria</span>
+                <button className={styles.dropdownFooterBtn} onClick={() => setShowNavModal(true)}>Join them →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div className={styles.navActions}>
+      <button className={styles.btnOutline} onClick={() => setShowNavModal(true)}>Learn more</button>
+      <button className={styles.btnPrimary} onClick={() => setShowNavModal(true)}>
+        Join waitlist
+      </button>
+    </div>
+  </div>
+</nav>
 
       {/* ── Hero ── */}
       <section className={styles.hero} id="hero-section">

@@ -36,9 +36,14 @@
   border-bottom: 1px solid transparent;
 }
 .navScrolled {
+  background: transparent;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: none;
   background: var(--navy);
-  box-shadow: 0 2px 16px rgba(0,0,0,0.15);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
 }
+
 .navInner {
   padding: 0 32px;
   display: flex; 
@@ -963,4 +968,265 @@
 .getStartedPrimary:hover::after,
 .getStartedSecondary:hover::after {
   left: 150%;
+}
+
+/* ══════════════════════════════════════════════════════════
+   NAV DROPDOWNS
+   ══════════════════════════════════════════════════════════ */
+.navItem {
+  position: relative;
+}
+
+.navItem > .navLink {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 0;
+}
+
+.navChevron {
+  font-size: 10px;
+  transition: transform 0.25s ease;
+  display: inline-block;
+}
+
+.navItem:hover .navChevron {
+  transform: rotate(180deg);
+}
+.navItem:first-child .dropdown {
+  left: 0;
+  transform: translateX(0) translateY(-8px);
+}
+
+.navItem:first-child:hover .dropdown {
+  transform: translateX(0) translateY(0);
+}
+
+/* Delay disappearance */
+.navItem .dropdown {
+  transition-delay: 0s;
+}
+
+.navItem:not(:hover) .dropdown {
+  transition: opacity 0.3s ease 0.2s, transform 0.3s ease 0.2s;  /* 👈 0.2s delay before hiding */
+}
+.dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 200;
+  min-width: 520px;
+  padding-top: 12px;
+}
+
+.navItem:hover .dropdown {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateX(-50%) translateY(0);
+  transition: opacity 0.25s ease 0s, transform 0.25s ease 0s;
+}
+
+/* arrow pointer */
+.dropdown::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px; height: 12px;
+  background: #fff;
+  border-radius: 2px;
+  rotate: 45deg;
+  box-shadow: -2px -2px 5px rgba(0,0,0,0.04);
+}
+
+.dropdownInner {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15), 0 4px 16px rgba(0,0,0,0.08);
+  border: 1px solid #F3F4F6;
+}
+
+/* Features 2x3 grid */
+.dropdownGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  margin-bottom: 20px;
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.dropdownItem:hover { background: #F9FAFB; }
+
+.dropdownIcon {
+  font-size: 20px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.dropdownItemTitle {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 2px;
+}
+
+.dropdownItemDesc {
+  font-size: 12px;
+  color: #6B7280;
+  line-height: 1.4;
+}
+
+/* Footer bar inside dropdown */
+.dropdownFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px solid #F3F4F6;
+}
+
+.dropdownFooterText {
+  font-size: 12px;
+  color: #9CA3AF;
+}
+
+.dropdownFooterBtn {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--navy);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.15s;
+  white-space: nowrap;
+}
+.dropdownFooterBtn:hover { color: var(--green); }
+
+/* Why Us layout */
+.dropdownWhyUs {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+}
+
+.dropdownWhyCol { display: flex; flex-direction: column; gap: 4px; }
+
+.dropdownColLabel {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #9CA3AF;
+  margin-bottom: 8px;
+}
+
+.dropdownWhyStats {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 160px;
+  padding-left: 24px;
+  border-left: 1px solid #F3F4F6;
+}
+
+.dropdownStat {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdownStatValue {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1;
+}
+
+.dropdownStatLabel {
+  font-size: 11px;
+  color: #9CA3AF;
+  margin-top: 2px;
+}
+
+/* Reviews layout */
+.dropdownReviews {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+  min-width: 680px;
+}
+
+.dropdownReview {
+  padding: 14px;
+  border-radius: 12px;
+  background: #F9FAFB;
+  border: 1px solid #F3F4F6;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dropdownReviewStars {
+  color: #E8C547;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+.dropdownReviewText {
+  font-size: 12px;
+  color: #374151;
+  line-height: 1.6;
+  flex: 1;
+}
+
+.dropdownReviewAuthor {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.dropdownReviewAvatar {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.dropdownReviewName {
+  font-size: 12px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.dropdownReviewRole {
+  font-size: 11px;
+  color: #9CA3AF;
 }
