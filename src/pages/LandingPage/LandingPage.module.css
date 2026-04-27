@@ -670,16 +670,16 @@
 }
 .pricingTitle {
   font-family: "Bricolage Grotesque", sans-serif;
-  font-size: 44px; font-weight: 700;
+  font-size: 36px; font-weight: 700;
   color: var(--navy); 
   margin-bottom: 52px;
   letter-spacing: -0.02em;
 }
 .pricingGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  max-width: 1100px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  max-width: 1300px;
   margin: 0 auto;
   align-items: start;
 }
@@ -687,7 +687,7 @@
 .pricingCard {
   background: var(--white);
   border-radius: 20px;
-  padding: 32px 28px 36px;
+  padding: 24px 18px 28px;
   text-align: left;
   position: relative;
   box-shadow: 0 12px 40px rgba(0.10,0.10,0.10,0.10);
@@ -726,12 +726,12 @@
 }
 .pricingCurrency {
   font-family: "Bricolage Grotesque", sans-serif;
-  font-size: 28px; font-weight: 700;
+  font-size: 22px; font-weight: 700;
   color: var(--navy);
 }
 .pricingAmount {
   font-family: "Bricolage Grotesque", sans-serif;
-  font-size: 48px; font-weight: 700;
+  font-size: 36px; font-weight: 700;
   color: var(--navy); line-height: 1;
   letter-spacing: -0.03em;
 }
@@ -780,6 +780,13 @@
   font-size: 13px; color: var(--navy); line-height: 1.4;
 }
 .pricingFeature svg { flex-shrink: 0; color: var(--green); }
+
+@media (max-width: 900px) {
+  .pricingGrid { grid-template-columns: repeat(2, 1fr); max-width: 700px; }
+}
+@media (max-width: 560px) {
+  .pricingGrid { grid-template-columns: 1fr; max-width: 420px; }
+}
 
 /* ══════════════════════════════════════════════════════════
    GET STARTED FAST
