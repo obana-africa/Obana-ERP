@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import styles from './LandingPage.module.css'
 import EverythingSection from './EverythingSection'
 import ThriveSection from './ThriveSection'
+import emailjs from '@emailjs/browser'
 
 
 // ── Static data ───────────────────────────────────────────
@@ -26,7 +27,7 @@ const saveToWaitlist = (email, source) => {
     'template_jooia8e',
     { 
       user_email: entry.email, 
-      message: 'source: ${source}',
+      message: `source: ${source}`,
       time: new Date().toLocaleString('en-NG', { timeZone: 'Africa/Lagos' }), 
       name: entry.email,
     },'9MT_fVS0T1iAhhljE')
