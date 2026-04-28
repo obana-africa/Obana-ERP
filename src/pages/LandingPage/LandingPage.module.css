@@ -658,13 +658,54 @@
   .testimonialCards  { grid-template-columns: 1fr; }
   .navLinks          { display: none; }
   .ctaTitle          { font-size: 28px; }
-  .footerTop         { grid-template-columns: 1fr 1fr; gap: 24px; padding: 40px 24px 28px; }
-  .footerBrandCol    { grid-column: 1 / -1; flex-direction: row; align-items: center; }
-  .footerNewsletter  { grid-column: 1 / -1; }
-  .footerBottom      { padding: 16px 24px; }
+  .footerTop         { 
+    flex-direction: column;
+    padding: 40px 20px 28px;
+    gap: 32px;
+  }
+  .footerBrandCol    { 
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-left: 0;
+  }
+  .footerCols {
+    flex-wrap: wrap;
+    gap: 32px;
+    width: 100%;
+  }
+  .footerCol {
+    min-width: calc(50% - 16px);  /* 2 columns */
+    flex: 1;
+  }
+  .footerNewsletter  { 
+    width: 100%; 
+  }
+  .footerNewsletterForm {
+    width: 100%;
+  }
+  .footerBottom      { 
+     flex-direction: column;
+    padding: 20px 20px 40px;
+    gap: 24px; 
+  }
+  .footerBottomLeft{
+    margin-left: 0;
+  }
   .heroBgOverlay     { background: rgba(11,28,50,0.78); }
 }
+@media (max-width: 480px) {
+  .footerCol {
+    min-width: 100%;  /* 1 column on very small screens */
+  }
 
+  .footerBrandCol {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}
 /* ══════════════════════════════════════════════════════════
    PRICING PLANS
    ══════════════════════════════════════════════════════════ */
