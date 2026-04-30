@@ -60,6 +60,7 @@ export default function Customers() {
   const [editCustomer,   setEditCustomer]   = useState(null)
   const [detailCustomer, setDetailCustomer] = useState(null)
   const [search,         setSearch]         = useState('')
+  const [showSearchDrop, setShowSearchDrop] = useState(false)
   const [segment,        setSegment]        = useState('all')
   const [filterState,    setFilterState]    = useState('all')
   const [sortBy,         setSortBy]         = useState('recent')
@@ -158,7 +159,8 @@ export default function Customers() {
             <div className={styles.searchBox}>
               <span className={styles.searchIco}><Ic d={I.search} size={14} /></span>
               <input placeholder="Search by name, phone, email…"
-                value={search} onChange={e => setSearch(e.target.value)} />
+                value={search} onChange={e => setSearch(e.target.value)} 
+                />
             </div>
             <select className={styles.filterSel} value={filterState} onChange={e => setFilterState(e.target.value)}>
               <option value="all">All States</option>

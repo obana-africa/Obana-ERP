@@ -12,10 +12,12 @@ import Transfers    from '../pages/Transfers/Transfers'
 import Content      from '../pages/Content/Content'
 import Discounts    from '../pages/Discounts/Discounts'
 import Analytics    from '../pages/Analytics/Analytics'
-import OnlineStore  from '../pages/OnlineStore/OnlineStore'
 import OnlineStoreThemes from '../pages/OnlineStore/OnlineStoreThemes'
+import OnlineStore  from '../pages/OnlineStore/OnlineStore'
 import POS          from '../pages/POS/POS'
+import Integrations from '../pages/Integrations/Integrations'
 import MainLayout   from '../components/layout/MainLayout/MainLayout'
+import Settings from '../pages/Settings/Settings'
 
 const AppRoutes = () => (
   <Routes>
@@ -25,6 +27,7 @@ const AppRoutes = () => (
     <Route path="/landing"  element={<LandingPage />} />
     <Route path="/login"    element={<Login />} />
     <Route path="/register" element={<Register />} />
+    <Route path="/Settings" element={<Settings />} />
 
     {/* Dashboard — sidebar via MainLayout */}
     <Route element={<MainLayout />}>
@@ -43,12 +46,21 @@ const AppRoutes = () => (
       <Route path="/discounts"            element={<Discounts />} />
       <Route path="/analytics"            element={<Analytics />} />
       <Route path="/pos"                  element={<POS />} />
-      <Route path="/online-store"         element={<OnlineStore />} />
+      <Route path="/online-store"         element={<OnlineStoreThemes />} />
       <Route path="/online-store/themes" element={<OnlineStoreThemes/>} />
+      <Route path="/online-store/editor" element={<OnlineStore />} />
+      {/* <Route path="/online-store/editor/:themeId" element={<OnlineStore/>} /> */}
+      {/* <Route path="/online-store/preview" element={<OnlineStore/>} /> */}
+      {/* <Route path="/store" element={<StorefrontPreiew />} /> */}
+      {/* <Route path="/Integrations" element={<Integrations />} /> */}
 
       {/* Catch-all unknown paths → dashboard */}
       <Route path="*" element={<Navigate to="/dashboard" replace />} />
+
+      // Theme editor → full builder
+     
     </Route>
+     {/* <Route path="/store/:storeId" element={<PublicStore />} /> */}
 
   </Routes>
 )

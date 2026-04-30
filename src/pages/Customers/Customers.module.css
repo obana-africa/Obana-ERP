@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap');
 /* ── Tokens ───────────────────────────────────────────────── */
 .page {
   --navy:    #1a1a2e;
@@ -16,10 +16,21 @@
   --surface: #F9FAFB;
   --white:   #FFFFFF;
   --red:     #EF4444;
+   --color-primary: #1b3b5f;
+  --color-primary-light: #dcfbf9;
+  --color-primary-dark: #111111;
+  --color-secondary: #ecedf0;
+  --color-secondary-light: #B8B4B480;
+  --color-secondary-dark: #49494D;
+  --color-accent: #9A9DAF;
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
   --radius:  10px;
 
   display: flex; flex-direction: column; min-height: 100vh;
   font-family: 'DM Sans', sans-serif;
+   font-family: "Bricolage Grotesque", sans-serif;
   background: var(--surface); color: var(--ink);
 }
 
@@ -37,7 +48,9 @@
 }
 .pgTitle {
   font-family: 'Fraunces', serif;
-  font-size: 22px; font-weight: 700; color: var(--ink); letter-spacing: -0.02em; margin: 0;
+  font-size: 22px; 
+  font-weight: 700; 
+  color: var(--color-primary); letter-spacing: -0.02em; margin: 0;
 }
 .topbarR { display: flex; gap: 8px; align-items: center; }
 
@@ -117,6 +130,8 @@
   background: var(--white); outline: none; color: var(--ink);
 }
 .searchBox input:focus { border-color: var(--green); }
+
+
 
 .filterSel {
   height: 36px; padding: 0 10px;
@@ -210,9 +225,9 @@
 .contactLine { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--ink3); }
 .locationCell { font-size: 12.5px; color: var(--ink3); }
 .ordersCell { display: flex; flex-direction: column; gap: 1px; }
-.orderCount { font-size: 15px; font-weight: 700; color: var(--ink); }
+.orderCount { font-size: 15px; font-weight: 700; color: var(--color-primary); }
 .orderLbl   { font-size: 10.5px; color: var(--ink4); }
-.spentCell  { font-size: 13.5px; font-weight: 700; color: var(--ink); }
+.spentCell  { font-size: 13.5px; font-weight: 700; color: var(--color-primary); }
 
 .actCell { display: flex; gap: 4px; align-items: center; }
 .iconActBtn {

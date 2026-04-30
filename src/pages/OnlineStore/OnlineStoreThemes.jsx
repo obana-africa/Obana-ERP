@@ -1,19 +1,18 @@
 /**
  * OnlineStoreThemes.jsx
- * Shopify-style Themes management page.
- * 
+ * Shopify-style themes management page.
  * Route: /online-store/themes
- * Add to AppRoutes.jsx inside the MainLayout block:
- *   import OnlineStoreThemes from '../pages/OnlineStore/OnlineStoreThemes'
- *   <Route path="/online-store/themes" element={<OnlineStoreThemes />} />
+ *
+ * Clicking "Edit theme" routes to /online-store (the full builder).
+ * Clicking "Online Store" in sidebar also routes here first.
  */
 
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import styles from './OnlineStoreThemes.module.css'
+import s from './OnlineStoreThemes.module.css'
 
-/* ─── Icon helper ─────────────────────────────────────────── */
-const Ic = ({ d, size = 16, stroke = 'currentColor', sw = 1.8, fill = 'none' }) => (
+/* ── Icon ──────────────────────────────────────────────────────── */
+const Ic = ({ d, size = 16, stroke = 'currentColor', sw = 1.7, fill = 'none' }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill={fill}
     stroke={stroke} strokeWidth={sw} strokeLinecap="round" strokeLinejoin="round"
     style={{ flexShrink: 0 }}>
@@ -21,114 +20,25 @@ const Ic = ({ d, size = 16, stroke = 'currentColor', sw = 1.8, fill = 'none' }) 
   </svg>
 )
 
-/* ─── Theme data ──────────────────────────────────────────── */
-const CURRENT_THEME = {
-  id: 'midnight',
-  name: 'Midnight Navy',
-  version: '1.0.0',
-  savedAt: 'Today at 10:38 am',
-  thumbnail: null,   // replace with actual screenshot URL
-  colors: ['#1a1a2e', '#2DBD97', '#ffffff'],
-}
-
-const DRAFT_THEMES = [
-  {
-    id: 'earth',
-    name: 'Earth Tones',
-    addedAt: 'Added: Dec 12, 2024',
-    version: '1.0.0',
-    thumbnail: null,
-    colors: ['#78350f', '#d97706', '#fffbf5'],
-  },
-  {
-    id: 'minimal',
-    name: 'Clean Minimal',
-    addedAt: 'Added: Nov 20, 2024',
-    version: '1.0.0',
-    thumbnail: null,
-    colors: ['#111827', '#6366f1', '#ffffff'],
-  },
-  {
-    id: 'bold',
-    name: 'Bold Green',
-    addedAt: 'Added: Sep 23, 2024',
-    version: '1.0.0',
-    thumbnail: null,
-    colors: ['#064e3b', '#10b981', '#ffffff'],
-  },
-]
-
-const FREE_THEMES = [
-  {
-    id: 'horizon',
-    name: 'Horizon',
-    by: 'Taja',
-    category: 'Fashion',
-    thumbnail: null,
-    bg: 'linear-gradient(135deg, #1a1a2e 0%, #2d3748 100%)',
-  },
-  {
-    id: 'bloom',
-    name: 'Bloom',
-    by: 'Taja',
-    category: 'Beauty',
-    thumbnail: null,
-    bg: 'linear-gradient(135deg, #701a75 0%, #db2777 100%)',
-  },
-  {
-    id: 'savanna',
-    name: 'Savanna',
-    by: 'Taja',
-    category: 'Lifestyle',
-    thumbnail: null,
-    bg: 'linear-gradient(135deg, #78350f 0%, #d97706 100%)',
-  },
-  {
-    id: 'coastal',
-    name: 'Coastal',
-    by: 'Taja',
-    category: 'General',
-    thumbnail: null,
-    bg: 'linear-gradient(135deg, #0c4a6e 0%, #0ea5e9 100%)',
-  },
-  {
-    id: 'ritual',
-    name: 'Ritual',
-    by: 'Taja',
-    category: 'Accessories',
-    thumbnail: null,
-    bg: 'linear-gradient(135deg, #1c1917 0%, #a8a29e 100%)',
-  },
-]
-
-/* ─── Theme thumbnail placeholder ────────────────────────── */
-function ThumbPlaceholder({ colors = [], label }) {
-  const [primary, accent, bg] = [...colors, '#1a1a2e', '#2DBD97', '#ffffff']
-  const isLight = bg === '#ffffff' || bg === '#fffbf5' || bg === '#f9fafb'
-  const cardBg  = isLight ? `${primary}12` : `${bg}22`
-  const textCol = isLight ? primary : bg
+/* ── Theme thumbnail placeholder ───────────────────────────────── */
+function ThumbPlaceholder({ primary = '#1b3b5f', accent = '#2DBD97', bg = '#fff', name = '' }) {
   return (
-    <div className={styles.thumbPlaceholder} style={{ background: bg }}>
-      {/* Nav bar */}
-      <div className={styles.thumbNav} style={{ background: primary }}>
-        <div className={styles.thumbNavDot} style={{ background: bg, opacity: 0.9 }} />
-        <div className={styles.thumbNavLine} style={{ background: `${bg}99`, width: '42%' }} />
-        <div className={styles.thumbNavLine} style={{ background: `${bg}55`, width: '25%', marginLeft: 'auto' }} />
+    <div className={s.thumbPlaceholder} style={{ background: bg }}>
+      <div className={s.thumbNav} style={{ background: primary }}>
+        <div className={s.thumbNavDot} style={{ background: accent }} />
+        <div className={s.thumbNavLine} style={{ background: `${accent}40` }} />
       </div>
-      {/* Hero */}
-      <div className={styles.thumbHero} style={{ background: accent }}>
-        <div className={styles.thumbHeroText} style={{ background: bg, opacity: 0.9, width: '65%' }} />
-        <div className={styles.thumbHeroSub}  style={{ background: bg, opacity: 0.55, width: '45%' }} />
-        <div className={styles.thumbHeroBtn}  style={{ background: primary, borderRadius: 3 }} />
+      <div className={s.thumbHero} style={{ background: primary }}>
+        <div className={s.thumbHeroText} style={{ background: `${accent}90` }} />
+        <div className={s.thumbHeroSub} style={{ background: `${accent}50` }} />
+        <div className={s.thumbHeroBtn} style={{ background: accent }} />
       </div>
-      {/* Product grid */}
-      <div className={styles.thumbGrid} style={{ background: bg }}>
-        {[1,2,3].map(i => (
-          <div key={i} className={styles.thumbCard}
-            style={{ background: isLight ? '#f3f4f6' : `${primary}25`,
-                     border: `1px solid ${isLight ? '#E5E7EB' : `${bg}20`}` }}>
-            <div className={styles.thumbCardImg} style={{ background: accent, opacity: 0.7 }} />
-            <div className={styles.thumbCardLine} style={{ background: textCol, opacity: 0.25 }} />
+      <div className={s.thumbGrid}>
+        {[1, 2, 3].map(i => (
+          <div key={i} className={s.thumbCard}>
+            <div className={s.thumbCardImg} style={{ background: `${primary}15` }} />
+            <div className={s.thumbCardLine} style={{ background: `${primary}30` }} />
+            <div className={s.thumbCardLine} style={{ background: accent, width: '60%' }} />
           </div>
         ))}
       </div>
@@ -136,100 +46,119 @@ function ThumbPlaceholder({ colors = [], label }) {
   )
 }
 
-/* ─── Main component ──────────────────────────────────────── */
+/* ── Data ─────────────────────────────────────────────────────── */
+const CURRENT_THEME = {
+  id: 'midnight', name: 'Midnight Navy',
+  primary: '#1b3b5f', accent: '#2DBD97', bg: '#ffffff',
+  savedAt: 'Apr 28 at 11:44 am',
+  version: '2.1.0',
+  isLive: true,
+}
+
+const DRAFT_THEMES = [
+  {
+    id: 'earth', name: 'Earth Tones',
+    primary: '#78350f', accent: '#d97706', bg: '#fffbf5',
+    savedAt: 'Apr 25 at 9:12 am',
+    version: '1.0.0',
+  },
+  {
+    id: 'bold', name: 'Bold Green',
+    primary: '#064e3b', accent: '#10b981', bg: '#ffffff',
+    savedAt: 'Apr 20 at 3:30 pm',
+    version: '1.2.0',
+  },
+]
+
+const FREE_THEMES = [
+  { id: 'minimal',   name: 'Clean Minimal', by: 'Taja',      primary: '#111827', accent: '#6366f1', bg: '#ffffff' },
+  { id: 'coral',     name: 'Coral Pop',     by: 'Taja',      primary: '#9f1239', accent: '#f43f5e', bg: '#fff1f2' },
+  { id: 'luxury',    name: 'Royal Purple',  by: 'Taja',      primary: '#4c1d95', accent: '#8b5cf6', bg: '#fafafa' },
+]
+
+/* ════════════════════════════════════════════════════════════════
+   MAIN PAGE
+   ════════════════════════════════════════════════════════════════ */
 export default function OnlineStoreThemes() {
   const navigate = useNavigate()
-  const [draftMenuOpen,  setDraftMenuOpen]  = useState(null)
-  const [publishConfirm, setPublishConfirm] = useState(null)
-  const [showThemeStore, setShowThemeStore] = useState(false)
-  const [importMenuOpen, setImportMenuOpen] = useState(false)
+  const [importOpen,   setImportOpen]   = useState(false)
+  const [publishId,    setPublishId]    = useState(null)
+  const [drafts,       setDrafts]       = useState(DRAFT_THEMES)
+  const [moreOpen,     setMoreOpen]     = useState(null) // draft id with open dropdown
+  const [currentTheme, setCurrentTheme] = useState(CURRENT_THEME)
 
-  const handlePublish = (theme) => {
-    setPublishConfirm(theme)
+  const handlePublish = (draft) => {
+    setCurrentTheme({ ...draft, savedAt: 'Just now', isLive: true })
+    setDrafts(prev => prev.filter(d => d.id !== draft.id))
+    setPublishId(null)
   }
 
-  const confirmPublish = () => {
-    // TODO: call your API to set the published theme
-    setPublishConfirm(null)
-    setDraftMenuOpen(null)
+  const handleDuplicate = (draft) => {
+    const copy = { ...draft, id: `${draft.id}-copy`, name: `${draft.name} (copy)`, savedAt: 'Just now' }
+    setDrafts(prev => [...prev, copy])
+    setMoreOpen(null)
+  }
+
+  const handleDelete = (id) => {
+    if (window.confirm('Delete this theme? This cannot be undone.')) {
+      setDrafts(prev => prev.filter(d => d.id !== id))
+    }
+    setMoreOpen(null)
+  }
+
+  const handleAddFreeTheme = (theme) => {
+    const draft = {
+      id: `${theme.id}-${Date.now()}`,
+      name: theme.name,
+      primary: theme.primary, accent: theme.accent, bg: theme.bg,
+      savedAt: 'Just now',
+      version: '1.0.0',
+    }
+    setDrafts(prev => [...prev, draft])
   }
 
   return (
-    <div className={styles.page}>
+    <div className={s.page}>
 
-      {/* ── Sticky page header ── */}
-      <div className={styles.pageHeader}>
-        <h1 className={styles.pageTitle}>
-          <span className={styles.pageTitleIcon}>🏪</span>
-          Online Store
+      {/* ── Sticky header ──────────────────────────────────────── */}
+      <div className={s.pageHeader}>
+        <h1 className={s.pageTitle}>
+          <span className={s.pageTitleIcon}>🎨</span>
+          Themes
         </h1>
-
-        <div className={styles.pageHeaderActions}>
-          {/* View store */}
-          <button
-            className={styles.viewStoreBtn}
-            onClick={() => window.open('/store-preview', '_blank')}
-          >
-            <Ic d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 0 2 2h6M15 3h6v6M10 14L21 3" size={14} />
+        <div className={s.pageHeaderActions}>
+          <button className={s.viewStoreBtn}
+            onClick={() => navigate('/online-store')}>
+            <Ic d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8zM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6z" size={14} />
             View store
           </button>
 
-          {/* Import theme button + dropdown */}
-          <div className={styles.importWrap}>
-            <div className={styles.importBtnGroup}>
-              <button
-                className={styles.importBtn}
-                onClick={() => window.open('https://themes.shopify.com', '_blank')}
-              >
-                Import theme
+          <div className={s.importWrap}>
+            <div className={s.importBtnGroup}>
+              <button className={s.importBtn}
+                onClick={() => navigate('/online-store')}>
+                Edit current theme
               </button>
-              <button
-                className={styles.importChevBtn}
-                onClick={() => setImportMenuOpen(v => !v)}
-                aria-label="Import theme options"
-              >
+              <button className={s.importChevBtn} onClick={() => setImportOpen(o => !o)}>
                 <Ic d="M6 9l6 6 6-6" size={14} />
               </button>
             </div>
-
-            {importMenuOpen && (
+            {importOpen && (
               <>
-                <div className={styles.importBackdrop} onClick={() => setImportMenuOpen(false)} />
-                <div className={styles.importDropdown}>
-                  <a
-                    href="https://themes.shopify.com"
-                    target="_blank"
-                    rel="noreferrer"
-                    className={styles.importDropItem}
-                    onClick={() => setImportMenuOpen(false)}
-                  >
+                <div className={s.importBackdrop} onClick={() => setImportOpen(false)} />
+                <div className={s.importDropdown}>
+                  <button className={s.importDropItem} onClick={() => { setImportOpen(false); navigate('/online-store') }}>
                     <Ic d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" size={14} />
-                    Visit Theme Store
-                  </a>
-                  <button
-                    className={styles.importDropItem}
-                    onClick={() => {
-                      setImportMenuOpen(false)
-                      document.getElementById('themeZipInput')?.click()
-                    }}
-                  >
+                    Open theme editor
+                  </button>
+                  <button className={s.importDropItem} onClick={() => setImportOpen(false)}>
                     <Ic d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12" size={14} />
-                    Upload zip file
-                    <input id="themeZipInput" type="file" accept=".zip" style={{display:'none'}}
-                      onChange={e => { alert(`Uploading: ${e.target.files[0]?.name}`); setImportMenuOpen(false) }} />
+                    Upload theme file (.zip)
                   </button>
-                  <button
-                    className={styles.importDropItem}
-                    onClick={() => {
-                      setImportMenuOpen(false)
-                      window.open('https://github.com', '_blank')
-                    }}
-                  >
-                    <svg width={14} height={14} viewBox="0 0 24 24" fill="currentColor" style={{flexShrink:0}}>
-                      <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
-                    </svg>
-                    Connect from GitHub
-                  </button>
+                  <a className={s.importDropItem} href="https://themes.shopify.com" target="_blank" rel="noreferrer">
+                    <Ic d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" size={14} />
+                    Browse theme store
+                  </a>
                 </div>
               </>
             )}
@@ -237,221 +166,234 @@ export default function OnlineStoreThemes() {
         </div>
       </div>
 
-      {/* ── Performance bar (like Shopify) ── */}
-      <div className={styles.perfBar}>
-        <div className={styles.perfItem}>
-          <span className={styles.perfLabel}>30 days</span>
+      {/* ── Performance bar ────────────────────────────────────── */}
+      <div className={s.perfBar}>
+        <div className={s.perfItem}>
+          <Ic d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" size={14} stroke="#6B7280" />
+          <span className={s.perfLabel}>30 days</span>
         </div>
-        <div className={styles.perfDivider} />
-        <div className={styles.perfItem}>
-          <span className={styles.perfValue}>LCP</span>
-          <span className={styles.perfNum}>2,096ms</span>
-          <span className={`${styles.perfBadge} ${styles.perfGood}`}>● Good</span>
-        </div>
-        <div className={styles.perfDivider} />
-        <div className={styles.perfItem}>
-          <span className={styles.perfValue}>INP</span>
-          <span className={styles.perfNum}>96ms</span>
-          <span className={`${styles.perfBadge} ${styles.perfGood}`}>● Good</span>
-        </div>
-        <div className={styles.perfDivider} />
-        <div className={styles.perfItem}>
-          <span className={styles.perfValue}>Layout Shift</span>
-          <span className={styles.perfNum}>0 —</span>
-        </div>
+        <div className={s.perfDivider} />
+        {[
+          { label: 'LCP P75',                  value: '2104 ms',  badge: 'Good', good: true  },
+          { label: 'INP P75',                  value: '96 ms',    badge: 'Good', good: true  },
+          { label: 'Cumulative Layout Shift',  value: '0',        badge: null,   good: null  },
+          { label: 'Sessions',                 value: '634',      badge: null,   good: null  },
+        ].map((p, i) => (
+          <div key={i} className={s.perfItem} style={{ gap: 6 }}>
+            <span className={s.perfLabel}>{p.label}</span>
+            <span className={s.perfNum}>{p.value}</span>
+            {p.badge && (
+              <span className={`${s.perfBadge} ${p.good ? s.perfGood : ''}`}>{p.badge}</span>
+            )}
+            {i < 3 && <div className={s.perfDivider} />}
+          </div>
+        ))}
       </div>
 
-      {/* ── Current theme ── */}
-      <div className={styles.section}>
-        <div className={styles.currentThemeCard}>
+      {/* ── Current theme ──────────────────────────────────────── */}
+      <div className={s.section}>
+        <div className={s.sectionHeader}>
+          <div>
+            <p className={s.sectionTitle}>Current theme</p>
+            <p className={s.sectionSub}>This is the live theme visible to your customers.</p>
+          </div>
+        </div>
+
+        <div className={s.currentThemeCard}>
           {/* Thumbnail */}
-          <div className={styles.currentThumb}>
-            <ThumbPlaceholder colors={CURRENT_THEME.colors} label={CURRENT_THEME.name} />
-            <div className={styles.currentThumbSide}>
-              <ThumbPlaceholder colors={CURRENT_THEME.colors} label="" />
+          <div className={s.currentThumb}>
+            <ThumbPlaceholder
+              primary={currentTheme.primary}
+              accent={currentTheme.accent}
+              bg={currentTheme.bg}
+            />
+            <div className={s.currentThumbSide}>
+              <ThumbPlaceholder
+                primary={currentTheme.primary}
+                accent={currentTheme.accent}
+                bg={currentTheme.bg}
+              />
             </div>
           </div>
 
-          {/* Info + actions */}
-          <div className={styles.currentInfo}>
-            <div className={styles.currentMeta}>
-              <div className={styles.currentBadge}>Current theme</div>
-              <h2 className={styles.currentName}>{CURRENT_THEME.name}</h2>
-              <p className={styles.currentSaved}>Last saved: {CURRENT_THEME.savedAt}</p>
-              <p className={styles.currentVersion}>Version {CURRENT_THEME.version}
-                <button className={styles.versionChev}>
+          {/* Info panel */}
+          <div className={s.currentInfo}>
+            <div className={s.currentMeta}>
+              <span className={s.currentBadge}>Current theme</span>
+              <h2 className={s.currentName}>{currentTheme.name}</h2>
+              <p className={s.currentSaved}>Last saved: {currentTheme.savedAt}</p>
+              <p className={s.currentVersion}>
+                <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#2DBD97', display: 'inline-block' }} />
+                Version {currentTheme.version}
+                <button className={s.versionChev}>
                   <Ic d="M6 9l6 6 6-6" size={12} />
                 </button>
               </p>
             </div>
-            <div className={styles.currentActions}>
-              <button
-                className={styles.editThemeBtn}
-                onClick={() => navigate('/online-store')}
-              >
-                Customize
+            <div className={s.currentActions}>
+              <button className={s.editThemeBtn}
+                onClick={() => navigate('/online-store')}>
+                Edit theme
               </button>
-              <button className={styles.moreBtn}>
-                <Ic d="M12 5h.01M12 12h.01M12 19h.01" size={16} sw={2.5} />
+              <button className={s.moreBtn} title="More actions">
+                <Ic d="M5 12h.01M12 12h.01M19 12h.01" size={16} sw={2.5} />
               </button>
             </div>
           </div>
         </div>
       </div>
 
-      {/* ── Draft themes ── */}
-      <div className={styles.section}>
-        <div className={styles.sectionHeader}>
-          <div>
-            <h2 className={styles.sectionTitle}>Draft themes</h2>
-            <p className={styles.sectionSub}>
-              These themes are only visible to you. Publishing a theme from your library will switch it to your current theme.
-            </p>
-          </div>
-        </div>
-
-        <div className={styles.draftList}>
-          {DRAFT_THEMES.map(theme => (
-            <div key={theme.id} className={styles.draftCard}>
-              <div className={styles.draftThumb}>
-                <ThumbPlaceholder colors={theme.colors} label={theme.name} />
-              </div>
-              <div className={styles.draftInfo}>
-                <p className={styles.draftName}>{theme.name}</p>
-                <p className={styles.draftMeta}>{theme.addedAt}</p>
-                <p className={styles.draftVersion}>
-                  <span className={styles.draftVersionDot} />
-                  Version {theme.version} available
-                  <Ic d="M6 9l6 6 6-6" size={11} stroke="#6B7280" />
-                </p>
-              </div>
-              <div className={styles.draftActions}>
-                <button
-                  className={styles.draftMoreBtn}
-                  onClick={() => setDraftMenuOpen(draftMenuOpen === theme.id ? null : theme.id)}
-                >
-                  <Ic d="M12 5h.01M12 12h.01M12 19h.01" size={16} sw={2.5} />
-                </button>
-                <button
-                  className={styles.publishBtn}
-                  onClick={() => handlePublish(theme)}
-                >
-                  Publish
-                </button>
-                <button
-                  className={styles.editDraftBtn}
-                  onClick={() => navigate('/online-store')}
-                >
-                  Customize
-                </button>
-
-                {/* Dropdown menu */}
-                {draftMenuOpen === theme.id && (
-                  <div className={styles.draftDropdown}>
-                    <button className={styles.draftDropItem} onClick={() => navigate('/online-store')}>
-                      <Ic d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" size={13} />
-                      Customize
-                    </button>
-                    <button className={styles.draftDropItem}>
-                      <Ic d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" size={13} />
-                      Preview
-                    </button>
-                    <button className={styles.draftDropItem}>
-                      <Ic d="M8 16H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2m-6 12h8a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-8a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2z" size={13} />
-                      Duplicate
-                    </button>
-                    <div className={styles.draftDropDivider} />
-                    <button className={`${styles.draftDropItem} ${styles.draftDropDanger}`}>
-                      <Ic d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" size={13} stroke="#EF4444" />
-                      Remove
-                    </button>
-                  </div>
-                )}
-              </div>
+      {/* ── Draft themes ───────────────────────────────────────── */}
+      {drafts.length > 0 && (
+        <div className={s.section}>
+          <div className={s.sectionHeader}>
+            <div>
+              <p className={s.sectionTitle}>Draft themes</p>
+              <p className={s.sectionSub}>
+                These themes are only visible to you. Publishing a theme from your library will switch it to your current theme.
+              </p>
             </div>
-          ))}
-        </div>
-      </div>
-
-      {/* ── Theme store ── */}
-      <div className={styles.section}>
-        <div className={styles.themeStoreHeader}>
-          <div>
-            <p className={styles.themeStoreLabel}>
-              <span className={styles.themeStoreLabelIcon}>🎨</span>
-              Popular free themes
-            </p>
-            <p className={styles.themeStoreSub}>
-              Made with core features you can easily customize — no coding needed.
-            </p>
           </div>
-        </div>
 
-        <div className={styles.freeThemeGrid}>
-          {FREE_THEMES.map(theme => (
-            <div key={theme.id} className={styles.freeThemeCard}>
-              <div
-                className={styles.freeThemeThumb}
-                style={{ background: theme.bg }}
-              >
-                <div className={styles.freeThemePreview}>
-                  <div className={styles.freeThemeBar} />
-                  <div className={styles.freeThemeHero} />
-                  <div className={styles.freeThemeGrid2}>
-                    <div className={styles.freeThemeProduct} />
-                    <div className={styles.freeThemeProduct} />
+          <div className={s.draftList}>
+            {drafts.map(draft => (
+              <div key={draft.id} className={s.draftCard}>
+                <div className={s.draftThumb}>
+                  <ThumbPlaceholder
+                    primary={draft.primary}
+                    accent={draft.accent}
+                    bg={draft.bg}
+                  />
+                </div>
+
+                <div className={s.draftInfo}>
+                  <p className={s.draftName}>{draft.name}</p>
+                  <p className={s.draftMeta}>Last saved: {draft.savedAt}</p>
+                  <p className={s.draftVersion}>
+                    <span className={s.draftVersionDot} />
+                    Version {draft.version}
+                  </p>
+                </div>
+
+                <div className={s.draftActions}>
+                  <div style={{ position: 'relative' }}>
+                    <button className={s.draftMoreBtn}
+                      onClick={() => setMoreOpen(moreOpen === draft.id ? null : draft.id)}>
+                      <Ic d="M5 12h.01M12 12h.01M19 12h.01" size={15} sw={2.5} />
+                    </button>
+                    {moreOpen === draft.id && (
+                      <>
+                        <div style={{ position: 'fixed', inset: 0, zIndex: 49 }}
+                          onClick={() => setMoreOpen(null)} />
+                        <div className={s.draftDropdown}>
+                          <button className={s.draftDropItem}
+                            onClick={() => { navigate('/online-store'); setMoreOpen(null) }}>
+                            <Ic d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" size={13} />
+                            Edit
+                          </button>
+                          <button className={s.draftDropItem}
+                            onClick={() => handleDuplicate(draft)}>
+                            <Ic d="M8 10a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-8a2 2 0 0 1-2-2v-8zM4 14a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2" size={13} />
+                            Duplicate
+                          </button>
+                          <button className={s.draftDropItem}>
+                            <Ic d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" size={13} />
+                            Download
+                          </button>
+                          <hr className={s.draftDropDivider} />
+                          <button className={`${s.draftDropItem} ${s.draftDropDanger}`}
+                            onClick={() => handleDelete(draft.id)}>
+                            <Ic d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" size={13} stroke="currentColor" />
+                            Delete theme
+                          </button>
+                        </div>
+                      </>
+                    )}
                   </div>
+
+                  <button className={s.publishBtn}
+                    onClick={() => setPublishId(draft.id)}>
+                    Publish
+                  </button>
+                  <button className={s.editDraftBtn}
+                    onClick={() => navigate('/online-store')}>
+                    Edit
+                  </button>
                 </div>
               </div>
-              <div className={styles.freeThemeInfo}>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* ── Free themes from store ──────────────────────────────── */}
+      <div className={s.section}>
+        <div className={s.themeStoreHeader}>
+          <div>
+            <p className={s.themeStoreLabel}>
+              <span className={s.themeStoreLabelIcon}>🛍</span>
+              Free themes
+            </p>
+            <p className={s.themeStoreSub}>
+              Add a free theme to your library. You can customize it before publishing.
+            </p>
+          </div>
+        </div>
+
+        <div className={s.freeThemeGrid}>
+          {FREE_THEMES.map(t => (
+            <div key={t.id} className={s.freeThemeCard}>
+              <div className={s.freeThemeThumb} style={{ background: t.primary }}>
+                <ThumbPlaceholder primary={t.primary} accent={t.accent} bg={t.bg} />
+              </div>
+              <div className={s.freeThemeInfo}>
                 <div>
-                  <p className={styles.freeThemeName}>{theme.name}</p>
-                  <p className={styles.freeThemeBy}>by {theme.by}</p>
+                  <p className={s.freeThemeName}>{t.name}</p>
+                  <p className={s.freeThemeBy}>by {t.by}</p>
                 </div>
-                <button
-                  className={styles.addThemeBtn}
-                  onClick={() => {
-                    // TODO: add to draft themes
-                    alert(`"${theme.name}" added to draft themes`)
-                  }}
-                >
+                <button className={s.addThemeBtn} onClick={() => handleAddFreeTheme(t)}>
                   Add
                 </button>
               </div>
             </div>
           ))}
+
           {/* Explore more */}
-          <div className={styles.exploreCard}>
-            <p className={styles.exploreTitle}>Explore more themes</p>
-            <p className={styles.exploreSub}>Browse professionally designed free and paid themes</p>
-            <button className={styles.exploreBtn}>
-              <Ic d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 0 2 2h6M15 3h6v6M10 14L21 3" size={13} />
-              Visit Theme Store
+          <div className={s.exploreCard}>
+            <p className={s.exploreTitle}>Explore more themes</p>
+            <p className={s.exploreSub}>
+              Find premium themes built for African stores with advanced features.
+            </p>
+            <button className={s.exploreBtn}>
+              <Ic d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" size={13} />
+              Visit theme store
             </button>
           </div>
         </div>
       </div>
 
-      {/* ── Publish confirm modal ── */}
-      {publishConfirm && (
-        <div className={styles.modalBackdrop} onClick={() => setPublishConfirm(null)}>
-          <div className={styles.modal} onClick={e => e.stopPropagation()}>
-            <h3 className={styles.modalTitle}>Publish "{publishConfirm.name}"?</h3>
-            <p className={styles.modalBody}>
-              This will replace your current theme ("{CURRENT_THEME.name}") and become visible to your store visitors immediately.
-            </p>
-            <div className={styles.modalActions}>
-              <button className={styles.modalCancel} onClick={() => setPublishConfirm(null)}>
-                Cancel
-              </button>
-              <button className={styles.modalConfirm} onClick={confirmPublish}>
-                Publish theme
-              </button>
+      {/* ── Publish confirm modal ───────────────────────────────── */}
+      {publishId && (() => {
+        const draft = drafts.find(d => d.id === publishId)
+        if (!draft) return null
+        return (
+          <div className={s.modalBackdrop} onClick={() => setPublishId(null)}>
+            <div className={s.modal} onClick={e => e.stopPropagation()}>
+              <h3 className={s.modalTitle}>Publish "{draft.name}"?</h3>
+              <p className={s.modalBody}>
+                This will replace your current theme <strong>"{currentTheme.name}"</strong> as the live theme visible to all customers.
+                Your current theme will be moved to draft themes.
+              </p>
+              <div className={s.modalActions}>
+                <button className={s.modalCancel} onClick={() => setPublishId(null)}>Cancel</button>
+                <button className={s.modalConfirm} onClick={() => handlePublish(draft)}>
+                  Publish theme
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
-
+        )
+      })()}
     </div>
   )
 }

@@ -184,17 +184,17 @@ export default function LandingPage() {
       {showNavModal && <NavWaitlistModal onClose={() => setShowNavModal(false)} />}
 
      {/* ── Navbar ── */}
-<nav className={`${styles.navbar} ${scrolled ? styles.navScrolled : ''}`}>
-  <div className={styles.navInner}>
-    <div className={styles.brand}>
-      <img src="/logos/taja logo white.png" alt="taja" className={styles.brandLogo} />
-      <div className={styles.navLinks}>
+      <nav className={`${styles.navbar} ${scrolled ? styles.navScrolled : ''}`}>
+        <div className={styles.navInner}>
+          <div className={styles.brand}>
+            <img src="/logos/taja logo white.png" alt="taja" className={styles.brandLogo} />
+            <div className={styles.navLinks}>
 
-        {/* Features dropdown */}
-        <div className={styles.navItem}>
-          <button className={styles.navLink}>
-            Features <span className={styles.navChevron}>▾</span>
-          </button>
+                {/* Features dropdown */}
+              <div className={styles.navItem}>
+                <button className={styles.navLink}>
+                  Features <span className={styles.navChevron}>▾</span>
+                </button>
           <div className={styles.dropdown}>
             <div className={styles.dropdownInner}>
               <div className={styles.dropdownGrid}>
@@ -306,8 +306,8 @@ export default function LandingPage() {
     </div>
     <div className={styles.navActions}>
       <button className={styles.btnOutline} onClick={() => setShowNavModal(true)}>Learn more</button>
-      <button className={styles.btnPrimary} onClick={() => setShowNavModal(true)}>
-        Join waitlist
+      <button className={styles.btnPrimary} onClick={() => navigate('/register')}>
+        Get started for free
       </button>
     </div>
   </div>

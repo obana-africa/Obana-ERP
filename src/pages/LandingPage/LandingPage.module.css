@@ -649,6 +649,7 @@
 @media (max-width: 768px) {
   .hero              { flex-direction: column; padding: 100px 20px 60px; }
   .heroTitle         { font-size: 36px; }
+  .heroSub { font-size: 20px;}
   .heroActions       { flex-wrap: wrap; }
   .emailWrap         { width: 100%; max-width: 100%; }
   .stats             { grid-template-columns: repeat(2,1fr); }
@@ -662,6 +663,10 @@
     flex-direction: column;
     padding: 40px 20px 28px;
     gap: 32px;
+  }
+
+  @media (max-width: 480px){
+    .heroSub { font-size: 16;}
   }
   .footerBrandCol    { 
     flex-direction: row;

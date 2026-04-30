@@ -32,25 +32,24 @@ const ICON = {
   settings: ['M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z', 'M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z'],
 }
 
-/* ─── Default theme ─────────────────────────────────────────── */
 export const DEFAULT_THEME = {
-  /* Identity */
-  storeName:      'taja by Obana.Africa',
-  logoText:       'taja',
-  tagline:        'Premium African Fashion & Beauty',
+  /* Identity — blank by default, user fills these in */
+  storeName:      'My Store',
+  logoText:       'My Store',
+  tagline:        'Your store tagline here',
   faviconUrl:     '',
   logoUrl:        '',
 
   /* Colours */
-  primary:        '#1a1a2e',
+  primary:        '#111827',
   accent:         '#2DBD97',
   bg:             '#ffffff',
   text:           '#111827',
-  heroBg:         '#1a1a2e',
+  heroBg:         '#111827',
   heroTextColor:  '#ffffff',
   cardBg:         '#ffffff',
   cardBorder:     '#F3F4F6',
-  footerBg:       '#1a1a2e',
+  footerBg:       '#111827',
   footerText:     '#ffffff',
   navBg:          '#ffffff',
   navText:        '#111827',
@@ -66,19 +65,19 @@ export const DEFAULT_THEME = {
   btn:            'filled',
   navLayout:      'centered',
   productCols:    3,
-  cardStyle:      'shadow',   // shadow | border | flat
+  cardStyle:      'shadow',
 
-  /* Hero section */
-  heroTitle:      'African Fashion,\nRedefined',
-  heroSub:        'Premium Ankara, Kaftan & Beauty — shipped across Nigeria in 48 hours',
+  /* Hero section — blank prompts */
+  heroTitle:      'Your Store Headline',
+  heroSub:        'Describe your store and what makes it special',
   heroCta1:       'Shop Now',
   heroCta2:       'View Collections',
   heroImageUrl:   '',
   heroOverlayOpacity: 40,
 
   /* Announcement bar */
-  announceText:   '🎉 Free shipping on orders above ₦20,000 · Use WELCOME25 for 25% off',
-  announceBg:     '#1a1a2e',
+  announceText:   '🎉 Welcome to our store! Free shipping on orders above ₦20,000',
+  announceBg:     '#111827',
   announceColor:  '#ffffff',
 
   /* Products section */
@@ -90,13 +89,13 @@ export const DEFAULT_THEME = {
   productsPerRow: 3,
 
   /* Promo banner */
-  promoTitle:     'New Arrivals This Week',
-  promoSub:       'Discover the latest in African fashion',
+  promoTitle:     'New Arrivals',
+  promoSub:       'Check out our latest products',
   promoCta:       'Shop Now',
 
   /* Footer */
-  footerTagline:  'Premium African fashion, delivered to your door.',
-  footerCopyright:'© 2026 Obana Africa Ltd. All rights reserved.',
+  footerTagline:  'Quality products, delivered to your door.',
+  footerCopyright:'© 2026 My Store. All rights reserved.',
 
   /* Section visibility */
   showAnnounce:   true,
@@ -109,8 +108,8 @@ export const DEFAULT_THEME = {
   showFooter:     true,
 
   /* Meta */
-  activeTemplate: 'midnight',
-  activePreset:   'midnight',
+  activeTemplate: '',
+  activePreset:   '',
 
   /* SEO */
   metaTitle:      '',
@@ -123,6 +122,19 @@ export const DEFAULT_THEME = {
 
 /* ─── Template presets ──────────────────────────────────────── */
 export const TEMPLATES = [
+
+
+  {
+    id: 'blank', name: 'Start Blank', category: 'General',
+    desc: 'Start from scratch — no preset colours or fonts',
+    thumbnail: 'https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?w=400&q=80',
+    theme: {
+      primary: '#111827', accent: '#2DBD97', bg: '#ffffff',
+      text: '#111827', heroBg: '#111827', heroTextColor: '#ffffff',
+      radius: 8, btn: 'filled', headingFont: 'DM Sans', cardStyle: 'flat'
+    },
+  },
+
   {
     id: 'midnight', name: 'Midnight Navy', category: 'Fashion',
     desc: 'Dark & premium — perfect for luxury African fashion',
@@ -267,9 +279,20 @@ export default function OnlineStore() {
 
   return (
     <div className={styles.builder}>
-
+{theme.storeName === 'My Store' && activeTab !== 'settings' && (
+  <div className={styles.setupBanner}>
+    <span>👋 Welcome! Start by setting your store name and identity.</span>
+    <button className={styles.setupBannerBtn} onClick={() => setActiveTab('theme')}>
+      Set up store →
+    </button>
+  </div>
+)}
       {/* ── Topbar ───────────────────────────────────────────── */}
       <div className={styles.topbar}>
+        // In the topbar, add a back button:
+          <button className={styles.backBtn} onClick={() => navigate('/online-store')}>
+           ← Themes
+          </button>
         <div className={styles.topLeft}>
           <span className={styles.topTitle}>
             <Ic d={ICON.settings} size={14} /> Store Builder

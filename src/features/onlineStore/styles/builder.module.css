@@ -1,0 +1,50 @@
+/* Only essential styles - remove ~60% of the current CSS */
+
+.builder {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: #f5f5f5;
+}
+
+/* Topbar - Keep it simple */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  height: 56px;
+  background: #1a1a2e;
+  color: white;
+  flex-shrink: 0;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 320px;
+  background: white;
+  border-right: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Preview Canvas */
+.canvas {
+  flex: 1;
+  overflow: auto;
+  padding: 24px;
+  display: flex;
+  justify-content: center;
+  background: #e5e7eb;
+}
+
+.previewFrame {
+  background: white;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.previewFrame.desktop { width: 100%; max-width: 1200px; }
+.previewFrame.tablet { width: 768px; }
+.previewFrame.mobile { width: 390px; }

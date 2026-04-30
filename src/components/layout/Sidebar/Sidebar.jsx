@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import styles from './Sidebar.module.css'
 
@@ -33,102 +33,133 @@ const ICON = {
   settings:    ['M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z', 'M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z'],
   bell:        ['M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9', 'M13.73 21a2 2 0 0 1-3.46 0'],
   chevron:     'M6 9l6 6 6-6',
+  collapse:    'M11 19l-7-7 7-7M18 19l-7-7 7-7',
+  expand:      'M13 5l7 7-7 7M6 5l7 7-7 7',
+  content:  ['M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z', 'M14 2v6h6'],
 }
 
 /* ─── Nav definitions ─────────────────────────────────────── */
 const PRODUCT_SUB = [
-  {to: '/collections', icon: ICON.collections, label:'Collections' },
-  { to: '/inventory',  icon: ICON.inventory,   label: 'Inventory'  },
-  { to: '/transfers',  icon: ICON.transfers,   label: 'Transfers'  },
+  { to: '/collections', icon: ICON.collections, label: 'Collections' },
+  { to: '/inventory',   icon: ICON.inventory,   label: 'Inventory'   },
+  { to: '/transfers',   icon: ICON.transfers,   label: 'Transfers'   },
 ]
-
 const CONTENT_SUB = [
   { to: '/content/blog-posts',  icon: ICON.blog,        label: 'Blog Posts'  },
   { to: '/content/menus',       icon: ICON.menus,       label: 'Menus'       },
   { to: '/content/files',       icon: ICON.files,       label: 'Files'       },
   { to: '/content/metaobjects', icon: ICON.metaobjects, label: 'Metaobjects' },
 ]
-
 const ONLINE_STORE_SUB = [
   { to: '/online-store/themes', icon: ICON.collections, label: 'Themes' },
+  { to: '/online-store/pages',       icon: ICON.content,     label: 'Pages'       },
+  { to: '/online-store/preferences', icon: ICON.settings,    label: 'Preferences' },
 ]
-
 const MAIN_NAV = [
   { to: '/orders',    icon: ICON.orders,    label: 'Orders'    },
   { to: '/customers', icon: ICON.customers, label: 'Customers' },
   { to: '/discounts', icon: ICON.discounts, label: 'Discounts' },
   { to: '/analytics', icon: ICON.analytics, label: 'Analytics' },
 ]
-
 const SALES_NAV = [
   { to: '/pos', icon: ICON.pos, label: 'Point of Sale' },
 ]
-
 const APP_NAV = [
   { to: '/integrations', icon: ICON.integrations, label: 'Integrations' },
 ]
 
-/* ─── Sub-nav link ───────────────────────────────────────── */
-const SubLink = ({ to, icon, label }) => (
-  <NavLink to={to}
-    className={({ isActive }) => `${styles.subNavItem} ${isActive ? styles.subNavActive : ''}`}>
-    <Ic d={icon} size={15} />
-    <span>{label}</span>
-  </NavLink>
-)
-
-/* ─── Top-level nav link ─────────────────────────────────── */
-const NavItem = ({ to, icon, label, badge }) => (
-  <NavLink to={to}
-    className={({ isActive }) => `${styles.navItem} ${isActive ? styles.active : ''}`}>
-    <span className={styles.navIcon}><Ic d={icon} size={18} /></span>
-    <span className={styles.navLabel}>{label}</span>
-    {badge && <span className={styles.badge}>{badge}</span>}
-  </NavLink>
-)
-
-/* ─── Expandable group ───────────────────────────────────── */
-const ExpandGroup = ({ to, icon, label, isActive, isOpen, onToggle, children }) => (
-  <div className={styles.navExpandGroup}>
-    <div className={`${styles.navItem} ${styles.navExpandBtn} ${isActive ? styles.active : ''}`}>
-      <NavLink to={to} className={styles.expandLink}>
-        <span className={styles.navIcon}><Ic d={icon} size={18} /></span>
-        <span className={styles.navLabel}>{label}</span>
-      </NavLink>
-      <button className={styles.arrowBtn} onClick={onToggle} aria-label={`Toggle ${label}`}>
-        <span className={`${styles.navArrow} ${isOpen ? styles.navArrowOpen : ''}`}>
-          <Ic d={ICON.chevron} size={16} />
-        </span>
-      </button>
-    </div>
-    <div className={`${styles.subNav} ${isOpen ? styles.subNavOpen : ''}`}>
-      {children}
-    </div>
+/* ─── Tooltip (shown when collapsed) ────────────────────── */
+const Tooltip = ({ label, children }) => (
+  <div className={styles.tooltipWrap}>
+    {children}
+    <span className={styles.tooltip}>{label}</span>
   </div>
 )
 
-/* ─── Hamburger button ───────────────────────────────────── */
+/* ─── Sub-nav link ───────────────────────────────────────── */
+const SubLink = ({ to, icon, label, collapsed }) => (
+  collapsed ? (
+    <Tooltip label={label}>
+      <NavLink to={to}
+        className={({ isActive }) => `${styles.subNavItem} ${styles.subNavCollapsed} ${isActive ? styles.subNavActive : ''}`}>
+        <Ic d={icon} size={15} />
+      </NavLink>
+    </Tooltip>
+  ) : (
+    <NavLink to={to}
+      className={({ isActive }) => `${styles.subNavItem} ${isActive ? styles.subNavActive : ''}`}>
+      <Ic d={icon} size={15} />
+      <span>{label}</span>
+    </NavLink>
+  )
+)
+
+/* ─── Top-level nav link ─────────────────────────────────── */
+const NavItem = ({ to, icon, label, badge, collapsed }) => (
+  collapsed ? (
+    <Tooltip label={label}>
+      <NavLink to={to}
+        className={({ isActive }) => `${styles.navItem} ${styles.navItemCollapsed} ${isActive ? styles.active : ''}`}>
+        <span className={styles.navIcon}><Ic d={icon} size={18} /></span>
+        {badge && <span className={styles.badgeDot} />}
+      </NavLink>
+    </Tooltip>
+  ) : (
+    <NavLink to={to}
+      className={({ isActive }) => `${styles.navItem} ${isActive ? styles.active : ''}`}>
+      <span className={styles.navIcon}><Ic d={icon} size={18} /></span>
+      <span className={styles.navLabel}>{label}</span>
+      {badge && <span className={styles.badge}>{badge}</span>}
+    </NavLink>
+  )
+)
+
+/* ─── Expandable group ───────────────────────────────────── */
+const ExpandGroup = ({ to, icon, label, isActive, isOpen, onToggle, collapsed, children }) => (
+  collapsed ? (
+    <Tooltip label={label}>
+      <NavLink to={to}
+        className={() => `${styles.navItem} ${styles.navItemCollapsed} ${isActive ? styles.active : ''}`}>
+        <span className={styles.navIcon}><Ic d={icon} size={18} /></span>
+      </NavLink>
+    </Tooltip>
+  ) : (
+    <div className={styles.navExpandGroup}>
+      <div className={`${styles.navItem} ${styles.navExpandBtn} ${isActive ? styles.active : ''}`}>
+        <NavLink to={to} className={styles.expandLink}>
+          <span className={styles.navIcon}><Ic d={icon} size={18} /></span>
+          <span className={styles.navLabel}>{label}</span>
+        </NavLink>
+        <button className={styles.arrowBtn} onClick={onToggle} aria-label={`Toggle ${label}`}>
+          <span className={`${styles.navArrow} ${isOpen ? styles.navArrowOpen : ''}`}>
+            <Ic d={ICON.chevron} size={16} />
+          </span>
+        </button>
+      </div>
+      <div className={`${styles.subNav} ${isOpen ? styles.subNavOpen : ''}`}>
+        {children}
+      </div>
+    </div>
+  )
+)
+
+/* ─── Hamburger ──────────────────────────────────────────── */
 const Hamburger = ({ isOpen, onClick }) => (
-  <button
-    className={styles.hamburger}
-    onClick={onClick}
-    aria-label={isOpen ? 'Close menu' : 'Open menu'}
-    aria-expanded={isOpen}
-  >
-    <span className={`${styles.hBar} ${styles.hBar1} ${isOpen ? styles.hBar1Open : ''}`} />
-    <span className={`${styles.hBar} ${styles.hBar2} ${isOpen ? styles.hBar2Open : ''}`} />
-    <span className={`${styles.hBar} ${styles.hBar3} ${isOpen ? styles.hBar3Open : ''}`} />
-  </button>
+<button
+  className={styles.hamburger}
+  onClick={onClick}
+  aria-label={isOpen ? 'Close menu' : 'Open menu'}
+  aria-expanded={isOpen}
+>
+  <Ic d={isOpen ? ICON.collapse : ICON.expand} size={16} stroke="#1b3b5f" />
+</button>
 )
 
 /* ─── SIDEBAR ─────────────────────────────────────────────── */
 const Sidebar = () => {
   const location = useLocation()
 
-  const isProductsActive = location.pathname.startsWith('/products')
-    || location.pathname.startsWith('/collections')
-    || location.pathname.startsWith('/inventory')
-    || location.pathname.startsWith('/transfers')
+  const isProductsActive    = ['/products','/collections','/inventory','/transfers'].some(p => location.pathname.startsWith(p))
   const isContentActive     = location.pathname.startsWith('/content')
   const isOnlineStoreActive = location.pathname.startsWith('/online-store')
 
@@ -136,6 +167,28 @@ const Sidebar = () => {
   const [contentOpen,     setContentOpen]     = useState(isContentActive)
   const [onlineStoreOpen, setOnlineStoreOpen] = useState(isOnlineStoreActive)
   const [sidebarOpen,     setSidebarOpen]     = useState(false)
+
+  // Auto-collapse on tablet/mobile, expand on desktop
+  const getDefaultCollapsed = () => window.innerWidth < 1024
+  const [collapsed, setCollapsed] = useState(getDefaultCollapsed)
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setCollapsed(true)
+        setSidebarOpen(false)
+      } else if (window.innerWidth < 1024) {
+        setCollapsed(true)
+      } else {
+        setCollapsed(false)
+      }
+    }
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  // Close mobile drawer on route change
+  // useEffect(() => { setSidebarOpen(false) }, [location.pathname])
 
   const closeSidebar = () => setSidebarOpen(false)
 
@@ -147,79 +200,61 @@ const Sidebar = () => {
         <div className={styles.backdrop} onClick={closeSidebar} aria-hidden="true" />
       )}
 
-      <aside className={`${styles.sidebar} ${sidebarOpen ? styles.sidebarOpen : ''}`}>
+      <aside className={`${styles.sidebar} ${collapsed ? styles.sidebarCollapsed : ''} ${sidebarOpen ? styles.sidebarOpen : ''}`}>
 
-      {/* Store header */}
-      <div className={styles.storeHeader}>
-        <div className={styles.logo}>
-          <img src="/public/logos/taja logo blue.png" alt="taja logo" className={styles.logoImg} />
-        </div>
-       
-        <button className={styles.notifBtn} aria-label="Notifications">
-          <Ic d={ICON.bell} size={17} />
+        {/* Collapse toggle button */}
+        <button
+          className={styles.collapseBtn}
+          onClick={() => setCollapsed(v => !v)}
+          aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+          title={collapsed ? 'Expand' : 'Collapse'}>
+          <Ic d={collapsed ? ICON.expand : ICON.collapse} size={14} />
         </button>
-      </div>
 
-      <nav className={styles.nav}>
-        <div className={styles.navGroup}>
+        <nav className={styles.nav}>
+          <div className={styles.navGroup}>
+            <NavItem to="/dashboard" icon={ICON.dashboard} label="Home" collapsed={collapsed} />
 
-          {/* Dashboard */}
-          <NavItem to="/dashboard" icon={ICON.dashboard} label="Home" />
+            <ExpandGroup to="/products" icon={ICON.products} label="Products"
+              isActive={isProductsActive} isOpen={productsOpen} collapsed={collapsed}
+              onToggle={() => setProductsOpen(v => !v)}>
+              {PRODUCT_SUB.map(s => <SubLink key={s.to} {...s} collapsed={collapsed} />)}
+            </ExpandGroup>
 
-          {/* Products (expandable) */}
-          <ExpandGroup
-            to="/products"
-            icon={ICON.products}
-            label="Products"
-            isActive={isProductsActive}
-            isOpen={productsOpen}
-            onToggle={() => setProductsOpen(v => !v)}>
-            {PRODUCT_SUB.map(s => <SubLink key={s.to} {...s} />)}
-          </ExpandGroup>
+            <ExpandGroup to="/content" icon={ICON.content} label="Content"
+              isActive={isContentActive} isOpen={contentOpen} collapsed={collapsed}
+              onToggle={() => setContentOpen(v => !v)}>
+              {CONTENT_SUB.map(s => <SubLink key={s.to} {...s} collapsed={collapsed} />)}
+            </ExpandGroup>
 
-          {/* Content (expandable) */}
-          <ExpandGroup
-            to="/content"
-            icon={ICON.content}
-            label="Content"
-            isActive={isContentActive}
-            isOpen={contentOpen}
-            onToggle={() => setContentOpen(v => !v)}>
-            {CONTENT_SUB.map(s => <SubLink key={s.to} {...s} />)}
-          </ExpandGroup>
+            {MAIN_NAV.map(item => <NavItem key={item.to} {...item} collapsed={collapsed} />)}
+          </div>
 
-          {/* Main nav items */}
-          {MAIN_NAV.map(item => <NavItem key={item.to} {...item} />)}
+          {!collapsed && <p className={styles.sectionTitle}>Sales Channels</p>}
+          {collapsed  && <div className={styles.sectionDivider} />}
+          <div className={styles.navGroup}>
+            <ExpandGroup to="/online-store" icon={ICON.store} label="Online Store"
+              isActive={isOnlineStoreActive} isOpen={onlineStoreOpen} collapsed={collapsed}
+              onToggle={() => setOnlineStoreOpen(v => !v)}>
+              {ONLINE_STORE_SUB.map(s => <SubLink key={s.to} {...s} collapsed={collapsed} />)}
+            </ExpandGroup>
+            {SALES_NAV.map(item => <NavItem key={item.to} {...item} collapsed={collapsed} />)}
+          </div>
+
+          {!collapsed && <p className={styles.sectionTitle}>Apps</p>}
+          {collapsed  && <div className={styles.sectionDivider} />}
+          <div className={styles.navGroup}>
+            {APP_NAV.map(item => <NavItem key={item.to} {...item} collapsed={collapsed} />)}
+          </div>
+        </nav>
+
+        {/* Footer */}
+        <div className={styles.sidebarFooter}>
+          <NavItem to="/settings" icon={ICON.settings} label="Settings" collapsed={collapsed} />
         </div>
-
-        <p className={styles.sectionTitle}>Sales Channels</p>
-        <div className={styles.navGroup}>
-          <ExpandGroup
-            to="/online-store"
-            icon={ICON.store}
-            label="Online Store"
-            isActive={isOnlineStoreActive}
-            isOpen={onlineStoreOpen}
-            onToggle={() => setOnlineStoreOpen(v => !v)}>
-            {ONLINE_STORE_SUB.map(s => <SubLink key={s.to} {...s} />)}
-          </ExpandGroup>
-          {SALES_NAV.map(item => <NavItem key={item.to} {...item} />)}
-        </div>
-
-        <p className={styles.sectionTitle}>Apps</p>
-        <div className={styles.navGroup}>
-          {APP_NAV.map(item => <NavItem key={item.to} {...item} />)}
-        </div>
-      </nav>
-
-      {/* Footer */}
-      <div className={styles.sidebarFooter}>
-        <NavItem to="/settings" icon={ICON.settings} label="Settings" />
-      </div>
       </aside>
     </>
   )
 }
 
 export default Sidebar
-

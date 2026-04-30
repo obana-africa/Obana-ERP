@@ -282,20 +282,27 @@ export default function ThemeEditor({ theme, update, updateMany }) {
       <Accordion title="Store Identity" icon="🏪">
         <Field label="Store name">
           <input className={styles.edInput} value={theme.storeName}
-            onChange={e => update('storeName', e.target.value)} />
+            onChange={e => update('storeName', e.target.value)} 
+            placeholder="e.g. Adire Lagos, Kemi's Closet... "
+            />
+
         </Field>
         <Field label="Logo text">
           <input className={styles.edInput} value={theme.logoText}
-            onChange={e => update('logoText', e.target.value)} />
+            onChange={e => update('logoText', e.target.value)} 
+            placeholder= "Short version shown in navbar"
+            />
         </Field>
         <Field label="Logo image URL">
           <input className={styles.edInput} value={theme.logoUrl || ''}
             onChange={e => update('logoUrl', e.target.value)}
-            placeholder="https://…/logo.svg" />
+            placeholder="https://…/logo.svg (overrides logo text)" />
         </Field>
         <Field label="Tagline">
           <input className={styles.edInput} value={theme.tagline}
-            onChange={e => update('tagline', e.target.value)} />
+            onChange={e => update('tagline', e.target.value)} 
+            placeholder="e.g. Premium African Fashion & Beauty"
+            />
         </Field>
       </Accordion>
 
