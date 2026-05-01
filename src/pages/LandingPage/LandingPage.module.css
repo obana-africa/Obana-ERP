@@ -30,7 +30,11 @@
    NAVBAR
    ══════════════════════════════════════════════════════════ */
 .navbar {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  z-index: 100;
   background: var(--navy);
   transition: background 0.2s, box-shadow 0.2s;
   border-bottom: 1px solid transparent;
@@ -40,7 +44,6 @@
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   box-shadow: none;
-  background: var(--navy);
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
@@ -58,8 +61,24 @@
   margin-left: 20px; 
   gap: 40px; 
 }
-.brandLogo   { height: 80px; width: auto; object-fit: contain; display: block; }
-.navLinks    { display: flex; gap: 24px; }
+
+.brandLogo{
+  padding: 0;
+  margin: 0;
+  line-height: 0;
+}
+.brandLogoImg{ 
+  height: auto; 
+  width: 80px; 
+  object-fit: contain; 
+  display: block; 
+}
+
+.navScrolled .brandLogoImg {
+  background: var(--navy);
+}
+
+.navLinks { display: flex; gap: 24px; }
 .navLink     { 
   font-size: 14px; 
   color: #fff; 
@@ -67,6 +86,9 @@
   font-weight: 500; 
   font-family: "Bricolage Grotesque", sans-serif;
   transition: color 0.15s; 
+}
+.navScrolled .navLink {
+  color: var(--navy);
 }
 .navLink:hover { color: var(--green); }
 .navActions  { display: flex; gap: 8px; align-items: center; }
@@ -85,7 +107,9 @@
 }
 .btnOutline:hover { background: rgba(255,255,255,0.1); 
   border-color: #fff; }
-
+.navScrolled .btnOutline{
+  color: var(--navy);
+}
 .btnPrimary {
   padding: 9px 20px; 
   border-radius: 8px; 
@@ -494,8 +518,8 @@
 }
 
 .footerLogo {
-  height: 80px;
-  width: 120px;
+  height: auto;
+  width: 80px;
   object-fit: contain;
   object-position: left center;
   display: block;

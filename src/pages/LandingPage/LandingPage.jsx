@@ -187,7 +187,9 @@ export default function LandingPage() {
       <nav className={`${styles.navbar} ${scrolled ? styles.navScrolled : ''}`}>
         <div className={styles.navInner}>
           <div className={styles.brand}>
-            <img src="/logos/taja logo white.png" alt="taja" className={styles.brandLogo} />
+           <div className={styles.brandLogo}>
+            <img src="/logos/taja logo white.png" alt="taja" className={styles.brandLogoImg} />
+            </div>  
             <div className={styles.navLinks}>
 
                 {/* Features dropdown */}
@@ -317,7 +319,7 @@ export default function LandingPage() {
       <section className={styles.hero} id="hero-section">
         <img src="/images/hero-bg.png" alt="" aria-hidden="true" className={styles.heroBgImage} />
         <div className={styles.heroBgOverlay} />
-        <div className={styles.heroInner}>
+         <div className={styles.heroInner}>
           <h1 className={styles.heroTitle}>
             The easiest way to sell <br/> online and offline.
           </h1>

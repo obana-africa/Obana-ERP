@@ -356,11 +356,12 @@ export default function Register() {
           LEFT PANEL - Static Background
           ════════════════════════════════════════════════════════ */}
       <div className={styles.left}>
+        <div className={styles.leftBgImg}><img src="/logos/hero-bg.png" alt="img"/></div>
         <div className={styles.leftInner}>
           {/* Logo */}
           <div className={styles.logo}>
             <img
-              src="/src/assets/images/logo/taja logo white.png"
+              src="/logos/taja logo white.png"
               alt="taja logo"
               className={styles.logoImg}
             />
