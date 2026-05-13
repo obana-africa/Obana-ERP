@@ -1,0 +1,115 @@
+/* ── Themes Page ─────────────────────────────────────────── */
+.page {
+  padding: 0 0 64px;
+  max-width: 1100px;
+  font-family: 'DM Sans', system-ui, sans-serif;
+}
+
+/* Header */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: #F9FAFB;
+  border-bottom: 1px solid #E5E7EB;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 32px;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.editBtn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  background: #111827;
+  color: #fff;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.editBtn:hover { background: #2DBD97; }
+
+/* Sections */
+.section { 
+  padding: 0 32px; 
+  margin-top: 32px; 
+}
+
+.sectionTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 16px;
+}
+
+/* Theme Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* Template Card */
+.templateCard {
+  background: #fff;
+  border: 1px solid #E5E7EB;
+  border-radius: 14px;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+.templateCard:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+
+.templateThumb {
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.templateInfo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+}
+
+.templateName {
+  font-size: 14px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 2px;
+}
+
+.templateBy {
+  font-size: 12px;
+  color: #6B7280;
+  margin: 0;
+}
+
+.addBtn {
+  padding: 7px 18px;
+  border-radius: 7px;
+  border: 1.5px solid #E5E7EB;
+  background: #fff;
+  color: #374151;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.addBtn:hover { border-color: #111827; }

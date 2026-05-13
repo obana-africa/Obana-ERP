@@ -1,0 +1,103 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink2, #374151);
+}
+
+.hint {
+  font-size: 11px;
+  color: var(--ink4, #9CA3AF);
+  font-weight: 400;
+  margin-left: 6px;
+}
+
+.dropzone {
+  border: 2px dashed var(--border, #E5E7EB);
+  border-radius: 10px;
+  padding: 28px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.dropzone:hover {
+  border-color: var(--green, #2DBD97);
+  background: var(--green-lt, #E6F7F2);
+}
+
+.placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--ink3, #6B7280);
+}
+
+.placeholder span {
+  font-size: 11.5px;
+  color: var(--ink4, #9CA3AF);
+}
+
+.imageGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.imageThumb {
+  width: 72px;
+  height: 72px;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  border: 1.5px solid var(--border, #E5E7EB);
+}
+
+.imageThumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.removeBtn {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.addMore {
+  width: 72px;
+  height: 72px;
+  border: 2px dashed var(--border, #E5E7EB);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink4, #9CA3AF);
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.addMore:hover {
+  border-color: var(--green, #2DBD97);
+}

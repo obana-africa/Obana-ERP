@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import styles from './Topbar.module.css'
 
 const Ic = ({ d, size = 18, stroke = 'currentColor', sw = 1.6, fill = 'none' }) => (
@@ -32,7 +33,14 @@ const INITIAL_NOTIFS = [
   { id: 4, type: 'order', title: 'Order status updated',     body: 'ORD-1003 marked as Shipped',              time: '3h ago',  read: true  },
 ]
 
+const PROFILE_MENU = [
+  { label: 'Account settings', path: '/admin/profile' },
+  { label: 'Switch store',     path: null             }, // future
+  { label: 'Help & support',   path: null             }, // future
+]
+
 const Topbar = ({ storeName = '', storeInitial = '' }) => {
+  const navigate = useNavigate()
   const [searchVal,   setSearchVal]   = useState('')
   const [searchFocus, setSearchFocus] = useState(false)
   const [notifOpen,   setNotifOpen]   = useState(false)
@@ -181,11 +189,28 @@ const Topbar = ({ storeName = '', storeInitial = '' }) => {
                 </div>
               </div>
               <div className={styles.divider} />
-              {['Account settings', 'Switch store', 'Help & support'].map(item => (
-                <button key={item} className={styles.dropItem}>{item}</button>
+              {PROFILE_MENU.map(({ label, path }) => (
+                <button
+                  key={label}
+                  className={styles.dropItem}
+                  onClick={() => {
+                    setProfileOpen(false)
+                    if (path) navigate(path)
+                  }}
+                >
+                  {label}
+                </button>
               ))}
               <div className={styles.divider} />
-              <button className={`${styles.dropItem} ${styles.dropItemRed}`}>Log out</button>
+              <button
+                className={`${styles.dropItem} ${styles.dropItemRed}`}
+                onClick={() => {
+                  setProfileOpen(false)
+                  navigate('/login')
+                }}
+              >
+                Log out
+              </button>
             </div>
           )}
         </div>

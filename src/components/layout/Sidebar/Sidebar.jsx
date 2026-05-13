@@ -44,11 +44,27 @@ const PRODUCT_SUB = [
   { to: '/inventory',   icon: ICON.inventory,   label: 'Inventory'   },
   { to: '/transfers',   icon: ICON.transfers,   label: 'Transfers'   },
 ]
+const ORDERS_SUB = [
+  { to: '/orders/drafts',    label: 'Drafts'               },
+  { to: '/orders/abandoned', label: 'Abandoned checkouts'  },
+]
+const CUSTOMER_SUB = [
+  { to: '/customers/segments',  label: 'Segments'  },
+  { to: '/customers/companies', label: 'Companies' },
+]
 const CONTENT_SUB = [
   { to: '/content/blog-posts',  icon: ICON.blog,        label: 'Blog Posts'  },
   { to: '/content/menus',       icon: ICON.menus,       label: 'Menus'       },
   { to: '/content/files',       icon: ICON.files,       label: 'Files'       },
   { to: '/content/metaobjects', icon: ICON.metaobjects, label: 'Metaobjects' },
+]
+const MARKETING_SUB = [
+  { to: '/marketing/campaigns',   label: 'Campaigns'  },
+  { to: '/marketing/attribution', label: 'Attribution' },
+]
+const MARKETS_SUB = [
+  { to: '/markets/catalogs', label: 'Catalogs' },
+  { to: '/markets/rollouts', label: 'Rollouts' },
 ]
 const ONLINE_STORE_SUB = [
   { to: '/online-store/themes', icon: ICON.collections, label: 'Themes' },
@@ -56,8 +72,8 @@ const ONLINE_STORE_SUB = [
   { to: '/online-store/preferences', icon: ICON.settings,    label: 'Preferences' },
 ]
 const MAIN_NAV = [
-  { to: '/orders',    icon: ICON.orders,    label: 'Orders'    },
-  { to: '/customers', icon: ICON.customers, label: 'Customers' },
+  // { to: '/orders',    icon: ICON.orders,    label: 'Orders'    },
+  // { to: '/customers', icon: ICON.customers, label: 'Customers' },
   { to: '/discounts', icon: ICON.discounts, label: 'Discounts' },
   { to: '/analytics', icon: ICON.analytics, label: 'Analytics' },
 ]
@@ -82,13 +98,13 @@ const SubLink = ({ to, icon, label, collapsed }) => (
     <Tooltip label={label}>
       <NavLink to={to}
         className={({ isActive }) => `${styles.subNavItem} ${styles.subNavCollapsed} ${isActive ? styles.subNavActive : ''}`}>
-        <Ic d={icon} size={15} />
+        {icon && <Ic d={icon} size={15} />}
       </NavLink>
     </Tooltip>
   ) : (
     <NavLink to={to}
       className={({ isActive }) => `${styles.subNavItem} ${isActive ? styles.subNavActive : ''}`}>
-      <Ic d={icon} size={15} />
+      {icon && <Ic d={icon} size={15} />}
       <span>{label}</span>
     </NavLink>
   )
@@ -160,11 +176,19 @@ const Sidebar = () => {
   const location = useLocation()
 
   const isProductsActive    = ['/products','/collections','/inventory','/transfers'].some(p => location.pathname.startsWith(p))
+  const isOrdersActive    = location.pathname.startsWith('/orders')
+  const isCustomersActive = location.pathname.startsWith('/customers')
   const isContentActive     = location.pathname.startsWith('/content')
+  const isMarketingActive = location.pathname.startsWith('/marketing')
+  const isMarketsActive   = location.pathname.startsWith('/markets')
   const isOnlineStoreActive = location.pathname.startsWith('/online-store')
 
   const [productsOpen,    setProductsOpen]    = useState(isProductsActive)
+  const [ordersOpen,    setOrdersOpen]    = useState(isOrdersActive)
+  const [customersOpen, setCustomersOpen] = useState(isCustomersActive)
   const [contentOpen,     setContentOpen]     = useState(isContentActive)
+  const [marketingOpen, setMarketingOpen] = useState(isMarketingActive)
+  const [marketsOpen,   setMarketsOpen]   = useState(isMarketsActive)
   const [onlineStoreOpen, setOnlineStoreOpen] = useState(isOnlineStoreActive)
   const [sidebarOpen,     setSidebarOpen]     = useState(false)
 
@@ -220,11 +244,32 @@ const Sidebar = () => {
               onToggle={() => setProductsOpen(v => !v)}>
               {PRODUCT_SUB.map(s => <SubLink key={s.to} {...s} collapsed={collapsed} />)}
             </ExpandGroup>
+            <ExpandGroup to="/orders" icon={ICON.orders} label="Orders"
+              isActive={isOrdersActive} isOpen={ordersOpen} collapsed={collapsed}
+              onToggle={() => setOrdersOpen(v => !v)}>
+              {ORDERS_SUB.map(s => <SubLink key={s.to} to={s.to} label={s.label} collapsed={collapsed} />)}
+            </ExpandGroup>
 
+            <ExpandGroup to="/customers" icon={ICON.customers} label="Customers"
+              isActive={isCustomersActive} isOpen={customersOpen} collapsed={collapsed}
+              onToggle={() => setCustomersOpen(v => !v)}>
+              {CUSTOMER_SUB.map(s => <SubLink key={s.to} to={s.to} label={s.label} collapsed={collapsed} />)}
+            </ExpandGroup>
             <ExpandGroup to="/content" icon={ICON.content} label="Content"
               isActive={isContentActive} isOpen={contentOpen} collapsed={collapsed}
               onToggle={() => setContentOpen(v => !v)}>
               {CONTENT_SUB.map(s => <SubLink key={s.to} {...s} collapsed={collapsed} />)}
+            </ExpandGroup>
+            <ExpandGroup to="/marketing" icon={ICON.analytics} label="Marketing"
+              isActive={isMarketingActive} isOpen={marketingOpen} collapsed={collapsed}
+              onToggle={() => setMarketingOpen(v => !v)}>
+              {MARKETING_SUB.map(s => <SubLink key={s.to} to={s.to} label={s.label} collapsed={collapsed} />)}
+            </ExpandGroup>
+
+            <ExpandGroup to="/markets" icon={ICON.integrations} label="Markets"
+              isActive={isMarketsActive} isOpen={marketsOpen} collapsed={collapsed}
+              onToggle={() => setMarketsOpen(v => !v)}>
+              {MARKETS_SUB.map(s => <SubLink key={s.to} to={s.to} label={s.label} collapsed={collapsed} />)}
             </ExpandGroup>
 
             {MAIN_NAV.map(item => <NavItem key={item.to} {...item} collapsed={collapsed} />)}

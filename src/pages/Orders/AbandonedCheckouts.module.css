@@ -1,0 +1,207 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;800&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+.page {
+  --navy:    #1b3b5f;
+  --navy-lt: #e8eef5;
+  --green:   #2DBD97;
+  --ink:     #111827;
+  --ink2:    #374151;
+  --ink3:    #6B7280;
+  --ink4:    #9CA3AF;
+  --border:  #E5E7EB;
+  --blt:     #F3F4F6;
+  --surface: #F8FAFC;
+  --white:   #FFFFFF;
+  --red:     #EF4444;
+  --amber:   #F59E0B;
+
+  display: flex; flex-direction: column;
+  background: var(--surface); min-height: 100%;
+  font-family: 'DM Sans', sans-serif; color: var(--ink);
+  opacity: 0; transition: opacity 0.3s ease;
+}
+.visible { opacity: 1; }
+
+/* Header */
+.header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 24px; gap: 12px; flex-wrap: wrap;
+  background: var(--white); border-bottom: 1px solid var(--border);
+  animation: fadeUp 0.4s ease both;
+}
+.headerLeft { display: flex; align-items: center; gap: 10px; }
+.breadBack {
+  background: none; border: none; cursor: pointer; color: var(--ink3);
+  display: flex; align-items: center; padding: 4px; border-radius: 6px;
+  transition: all 0.15s;
+}
+.breadBack:hover { background: var(--blt); color: var(--navy); }
+.titleIconWrap {
+  width: 30px; height: 30px; border-radius: 7px;
+  background: var(--green-lt); display: flex; align-items: center; justify-content: center;
+}
+.title {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 22px; font-weight: 800; color: var(--navy);
+  letter-spacing: -0.02em; margin: 0;
+}
+
+/* Stats */
+.statsStrip {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 16px;
+  background: var(--white); border-bottom: 1px solid var(--border);
+  padding: 12px 24px;
+  animation: fadeUp 0.4s ease 0.04s both;
+}
+.statItem { display: flex; align-items: baseline; gap: 8px; }
+.statVal  { font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; font-weight: 800; color: var(--navy); letter-spacing: -0.01em; }
+.statLbl  { font-size: 13px; color: var(--ink3); }
+.statDivider { width: 1px; height: 22px; background: var(--border); flex-shrink: 0; }
+
+.recoveryHint {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 13px; color: var(--ink3); margin-left: auto;
+  flex-wrap: wrap;
+}
+.link { color: var(--navy); font-weight: 600; }
+.link:hover { text-decoration: underline; }
+
+/* Bulk bar */
+.bulkBar {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 24px; background: var(--navy-lt); border-bottom: 1px solid var(--border);
+  animation: fadeUp 0.2s ease both;
+}
+.bulkCount  { font-size: 13.5px; font-weight: 700; color: var(--navy); flex: 1; }
+.bulkAction {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 14px; border-radius: 7px; border: none;
+  background: var(--green); color: var(--white);
+  font-family: inherit; font-size: 13px; font-weight: 700; cursor: pointer;
+}
+.bulkAction:hover { background: #1fa882; }
+.bulkClear {
+  padding: 6px 14px; border-radius: 7px;
+  border: 1.5px solid var(--border); background: var(--white);
+  font-family: inherit; font-size: 13px; color: var(--ink2); cursor: pointer;
+}
+
+/* Filter bar */
+.filterBar {
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--white); border-bottom: 1px solid var(--border);
+  padding: 0 24px; flex-wrap: wrap;
+  animation: fadeUp 0.4s ease 0.06s both;
+}
+.filterTabs { display: flex; }
+.ftab {
+  padding: 10px 14px; border: none; background: none;
+  font-family: inherit; font-size: 13.5px; font-weight: 500; color: var(--ink3);
+  cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px;
+  transition: all 0.15s; white-space: nowrap; display: flex; align-items: center; gap: 5px;
+}
+.ftab:hover { color: var(--navy); }
+.ftabOn { color: var(--navy) !important; font-weight: 700; border-bottom-color: var(--navy) !important; }
+.ftabCount { font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 99px; background: var(--border); color: var(--ink4); }
+.ftabAdd { display: flex; align-items: center; justify-content: center; width: 32px; padding: 10px 0; border: none; background: none; cursor: pointer; color: var(--ink4); }
+.filterRight { display: flex; gap: 6px; padding: 8px 0; }
+.iconBtn {
+  width: 32px; height: 32px; border-radius: 8px;
+  border: 1.5px solid var(--border); background: var(--white);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--ink3); transition: all 0.15s;
+}
+.iconBtn:hover { border-color: var(--navy); color: var(--navy); }
+
+/* Table */
+.tableWrap {
+  background: var(--white); flex: 1;
+  animation: fadeUp 0.4s ease 0.08s both;
+}
+.tHead {
+  display: grid;
+  grid-template-columns: 40px 200px 160px 1fr 120px 160px 140px;
+  gap: 10px; padding: 9px 24px;
+  background: var(--blt); border-bottom: 1px solid var(--border);
+  font-size: 11px; font-weight: 700; color: var(--ink4);
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+.tCheck  { display: flex; align-items: center; }
+.sortHead { display: inline-flex; align-items: center; gap: 4px; cursor: pointer; transition: color 0.15s; }
+.sortHead:hover { color: var(--navy); }
+.tRight  { text-align: right; }
+
+.tRow {
+  display: grid;
+  grid-template-columns: 40px 200px 160px 1fr 120px 160px 140px;
+  gap: 10px; padding: 12px 24px;
+  border-bottom: 1px solid var(--blt); align-items: center;
+  font-size: 13.5px; cursor: pointer; transition: background 0.12s;
+  animation: fadeUp 0.3s ease both;
+}
+.tRow:last-child { border-bottom: none; }
+.tRow:hover { background: var(--surface); }
+
+.checkbox { accent-color: var(--navy); cursor: pointer; width: 15px; height: 15px; }
+.checkoutId { font-weight: 600; color: var(--navy); font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dateCell   { font-size: 13px; color: var(--ink2); }
+
+.customerCell { display: flex; align-items: center; gap: 9px; }
+.customerAvatar {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--green-lt); color: var(--navy);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 800; flex-shrink: 0;
+}
+.customerName  { font-size: 13.5px; font-weight: 600; color: var(--navy); }
+.customerEmail { font-size: 12px; color: var(--ink4); margin-top: 1px; }
+
+.regionCell { display: flex; align-items: center; gap: 6px; font-size: 13.5px; color: var(--ink2); }
+.regionFlag { font-size: 16px; }
+
+/* Recovery pills */
+.pillNotRecovered {
+  display: inline-block; padding: 3px 10px; border-radius: 99px;
+  background: #FEF3C7; color: #D97706;
+  font-size: 12px; font-weight: 700;
+}
+.pillRecovered {
+  display: inline-block; padding: 3px 10px; border-radius: 99px;
+  background: #ECFDF5; color: #059669;
+  font-size: 12px; font-weight: 700;
+}
+.totalCell { font-weight: 700; color: var(--ink); }
+
+/* Buttons */
+.btnOutline {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 14px; background: var(--white); color: var(--ink2);
+  border: 1.5px solid var(--border); border-radius: 8px;
+  font-family: inherit; font-size: 13.5px; font-weight: 500;
+  cursor: pointer; transition: all 0.15s;
+}
+.btnOutline:hover { border-color: var(--navy); color: var(--navy); }
+
+/* Empty */
+.emptyState { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 64px 24px; text-align: center; }
+.emptyTitle { font-family: 'Bricolage Grotesque', sans-serif; font-size: 17px; font-weight: 700; color: var(--navy); margin: 4px 0 0; }
+.emptySub   { font-size: 13.5px; color: var(--ink3); margin: 0; max-width: 400px; }
+
+.learnLink { color: var(--navy); font-weight: 600; font-size: 13.5px; }
+.learnLink:hover { text-decoration: underline; }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
+
+@media(max-width:1024px) {
+  .tHead,.tRow { grid-template-columns: 40px 160px 140px 1fr 130px 130px; }
+  .tHead span:nth-child(5),.tRow span:nth-child(5) { display: none; }
+}
+@media(max-width:768px) {
+  .tHead,.tRow { grid-template-columns: 40px 1fr 130px 130px; }
+  .tHead span:nth-child(3),.tRow span:nth-child(3),
+  .tHead span:nth-child(4),.tRow span:nth-child(4) { display: none; }
+  .header { padding: 14px 16px; }
+  .statsStrip { padding: 10px 16px; }
+  .filterBar  { padding: 0 16px; }
+  .tableWrap .tRow, .tableWrap .tHead { padding: 10px 16px; }
+}

@@ -1,10 +1,10 @@
 
 import { useState, useCallback, useRef, useEffect } from 'react'
-import styles from './OnlineStore.module.css'
-import StorefrontPreview from './components/StorefrontPreview'
-import ThemeEditor from './components/ThemeEditor'
-import IntegrationPanel from './components/IntegrationPanel'
-import TemplateGallery from './components/TemplateGallery'
+import styles from '../../features/onlineStore/styles/builder.module.css'
+import StorefrontPreview from '../../features/onlineStore/components/builder/StorefrontPreview'
+import ThemeEditor from '../../features/onlineStore/components/builder/ThemeEditor'
+import IntegrationPanel from '../../features/onlineStore/components/builder/IntegrationPanel'
+import TemplateGallery from '../../features/onlineStore/components/builder/TemplateGallery'
 
 /* ─── Icon ──────────────────────────────────────────────────── */
 const Ic = ({ d, size = 16, stroke = 'currentColor', sw = 1.8, fill = 'none' }) => (

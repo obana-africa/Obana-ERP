@@ -11,17 +11,28 @@ const handleResponse = async (response) => {
 export const storefrontApi = {
   // Theme management
   async saveTheme(theme) {
-    const response = await fetch(`${API_BASE}/theme`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ theme })
-    });
-    return handleResponse(response);
+     // For now, save to localStorage
+    localStorage.setItem('obana_theme', JSON.stringify(theme));
+    return { success: true };
+
+    // TODO: Replace with actual API call
+    // const response = await fetch(`${API_BASE}/theme`, {
+    //   method: 'PUT',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({ theme })
+    // });
+    // return handleResponse(response);
   },
 
   async getTheme() {
-    const response = await fetch(`${API_BASE}/theme`);
-    return handleResponse(response);
+       // For now, load from localStorage
+    const saved = localStorage.getItem('obana_theme');
+    return saved ? JSON.parse(saved) : null;
+
+
+    // TODO: Replace with actual API call
+    // const response = await fetch(`${API_BASE}/theme`);
+    // return handleResponse(response);
   },
 
   // Products
@@ -33,8 +44,12 @@ export const storefrontApi = {
 
   // Publish
   async publish() {
-    const response = await fetch(`${API_BASE}/publish`, { method: 'POST' });
-    return handleResponse(response);
+     localStorage.setItem('obana_published', 'true');
+    return { success: true };
+
+    // TODO: Replace with actual API call
+    // const response = await fetch(`${API_BASE}/publish`, { method: 'POST' });
+    // return handleResponse(response);
   },
 
   // Templates

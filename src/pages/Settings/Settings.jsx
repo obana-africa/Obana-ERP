@@ -1,17 +1,11 @@
-/**
- * Settings.jsx
- * Full admin settings page — mirrors Shopify-style settings layout.
- * Route: /admin/settings
- *
- * Usage in your router:
- *   import AdminSettings from './pages/AdminSettings/AdminSettings'
- *   <Route path="/admin/settings" element={<AdminSettings />} />
- *
- * The settings icon in your dashboard should link to /admin/settings
- */
 
 import { useState, useRef } from 'react'
 import styles from './Settings.module.css'
+import PanelCheckout from './panels/Checkout'
+import PanelCustomerAccounts from './panels/CustomerAccounts'
+import PanelLocations from './panels/Locations'
+import PanelTaxes from './panels/PanelTaxes'
+import PanelSalesChannels from './panels/PanelSalesChannels'
 
 /* ── Icon primitive ────────────────────────────────────────────── */
 const Ic = ({ d, size = 18, stroke = 'currentColor', sw = 1.6, fill = 'none' }) => (
@@ -30,9 +24,11 @@ const NAV = [
   { id: 'users',        label: 'Users',               icon: 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75' },
   { id: 'payments',     label: 'Payments',            icon: 'M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H6a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3z' },
   { id: 'checkout',     label: 'Checkout',            icon: 'M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0' },
+  { id: 'customer_accounts', label: 'Customer accounts', icon: '...' },
   { id: 'shipping',     label: 'Shipping & Delivery', icon: 'M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v3m0 0h4l3 5v4h-7V8zM16 17a2 2 0 1 0 4 0 2 2 0 0 0-4 0M5 17a2 2 0 1 0 4 0 2 2 0 0 0-4 0' },
   { id: 'taxes',        label: 'Taxes & Duties',      icon: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M16 13H8M16 17H8M10 9H8' },
   { id: 'locations',    label: 'Locations',           icon: 'M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0zM12 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z' },
+  { id: 'sales_channels', label: 'Sales channels', icon: 'M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z' },
   { id: 'notifications',label: 'Notifications',       icon: 'M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0' },
   { id: 'security',     label: 'Security',            icon: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z' },
   { id: 'policies',     label: 'Policies',            icon: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M16 13H8M16 17H8M10 9H8' },
@@ -889,10 +885,12 @@ const PANELS = {
   billing:       PanelBilling,
   users:         PanelUsers,
   payments:      PanelPayments,
-  checkout:      () => <Section title="Checkout settings" subtitle="Coming soon"><p className={styles.comingSoon}>Checkout customisation will be available in the next release.</p></Section>,
+  checkout:      () => <PanelCheckout />,
+  customer_accounts: () => <PanelCustomerAccounts />,
   shipping:      PanelShipping,
-  taxes:         () => <Section title="Taxes & Duties" subtitle="Coming soon"><p className={styles.comingSoon}>Tax configuration will be available in the next release.</p></Section>,
-  locations:     () => <Section title="Locations" subtitle="Coming soon"><p className={styles.comingSoon}>Multi-location management will be available in the next release.</p></Section>,
+  taxes:         () => < PanelTaxes/>,
+  locations:     () => < PanelLocations/>,
+  sales_channels: PanelSalesChannels,
   notifications: PanelNotifications,
   security:      PanelSecurity,
   policies:      PanelPolicies,

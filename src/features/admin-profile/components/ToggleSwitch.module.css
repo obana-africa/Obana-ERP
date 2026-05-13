@@ -1,0 +1,43 @@
+.toggle {
+  position: relative;
+  width: 42px;
+  height: 24px;
+  cursor: pointer;
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+.toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.track {
+  position: absolute;
+  inset: 0;
+  background: var(--border);
+  border-radius: 99px;
+  transition: background 0.22s;
+}
+
+.toggle input:checked ~ .track {
+  background: var(--green);
+}
+
+.thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+  transition: transform 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.toggle input:checked ~ .thumb {
+  transform: translateX(18px);
+}

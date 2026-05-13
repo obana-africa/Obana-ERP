@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TEMPLATES } from '../utils/themeDefaults';
 import ThemeCard from '../components/themes/ThemeCard';
-import s from '../styles/themes.module.css';
+import s from '../styles/builder.module.css';
 
 export default function OnlineStoreThemes() {
   const navigate = useNavigate();

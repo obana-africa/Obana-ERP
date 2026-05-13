@@ -1,0 +1,76 @@
+.pageTitle {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.pageSub {
+  font-size: 13.5px;
+  color: var(--ink3);
+  margin-bottom: 32px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.cardHeader {
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.cardTitle {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+
+.cardDesc {
+  font-size: 13px;
+  color: var(--ink3);
+  line-height: 1.5;
+}
+
+.cardBodyFlush {
+  padding: 0 24px;
+}
+
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 16px 24px;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.toggleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.toggleRow:last-child {
+  border-bottom: none;
+}
+
+.toggleLabel {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.toggleSub {
+  font-size: 12px;
+  color: var(--ink3);
+  margin-top: 2px;
+}

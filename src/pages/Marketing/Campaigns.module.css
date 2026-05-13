@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;800&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+.page {
+  --navy:#1b3b5f;--navy-lt:#e8eef5;--green:#2DBD97;--gold:#E8C547;
+  --ink:#111827;--ink2:#374151;--ink3:#6B7280;--ink4:#9CA3AF;
+  --border:#E5E7EB;--blt:#F3F4F6;--surface:#F8FAFC;--white:#FFFFFF;--red:#EF4444;
+  padding:24px 28px 60px; background:var(--surface); min-height:100%;
+  font-family:'DM Sans',sans-serif; color:var(--ink);
+  display:flex; flex-direction:column; gap:16px;
+  opacity:0; transition:opacity 0.3s ease;
+}
+.visible{opacity:1;}
+
+.header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;animation:fadeUp 0.4s ease both;}
+.headerLeft{display:flex;align-items:center;gap:10px;}
+.breadBack{background:none;border:none;cursor:pointer;color:var(--ink3);display:flex;align-items:center;padding:4px;border-radius:6px;transition:all 0.15s;}
+.breadBack:hover{background:var(--blt);color:var(--navy);}
+.title{font-family:'Bricolage Grotesque',sans-serif;font-size:22px;font-weight:800;color:var(--navy);letter-spacing:-0.02em;margin:0;}
+
+.btnPrimary{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;background:var(--navy);color:#fff;border:none;border-radius:8px;font-family:inherit;font-size:13.5px;font-weight:700;cursor:pointer;transition:background 0.15s;white-space:nowrap;}
+.btnPrimary:hover{background:var(--green);color:var(--navy);}
+.btnOutline{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;background:var(--white);color:var(--ink2);border:1.5px solid var(--border);border-radius:8px;font-family:inherit;font-size:13.5px;font-weight:500;cursor:pointer;transition:all 0.15s;}
+.btnOutline:hover{border-color:var(--navy);color:var(--navy);}
+
+.unassignedBadge{display:inline-flex;align-items:center;gap:8px;padding:7px 16px;background:var(--blt);border:1.5px solid var(--border);border-radius:99px;font-family:inherit;font-size:13px;font-weight:600;color:var(--ink2);cursor:pointer;align-self:flex-start;transition:all 0.15s;animation:fadeUp 0.4s ease 0.05s both;}
+.unassignedBadge:hover{border-color:var(--navy);color:var(--navy);}
+
+.filterRow{display:flex;align-items:center;justify-content:space-between;gap:12px;animation:fadeUp 0.4s ease 0.08s both;}
+.filterTabs{display:flex;gap:2px;background:var(--blt);border-radius:9px;padding:3px;}
+.filterTab{padding:6px 14px;border-radius:7px;border:none;background:none;font-family:inherit;font-size:13px;font-weight:500;color:var(--ink3);cursor:pointer;transition:all 0.15s;display:flex;align-items:center;gap:5px;}
+.filterTab:hover{color:var(--ink);}
+.filterTabOn{background:var(--white)!important;color:var(--navy)!important;font-weight:700;box-shadow:0 1px 3px rgba(0,0,0,0.08);}
+.filterCount{font-size:11px;background:var(--border);color:var(--ink4);padding:1px 6px;border-radius:99px;font-weight:700;}
+.configBtn{width:34px;height:34px;border-radius:8px;border:1.5px solid var(--border);background:var(--white);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--ink3);transition:all 0.15s;}
+.configBtn:hover{border-color:var(--navy);color:var(--navy);}
+
+/* Empty card */
+.emptyCard{background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden;animation:fadeUp 0.4s ease 0.1s both;}
+.emptyCta{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;padding:40px 48px;}
+.emptyTitle{font-family:'Bricolage Grotesque',sans-serif;font-size:18px;font-weight:700;color:var(--navy);margin:0 0 10px;}
+.emptySub{font-size:14px;color:var(--ink2);line-height:1.6;margin:0 0 20px;max-width:500px;}
+.emptyBtns{display:flex;gap:10px;flex-wrap:wrap;}
+
+/* Illustration */
+.emptyIllo{position:relative;width:120px;height:100px;flex-shrink:0;}
+.illoFolder{width:90px;height:80px;position:absolute;bottom:0;left:10px;}
+.illoFolderTab{width:36px;height:12px;background:var(--navy);border-radius:4px 4px 0 0;position:absolute;top:0;left:8px;opacity:0.7;}
+.illoFolderBody{position:absolute;top:8px;left:0;right:0;bottom:0;background:linear-gradient(135deg,var(--navy),#2563EB);border-radius:8px;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(27,59,95,0.3);}
+.illoInner{opacity:0.8;}
+.illoSearch{position:absolute;top:0;right:0;width:28px;height:28px;border-radius:50%;background:var(--white);box-shadow:0 4px 12px rgba(0,0,0,0.1);display:flex;align-items:center;justify-content:center;}
+
+/* Table */
+.tableWrap{background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden;animation:fadeUp 0.4s ease 0.1s both;}
+.tHead{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 80px 80px 1.5fr 50px;gap:10px;padding:9px 20px;font-size:11px;font-weight:700;color:var(--ink4);text-transform:uppercase;letter-spacing:0.05em;background:var(--blt);}
+.tRow{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 80px 80px 1.5fr 50px;gap:10px;padding:12px 20px;border-top:1px solid var(--blt);align-items:center;font-size:13.5px;cursor:pointer;transition:background 0.12s;animation:fadeUp 0.3s ease both;}
+.tRow:hover{background:var(--surface);}
+.campaignName{
+  font-weight:700;
+  color:var(--navy);
+}
+.campaignDates{
+  font-size:12px;color:var(--ink4);margin-top:2px;}
+.statusPill{padding:3px 10px;border-radius:99px;font-size:12px;font-weight:700;}
+.num{font-weight:600;color:var(--ink2);}
+.convGreen{font-weight:700;color:#059669;}
+.channelTags{display:flex;gap:4px;flex-wrap:wrap;}
+.channelTag{padding:2px 7px;border-radius:99px;background:var(--green-lt);color:var(--navy);font-size:11.5px;font-weight:600;}
+.noChannels{color:var(--ink4);}
+.deleteBtn{width:28px;height:28px;border-radius:6px;border:1.5px solid var(--border);background:var(--white);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.15s;}
+.deleteBtn:hover{border-color:var(--red);background:#FEF2F2;}
+.deleteBtn:hover svg{stroke:var(--red);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+@media(max-width:900px){.page{padding:16px 14px 40px;}.tHead,.tRow{grid-template-columns:2fr 1fr 1fr 1fr;}.tRow span:nth-child(n+5):not(:last-child),.tHead span:nth-child(n+5):not(:last-child){display:none;}.emptyCta{grid-template-columns:1fr;}.emptyIllo{display:none;}}

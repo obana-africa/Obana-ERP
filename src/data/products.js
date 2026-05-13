@@ -1,4 +1,5 @@
-
+// TEMPORARY MOCK DATA — to be replaced by real API.
+// DO NOT import directly into components; only through productService.js
 export const SAMPLE_PRODUCTS = [
   { id:1, name:'Classic Ankara Dress',   price:15000, stock:12, sold:3,  img:null, category:'Fashion',     variants:true,  sku:'AKR-001' },
   { id:2, name:'Leather Crossbody Bag',  price:22000, stock:5,  sold:8,  img:null, category:'Accessories', variants:false, sku:'LCB-002' },
