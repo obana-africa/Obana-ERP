@@ -22,92 +22,99 @@ const isValidPhone = (v) => !v || /^\+?[\d\s-]{8,}$/.test(v.trim())
 
 // ── API base URL (set in .env) ──────────────────────────
 const API_BASE = import.meta.env.VITE_API_URL || 'https://your-backend.com/api'
-
-// ── Enhanced Waitlist Form (full name, email, business, phone) ──
+// ── Waitlist Form using Formspree ─────────────────────────
 function WaitlistForm({ onSuccess, source = 'waitlist', buttonText = 'Join waitlist' }) {
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
     businessName: '',
     phone: '',
-  })
-  const [status, setStatus] = useState('idle')
-  const [errorMsg, setErrorMsg] = useState('')
-  const [fieldErrors, setFieldErrors] = useState({})
+  });
+  const [status, setStatus] = useState('idle');
+  const [errorMsg, setErrorMsg] = useState('');
+  const [fieldErrors, setFieldErrors] = useState({});
 
   const validateForm = () => {
-    const errors = {}
-    if (!formData.fullName.trim()) errors.fullName = 'Full name is required'
-    if (!formData.email.trim()) errors.email = 'Email is required'
-    else if (!isValidEmail(formData.email)) errors.email = 'Valid email required'
-    if (!formData.businessName.trim()) errors.businessName = 'Business name is required'
-    if (formData.phone && !isValidPhone(formData.phone)) errors.phone = 'Valid phone number required'
-    setFieldErrors(errors)
-    return Object.keys(errors).length === 0
-  }
+    const errors = {};
+    if (!formData.fullName.trim()) errors.fullName = 'Full name is required';
+    if (!formData.email.trim()) errors.email = 'Email is required';
+    else if (!isValidEmail(formData.email)) errors.email = 'Valid email required';
+    if (!formData.businessName.trim()) errors.businessName = 'Business name is required';
+    if (formData.phone && !isValidPhone(formData.phone)) errors.phone = 'Valid phone number required';
+    setFieldErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
 
   const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
     if (fieldErrors[name]) {
-      setFieldErrors(prev => ({ ...prev, [name]: '' }))
+      setFieldErrors(prev => ({ ...prev, [name]: '' }));
     }
-  }
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    if (!validateForm()) return
+    e.preventDefault();
+    if (!validateForm()) return;
 
-    setStatus('loading')
-    setErrorMsg('')
+    setStatus('loading');
+    setErrorMsg('');
+
+    // Build FormData (Formspree expects this format)
+    const formPayload = new FormData();
+    formPayload.append('fullName', formData.fullName.trim());
+    formPayload.append('email', formData.email.trim());
+    formPayload.append('businessName', formData.businessName.trim());
+    formPayload.append('phone', formData.phone.trim());
+    formPayload.append('source', source);
 
     try {
-      const response = await fetch(`${API_BASE}/waitlist`, {
+      const response = await fetch('https://formspree.io/f/mbdeprda', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          fullName: formData.fullName.trim(),
-          email: formData.email.trim(),
-          businessName: formData.businessName.trim(),
-          phone: formData.phone.trim(),
-          source,
-        }),
-      })
+        body: formPayload,
+        headers: {
+          'Accept': 'application/json', // tells Formspree to return JSON
+        },
+      });
 
-      const data = await response.json()
-
-      if (!response.ok) {
-        if (response.status === 409) throw new Error('You are already on the waitlist!')
-        throw new Error(data.message || 'Something went wrong. Please try again.')
+      if (response.ok) {
+        setStatus('success');
+        setFormData({
+          fullName: '',
+          email: '',
+          businessName: '',
+          phone: '',
+        });
+        onSuccess?.();
+      } else {
+        const data = await response.json();
+        // Formspree returns errors in data.errors
+        if (data.errors && Object.keys(data.errors).length) {
+          const firstError = Object.values(data.errors)[0];
+          throw new Error(Array.isArray(firstError) ? firstError[0] : firstError);
+        } else {
+          throw new Error(data.error || 'Something went wrong. Please try again.');
+        }
       }
-
-      setStatus('success')
-      setFormData({
-        fullName: '',
-        email: '',
-        businessName: '',
-        phone: '',
-      })
-      onSuccess?.()
     } catch (err) {
-      setStatus('error')
-      setErrorMsg(err.message)
+      setStatus('error');
+      setErrorMsg(err.message);
     }
-  }
+  };
 
   useEffect(() => {
     if (status === 'success') {
-      const timer = setTimeout(() => setStatus('idle'), 3000)
-      return () => clearTimeout(timer)
+      const timer = setTimeout(() => setStatus('idle'), 3000);
+      return () => clearTimeout(timer);
     }
-  }, [status])
+  }, [status]);
 
   if (status === 'success') {
     return (
       <div className={styles.successMsg}>
         🎉 You're on the list! Check your inbox for confirmation.
       </div>
-    )
+    );
   }
 
   return (
@@ -182,9 +189,8 @@ function WaitlistForm({ onSuccess, source = 'waitlist', buttonText = 'Join waitl
         </div>
       )}
     </form>
-  )
-}
-// ── Notify Me Form (inline, slide-in) – remains simple email only ──
+  );
+}// ── Notify Me Form (inline, slide-in) – remains simple email only ──
 function NotifyForm() {
   const [show, setShow] = useState(false)
   const [email, setEmail] = useState('')
@@ -342,7 +348,7 @@ export default function LandingPage() {
         <div className={styles.navInner}>
           <div className={styles.brand}>
             <div className={styles.brandLogo}>
-              <img src="/logos/taoja logo.png" alt="taoja" className={styles.brandLogoImg} />
+              <img src="/logos/taojaLogo_white.png" alt="taoja" className={styles.brandLogoImg} />
             </div>
             <div className={styles.navLinks}>
               {/* Features dropdown */}
