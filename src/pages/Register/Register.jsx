@@ -5,7 +5,7 @@ import styles from './Register.module.css'
 // ── Testimonials Data ──────────────────────────────────────────
 const TESTIMONIALS = [
   {
-    text: "taja completely changed how I run my fashion business. I used to spend hours tracking orders on paper — now everything is automated and I can focus on selling.",
+    text: "taoja completely changed how I run my fashion business. I used to spend hours tracking orders on paper — now everything is automated and I can focus on selling.",
     name: "Adaeze Okonkwo", role: "Fashion boutique owner, Lagos",
     initials: "AO", color: { bg: "#E8C547", text: "#1a1a2e" },
   },
@@ -15,7 +15,7 @@ const TESTIMONIALS = [
     initials: "EB", color: { bg: "#9FE1CB", text: "#085041" },
   },
   {
-    text: "I started getting international orders within a week of setting up my taja store. The analytics helped me understand which products were actually selling.",
+    text: "I started getting international orders within a week of setting up my taoja store. The analytics helped me understand which products were actually selling.",
     name: "Fatima Kabir", role: "Skincare brand founder, Kano",
     initials: "FK", color: { bg: "#F5C4B3", text: "#993C1D" },
   },
@@ -317,7 +317,7 @@ export default function Register() {
       }
       
       // Store in localStorage or sessionStorage for persistence
-      localStorage.setItem('taja_user', JSON.stringify(userData))
+      localStorage.setItem('taoja_user', JSON.stringify(userData))
       
       // Navigate after success
       setTimeout(() => {
@@ -361,8 +361,8 @@ export default function Register() {
           {/* Logo */}
           <div className={styles.logo}>
             <img
-              src="/logos/taja logo white.png"
-              alt="taja logo"
+              src="/logos/taoja logo.png"
+              alt="taoja logo"
               className={styles.logoImg}
             />
           </div>
@@ -609,7 +609,7 @@ export default function Register() {
                 aria-invalid={touched.terms && !!errors.terms}
               />
               <label htmlFor="terms" className={styles.checkLabel}>
-                I agree to taja's{' '}
+                I agree to taoja's{' '}
                 <a href="/terms" target="_blank" rel="noopener noreferrer">Terms of Service</a> and{' '}
                 <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
                 I consent to receiving product updates by email.
@@ -661,7 +661,7 @@ export default function Register() {
 
           {/* Sign In Link */}
           <p className={styles.signinLink}>
-            Already selling with taja?{' '}
+            Already selling with taoja?{' '}
             <span 
               className={styles.link}
               onClick={() => navigate('/')}

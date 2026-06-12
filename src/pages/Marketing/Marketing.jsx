@@ -238,7 +238,7 @@ export default function Marketing() {
         Learn more about{' '}
         <a href="#" className={s.footerLink}>marketing campaigns</a>
         {' '}and how{' '}
-        <a href="#" className={s.footerLink}>Taja syncs report data</a>.
+        <a href="#" className={s.footerLink}>taoja syncs report data</a>.
       </div>
     </div>
   )

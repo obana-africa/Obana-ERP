@@ -93,7 +93,7 @@ export default function ThriveSection({ setShowNavModal }) {
           Everything Your Business Needs To Thrive
         </h2>
         <p className={styles.sub}>
-          From inventory to payments, analytics to customer management. Taja simplifies the hard parts of
+          From inventory to payments, analytics to customer management. Taoja simplifies the hard parts of
           running a business.
         </p>
       </div>

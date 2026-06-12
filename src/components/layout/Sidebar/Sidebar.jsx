@@ -35,7 +35,6 @@ const ICON = {
   chevron:     'M6 9l6 6 6-6',
   collapse:    'M11 19l-7-7 7-7M18 19l-7-7 7-7',
   expand:      'M13 5l7 7-7 7M6 5l7 7-7 7',
-  content:  ['M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z', 'M14 2v6h6'],
 }
 
 /* ─── Nav definitions ─────────────────────────────────────── */
@@ -67,13 +66,11 @@ const MARKETS_SUB = [
   { to: '/markets/rollouts', label: 'Rollouts' },
 ]
 const ONLINE_STORE_SUB = [
-  { to: '/online-store/themes', icon: ICON.collections, label: 'Themes' },
+  { to: '/online-store/themes',      icon: ICON.collections, label: 'Themes'      },
   { to: '/online-store/pages',       icon: ICON.content,     label: 'Pages'       },
   { to: '/online-store/preferences', icon: ICON.settings,    label: 'Preferences' },
 ]
 const MAIN_NAV = [
-  // { to: '/orders',    icon: ICON.orders,    label: 'Orders'    },
-  // { to: '/customers', icon: ICON.customers, label: 'Customers' },
   { to: '/discounts', icon: ICON.discounts, label: 'Discounts' },
   { to: '/analytics', icon: ICON.analytics, label: 'Analytics' },
 ]
@@ -93,16 +90,16 @@ const Tooltip = ({ label, children }) => (
 )
 
 /* ─── Sub-nav link ───────────────────────────────────────── */
-const SubLink = ({ to, icon, label, collapsed }) => (
+const SubLink = ({ to, icon, label, collapsed, onNavigate }) => (
   collapsed ? (
     <Tooltip label={label}>
-      <NavLink to={to}
+      <NavLink to={to} onClick={onNavigate}
         className={({ isActive }) => `${styles.subNavItem} ${styles.subNavCollapsed} ${isActive ? styles.subNavActive : ''}`}>
         {icon && <Ic d={icon} size={15} />}
       </NavLink>
     </Tooltip>
   ) : (
-    <NavLink to={to}
+    <NavLink to={to} onClick={onNavigate}
       className={({ isActive }) => `${styles.subNavItem} ${isActive ? styles.subNavActive : ''}`}>
       {icon && <Ic d={icon} size={15} />}
       <span>{label}</span>
@@ -111,17 +108,17 @@ const SubLink = ({ to, icon, label, collapsed }) => (
 )
 
 /* ─── Top-level nav link ─────────────────────────────────── */
-const NavItem = ({ to, icon, label, badge, collapsed }) => (
+const NavItem = ({ to, icon, label, badge, collapsed, onNavigate }) => (
   collapsed ? (
     <Tooltip label={label}>
-      <NavLink to={to}
+      <NavLink to={to} onClick={onNavigate}
         className={({ isActive }) => `${styles.navItem} ${styles.navItemCollapsed} ${isActive ? styles.active : ''}`}>
         <span className={styles.navIcon}><Ic d={icon} size={18} /></span>
         {badge && <span className={styles.badgeDot} />}
       </NavLink>
     </Tooltip>
   ) : (
-    <NavLink to={to}
+    <NavLink to={to} onClick={onNavigate}
       className={({ isActive }) => `${styles.navItem} ${isActive ? styles.active : ''}`}>
       <span className={styles.navIcon}><Ic d={icon} size={18} /></span>
       <span className={styles.navLabel}>{label}</span>
@@ -131,21 +128,38 @@ const NavItem = ({ to, icon, label, badge, collapsed }) => (
 )
 
 /* ─── Expandable group ───────────────────────────────────── */
-const ExpandGroup = ({ to, icon, label, isActive, isOpen, onToggle, collapsed, children }) => (
-  collapsed ? (
-    <Tooltip label={label}>
-      <NavLink to={to}
-        className={() => `${styles.navItem} ${styles.navItemCollapsed} ${isActive ? styles.active : ''}`}>
-        <span className={styles.navIcon}><Ic d={icon} size={18} /></span>
-      </NavLink>
-    </Tooltip>
-  ) : (
+const ExpandGroup = ({ to, icon, label, isActive, isOpen, onToggle, collapsed, isMobile, onNavigate, children }) => {
+  if (collapsed) {
+    return (
+      <Tooltip label={label}>
+        <NavLink to={to} onClick={onNavigate}
+          className={() => `${styles.navItem} ${styles.navItemCollapsed} ${isActive ? styles.active : ''}`}>
+          <span className={styles.navIcon}><Ic d={icon} size={18} /></span>
+        </NavLink>
+      </Tooltip>
+    )
+  }
+
+  // Expanded layout (desktop OR mobile drawer)
+  return (
     <div className={styles.navExpandGroup}>
       <div className={`${styles.navItem} ${styles.navExpandBtn} ${isActive ? styles.active : ''}`}>
-        <NavLink to={to} className={styles.expandLink}>
-          <span className={styles.navIcon}><Ic d={icon} size={18} /></span>
-          <span className={styles.navLabel}>{label}</span>
-        </NavLink>
+        {isMobile ? (
+          // Mobile: entire row toggles. No accidental navigation.
+          <button type="button" onClick={onToggle}
+            className={styles.expandLink}
+            aria-expanded={isOpen}
+            aria-label={`Toggle ${label}`}>
+            <span className={styles.navIcon}><Ic d={icon} size={18} /></span>
+            <span className={styles.navLabel}>{label}</span>
+          </button>
+        ) : (
+          // Desktop: label area navigates, chevron toggles
+          <NavLink to={to} className={styles.expandLink}>
+            <span className={styles.navIcon}><Ic d={icon} size={18} /></span>
+            <span className={styles.navLabel}>{label}</span>
+          </NavLink>
+        )}
         <button className={styles.arrowBtn} onClick={onToggle} aria-label={`Toggle ${label}`}>
           <span className={`${styles.navArrow} ${isOpen ? styles.navArrowOpen : ''}`}>
             <Ic d={ICON.chevron} size={16} />
@@ -153,22 +167,26 @@ const ExpandGroup = ({ to, icon, label, isActive, isOpen, onToggle, collapsed, c
         </button>
       </div>
       <div className={`${styles.subNav} ${isOpen ? styles.subNavOpen : ''}`}>
+        {/* On mobile, surface the parent route as an "Overview" entry */}
+        {isMobile && (
+          <SubLink to={to} label={`${label} overview`} collapsed={false} onNavigate={onNavigate} />
+        )}
         {children}
       </div>
     </div>
   )
-)
+}
 
 /* ─── Hamburger ──────────────────────────────────────────── */
 const Hamburger = ({ isOpen, onClick }) => (
-<button
-  className={styles.hamburger}
-  onClick={onClick}
-  aria-label={isOpen ? 'Close menu' : 'Open menu'}
-  aria-expanded={isOpen}
->
-  <Ic d={isOpen ? ICON.collapse : ICON.expand} size={16} stroke="#1b3b5f" />
-</button>
+  <button
+    className={styles.hamburger}
+    onClick={onClick}
+    aria-label={isOpen ? 'Close menu' : 'Open menu'}
+    aria-expanded={isOpen}
+  >
+    <Ic d={isOpen ? ICON.collapse : ICON.expand} size={16} />
+  </button>
 )
 
 /* ─── SIDEBAR ─────────────────────────────────────────────── */
@@ -176,45 +194,49 @@ const Sidebar = () => {
   const location = useLocation()
 
   const isProductsActive    = ['/products','/collections','/inventory','/transfers'].some(p => location.pathname.startsWith(p))
-  const isOrdersActive    = location.pathname.startsWith('/orders')
-  const isCustomersActive = location.pathname.startsWith('/customers')
+  const isOrdersActive      = location.pathname.startsWith('/orders')
+  const isCustomersActive   = location.pathname.startsWith('/customers')
   const isContentActive     = location.pathname.startsWith('/content')
-  const isMarketingActive = location.pathname.startsWith('/marketing')
-  const isMarketsActive   = location.pathname.startsWith('/markets')
+  const isMarketingActive   = location.pathname.startsWith('/marketing')
+  const isMarketsActive     = location.pathname.startsWith('/markets')
   const isOnlineStoreActive = location.pathname.startsWith('/online-store')
 
   const [productsOpen,    setProductsOpen]    = useState(isProductsActive)
-  const [ordersOpen,    setOrdersOpen]    = useState(isOrdersActive)
-  const [customersOpen, setCustomersOpen] = useState(isCustomersActive)
+  const [ordersOpen,      setOrdersOpen]      = useState(isOrdersActive)
+  const [customersOpen,   setCustomersOpen]   = useState(isCustomersActive)
   const [contentOpen,     setContentOpen]     = useState(isContentActive)
-  const [marketingOpen, setMarketingOpen] = useState(isMarketingActive)
-  const [marketsOpen,   setMarketsOpen]   = useState(isMarketsActive)
+  const [marketingOpen,   setMarketingOpen]   = useState(isMarketingActive)
+  const [marketsOpen,     setMarketsOpen]     = useState(isMarketsActive)
   const [onlineStoreOpen, setOnlineStoreOpen] = useState(isOnlineStoreActive)
   const [sidebarOpen,     setSidebarOpen]     = useState(false)
 
-  // Auto-collapse on tablet/mobile, expand on desktop
+  // Responsive collapse: icon rail on tablet, drawer on mobile, full on desktop
   const getDefaultCollapsed = () => window.innerWidth < 1024
+  const getDefaultMobile    = () => window.innerWidth < 768
   const [collapsed, setCollapsed] = useState(getDefaultCollapsed)
+  const [isMobile,  setIsMobile]  = useState(getDefaultMobile)
 
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 768) {
         setCollapsed(true)
+        setIsMobile(true)
         setSidebarOpen(false)
       } else if (window.innerWidth < 1024) {
         setCollapsed(true)
+        setIsMobile(false)
       } else {
         setCollapsed(false)
+        setIsMobile(false)
       }
     }
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  // Close mobile drawer on route change
-  // useEffect(() => { setSidebarOpen(false) }, [location.pathname])
-
   const closeSidebar = () => setSidebarOpen(false)
+  // Only close drawer on mobile; on desktop a click shouldn't do anything extra
+  const handleNavigate = () => { if (isMobile) setSidebarOpen(false) }
 
   return (
     <>
@@ -226,76 +248,83 @@ const Sidebar = () => {
 
       <aside className={`${styles.sidebar} ${collapsed ? styles.sidebarCollapsed : ''} ${sidebarOpen ? styles.sidebarOpen : ''}`}>
 
-        {/* Collapse toggle button */}
-        <button
-          className={styles.collapseBtn}
-          onClick={() => setCollapsed(v => !v)}
-          aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-          title={collapsed ? 'Expand' : 'Collapse'}>
-          <Ic d={collapsed ? ICON.expand : ICON.collapse} size={14} />
-        </button>
-
+        {(() => {
+          // On mobile, the drawer is full-width when open — treat children as expanded
+          const effCollapsed = collapsed && !(isMobile && sidebarOpen)
+          return (
         <nav className={styles.nav}>
           <div className={styles.navGroup}>
-            <NavItem to="/dashboard" icon={ICON.dashboard} label="Home" collapsed={collapsed} />
+            <NavItem to="/dashboard" icon={ICON.dashboard} label="Home" collapsed={effCollapsed} onNavigate={handleNavigate} />
 
             <ExpandGroup to="/products" icon={ICON.products} label="Products"
-              isActive={isProductsActive} isOpen={productsOpen} collapsed={collapsed}
+              isActive={isProductsActive} isOpen={productsOpen} collapsed={effCollapsed}
+              isMobile={isMobile} onNavigate={handleNavigate}
               onToggle={() => setProductsOpen(v => !v)}>
-              {PRODUCT_SUB.map(s => <SubLink key={s.to} {...s} collapsed={collapsed} />)}
+              {PRODUCT_SUB.map(s => <SubLink key={s.to} {...s} collapsed={effCollapsed} onNavigate={handleNavigate} />)}
             </ExpandGroup>
+
             <ExpandGroup to="/orders" icon={ICON.orders} label="Orders"
-              isActive={isOrdersActive} isOpen={ordersOpen} collapsed={collapsed}
+              isActive={isOrdersActive} isOpen={ordersOpen} collapsed={effCollapsed}
+              isMobile={isMobile} onNavigate={handleNavigate}
               onToggle={() => setOrdersOpen(v => !v)}>
-              {ORDERS_SUB.map(s => <SubLink key={s.to} to={s.to} label={s.label} collapsed={collapsed} />)}
+              {ORDERS_SUB.map(s => <SubLink key={s.to} to={s.to} label={s.label} collapsed={effCollapsed} onNavigate={handleNavigate} />)}
             </ExpandGroup>
 
             <ExpandGroup to="/customers" icon={ICON.customers} label="Customers"
-              isActive={isCustomersActive} isOpen={customersOpen} collapsed={collapsed}
+              isActive={isCustomersActive} isOpen={customersOpen} collapsed={effCollapsed}
+              isMobile={isMobile} onNavigate={handleNavigate}
               onToggle={() => setCustomersOpen(v => !v)}>
-              {CUSTOMER_SUB.map(s => <SubLink key={s.to} to={s.to} label={s.label} collapsed={collapsed} />)}
+              {CUSTOMER_SUB.map(s => <SubLink key={s.to} to={s.to} label={s.label} collapsed={effCollapsed} onNavigate={handleNavigate} />)}
             </ExpandGroup>
+
             <ExpandGroup to="/content" icon={ICON.content} label="Content"
-              isActive={isContentActive} isOpen={contentOpen} collapsed={collapsed}
+              isActive={isContentActive} isOpen={contentOpen} collapsed={effCollapsed}
+              isMobile={isMobile} onNavigate={handleNavigate}
               onToggle={() => setContentOpen(v => !v)}>
-              {CONTENT_SUB.map(s => <SubLink key={s.to} {...s} collapsed={collapsed} />)}
+              {CONTENT_SUB.map(s => <SubLink key={s.to} {...s} collapsed={effCollapsed} onNavigate={handleNavigate} />)}
             </ExpandGroup>
+
             <ExpandGroup to="/marketing" icon={ICON.analytics} label="Marketing"
-              isActive={isMarketingActive} isOpen={marketingOpen} collapsed={collapsed}
+              isActive={isMarketingActive} isOpen={marketingOpen} collapsed={effCollapsed}
+              isMobile={isMobile} onNavigate={handleNavigate}
               onToggle={() => setMarketingOpen(v => !v)}>
-              {MARKETING_SUB.map(s => <SubLink key={s.to} to={s.to} label={s.label} collapsed={collapsed} />)}
+              {MARKETING_SUB.map(s => <SubLink key={s.to} to={s.to} label={s.label} collapsed={effCollapsed} onNavigate={handleNavigate} />)}
             </ExpandGroup>
 
             <ExpandGroup to="/markets" icon={ICON.integrations} label="Markets"
-              isActive={isMarketsActive} isOpen={marketsOpen} collapsed={collapsed}
+              isActive={isMarketsActive} isOpen={marketsOpen} collapsed={effCollapsed}
+              isMobile={isMobile} onNavigate={handleNavigate}
               onToggle={() => setMarketsOpen(v => !v)}>
-              {MARKETS_SUB.map(s => <SubLink key={s.to} to={s.to} label={s.label} collapsed={collapsed} />)}
+              {MARKETS_SUB.map(s => <SubLink key={s.to} to={s.to} label={s.label} collapsed={effCollapsed} onNavigate={handleNavigate} />)}
             </ExpandGroup>
 
-            {MAIN_NAV.map(item => <NavItem key={item.to} {...item} collapsed={collapsed} />)}
+            {MAIN_NAV.map(item => <NavItem key={item.to} {...item} collapsed={effCollapsed} onNavigate={handleNavigate} />)}
           </div>
 
-          {!collapsed && <p className={styles.sectionTitle}>Sales Channels</p>}
-          {collapsed  && <div className={styles.sectionDivider} />}
+          {!effCollapsed && <p className={styles.sectionTitle}>Sales Channels</p>}
+          {effCollapsed  && <div className={styles.sectionDivider} />}
           <div className={styles.navGroup}>
             <ExpandGroup to="/online-store" icon={ICON.store} label="Online Store"
-              isActive={isOnlineStoreActive} isOpen={onlineStoreOpen} collapsed={collapsed}
+              isActive={isOnlineStoreActive} isOpen={onlineStoreOpen} collapsed={effCollapsed}
+              isMobile={isMobile} onNavigate={handleNavigate}
               onToggle={() => setOnlineStoreOpen(v => !v)}>
-              {ONLINE_STORE_SUB.map(s => <SubLink key={s.to} {...s} collapsed={collapsed} />)}
+              {ONLINE_STORE_SUB.map(s => <SubLink key={s.to} {...s} collapsed={effCollapsed} onNavigate={handleNavigate} />)}
             </ExpandGroup>
-            {SALES_NAV.map(item => <NavItem key={item.to} {...item} collapsed={collapsed} />)}
+            {SALES_NAV.map(item => <NavItem key={item.to} {...item} collapsed={effCollapsed} onNavigate={handleNavigate} />)}
           </div>
 
-          {!collapsed && <p className={styles.sectionTitle}>Apps</p>}
-          {collapsed  && <div className={styles.sectionDivider} />}
+          {!effCollapsed && <p className={styles.sectionTitle}>Apps</p>}
+          {effCollapsed  && <div className={styles.sectionDivider} />}
           <div className={styles.navGroup}>
-            {APP_NAV.map(item => <NavItem key={item.to} {...item} collapsed={collapsed} />)}
+            {APP_NAV.map(item => <NavItem key={item.to} {...item} collapsed={effCollapsed} onNavigate={handleNavigate} />)}
           </div>
         </nav>
+          )
+        })()}
 
         {/* Footer */}
         <div className={styles.sidebarFooter}>
-          <NavItem to="/settings" icon={ICON.settings} label="Settings" collapsed={collapsed} />
+          <NavItem to="/settings" icon={ICON.settings} label="Settings" collapsed={collapsed && !(isMobile && sidebarOpen)} onNavigate={handleNavigate} />
         </div>
       </aside>
     </>

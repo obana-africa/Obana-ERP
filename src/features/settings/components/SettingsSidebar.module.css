@@ -1,0 +1,118 @@
+/* ── Sidebar ──────────────────────────────────────────────── */
+.sidebar {
+  width: 240px;
+  background: #FFFFFF;
+  border-right: 1px solid #E8ECF1;
+  flex-shrink: 0;
+  overflow-y: auto;
+}
+
+.sidebarInner {
+  padding: 1.25rem 0.75rem;
+}
+
+.storeInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  margin-bottom: 16px;
+}
+
+.storeAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: #1b3b5f;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 15px;
+  font-family: 'Bricolage Grotesque', 'DM Sans', sans-serif;
+  flex-shrink: 0;
+}
+
+.storeName {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #0F1B2D;
+  margin: 0;
+}
+
+.storeUrl {
+  font-size: 11.5px;
+  color: #9CA3AF;
+  margin: 1px 0 0;
+}
+
+/* ── Nav ──────────────────────────────────────────────────── */
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #374151;
+  text-decoration: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+  position: relative;
+}
+
+.navItem:hover {
+  background: #F1F4F8;
+  color: #1b3b5f;
+}
+
+.navItemActive {
+  background: #dcfbf9;
+  color: #1b3b5f;
+  font-weight: 600;
+}
+
+.navItemActive::before {
+  content: '';
+  position: absolute;
+  left: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 18px;
+  border-radius: 0 3px 3px 0;
+  background: #1b3b5f;
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .sidebar { width: 220px; }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #E8ECF1;
+    max-height: 200px;
+  }
+  .sidebarInner { padding: 0.75rem; }
+  .nav {
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 4px;
+    scrollbar-width: none;
+  }
+  .nav::-webkit-scrollbar { display: none; }
+  .navItem { flex-shrink: 0; }
+  .navItemActive::before { display: none; }
+}

@@ -51,8 +51,8 @@ export default function Login() {
       <div className={styles.leftPanel}>
         <div className={styles.brand}>
           <img
-            src="/src/assets/images/logo/taja logo white.png"
-            alt="taja by Obana.Africa"
+            src="/src/assets/images/logo/taoja logo.png"
+            alt="taoja.Africa"
             className={styles.brandLogo}
           />
         </div>
@@ -79,7 +79,7 @@ export default function Login() {
           </ul>
         </div>
 
-        <p className={styles.leftFooter}>© 2026 Obana Africa Ltd. All rights reserved.</p>
+        <p className={styles.leftFooter}>© 2026 taoja.Africa Ltd. All rights reserved.</p>
       </div>
 
       {/* ── Right panel ── */}

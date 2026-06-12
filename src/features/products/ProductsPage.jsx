@@ -10,8 +10,8 @@ import EmptyState from './components/ProductsList/EmptyState';
 import AddProductModal from './components/AddProductModal/AddProductModal';
 import ImportModal from './components/ImportModal/ImportModal';
 import PreviewModal from './components/PreviewModal/PreviewModal';
-import LoadingSpinner from '@/components/shared/LoadingSpinner';
-import ErrorDisplay from '@/components/shared/ErrorDisplay';
+// import LoadingSpinner from '@/components/shared/LoadingSpinner';
+// import ErrorDisplay from '@/components/shared/ErrorDisplay';
 import Icon from '@/components/ui/Icon/Icon'
 import s from './ProductsPage.module.css';
 
@@ -38,7 +38,7 @@ export default function ProductsPage() {
   // Handle programmatic modal opening from route state
   useEffect(() => {
     if (location.state?.openModal) {
-      setModal(location.state.openModal);
+      // setModal(location.state.openModal);
       window.history.replaceState({}, document.title);
     }
   }, [location.state]);
@@ -63,11 +63,11 @@ export default function ProductsPage() {
     }
   };
 
-  const handleEditProduct = (product) => {
-    setPreviewProduct(null);
-    // TODO: Navigate to edit page or open edit modal with product data
-    setModal('add');
-  };
+  // const handleEditProduct = (product) => {
+  //   setPreviewProduct(null);
+  //   // TODO: Navigate to edit page or open edit modal with product data
+  //   setModal('add');
+  // };
 
   // Loading state
   if (loading) {
@@ -150,14 +150,14 @@ export default function ProductsPage() {
           ) : viewMode === 'table' ? (
             <ProductsTable
               products={filteredProducts}
-              onEdit={handleEditProduct}
+              // onEdit={handleEditProduct}
               onPreview={setPreviewProduct}
               onDelete={handleDeleteProduct}
             />
           ) : (
             <ProductsGrid
               products={filteredProducts}
-              onEdit={handleEditProduct}
+              // onEdit={handleEditProduct}
               onPreview={setPreviewProduct}
               onDelete={handleDeleteProduct}
             />
@@ -179,7 +179,7 @@ export default function ProductsPage() {
         product={previewProduct}
         isOpen={!!previewProduct}
         onClose={() => setPreviewProduct(null)}
-        onEdit={handleEditProduct}
+        // onEdit={handleEditProduct}
       />
     </div>
   );

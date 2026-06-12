@@ -35,8 +35,8 @@ const INITIAL_NOTIFS = [
 
 const PROFILE_MENU = [
   { label: 'Account settings', path: '/admin/profile' },
-  { label: 'Switch store',     path: null             }, // future
-  { label: 'Help & support',   path: null             }, // future
+  // { label: 'Switch store',     path: null             }, 
+  // { label: 'Help & support',   path: null             }, 
 ]
 
 const Topbar = ({ storeName = '', storeInitial = '' }) => {
@@ -86,8 +86,8 @@ const Topbar = ({ storeName = '', storeInitial = '' }) => {
       {/* Logo */}
       <div className={styles.logo}>
         <img
-          src="/public/logos/taja logo blue.png"
-          alt="Taja"
+          src="/public/logos/taoja logo blue.png"
+          alt="taoja"
           className={styles.logoImg}
           onError={e => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'block' }}
         />

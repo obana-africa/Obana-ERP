@@ -206,13 +206,13 @@ const AdminProfile = () => {
             <div className={styles.card}>
               <div className={styles.cardHeader}>
                 <div className={styles.cardTitle}>Login service</div>
-                <div className={styles.cardDesc}>Connect an external login service to quickly and securely access your Taja account.</div>
+                <div className={styles.cardDesc}>Connect an external login service to quickly and securely access your taoja account.</div>
               </div>
               <div className={styles.cardBodyFlush}>
                 {[
-                  { id: 'apple', emoji: '🍎', name: 'Apple', status: 'Not connected' },
-                  { id: 'google', emoji: '🅖', name: 'Google', status: 'Not connected' },
-                  { id: 'facebook', emoji: '📘', name: 'Facebook', status: 'Not connected' },
+                  { id: 'apple', emoji: '', name: 'Apple', status: 'Not connected' },
+                  { id: 'google', emoji: '', name: 'Google', status: 'Not connected' },
+                  { id: 'facebook', emoji: '', name: 'Facebook', status: 'Not connected' },
                 ].map(p => (
                   <div className={styles.loginRow} key={p.id}>
                     <div className={styles.loginLeft}>
@@ -431,7 +431,7 @@ const AdminProfile = () => {
                   { key: 'lowStock',     label: 'Low stock alert',           sub: 'When a product has fewer than 5 units left' },
                   { key: 'newCustomer',  label: 'New customer registered',   sub: 'When someone signs up via the store or WhatsApp' },
                   { key: 'orderShipped', label: 'Order status updates',      sub: 'Shipped, delivered, and returned' },
-                  { key: 'marketing',    label: 'Marketing & promotions',    sub: 'Tips, product updates, and offers from Taja' },
+                  { key: 'marketing',    label: 'Marketing & promotions',    sub: 'Tips, product updates, and offers from taoja' },
                   { key: 'weeklyReport', label: 'Weekly performance report', sub: "Summary of your store's activity every Monday" },
                 ].map(n => (
                   <div className={styles.toggleRow} key={n.key}>
@@ -502,7 +502,7 @@ const AdminProfile = () => {
               <div className={styles.cardBody}>
                 <div className={styles.planRow}>
                   <div>
-                    <div className={styles.planName}>Taja Pro</div>
+                    <div className={styles.planName}>taoja Pro</div>
                     <div className={styles.planMeta}>N15,000 / month · Renews June 1, 2026</div>
                   </div>
                   <button className={`${styles.btn} ${styles.btnOutline}`} onClick={() => showToast('Upgrade flow coming soon!')}>Upgrade plan</button>

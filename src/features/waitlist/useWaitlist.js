@@ -8,8 +8,8 @@ export const isValidEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())
 
 export const saveToWaitlist = (email, source) => {
   const entry = { email: email.trim(), source, joinedAt: new Date().toISOString() }
-  const existing = JSON.parse(localStorage.getItem('taja_waitlist') || '[]')
-  localStorage.setItem('taja_waitlist', JSON.stringify([...existing, entry]))
+  const existing = JSON.parse(localStorage.getItem('taoja_waitlist') || '[]')
+  localStorage.setItem('taoja_waitlist', JSON.stringify([...existing, entry]))
 
   return emailjs.send(
     SERVICE_ID,

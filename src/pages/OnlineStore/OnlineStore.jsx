@@ -1,4 +1,3 @@
-
 import { useState, useCallback, useRef, useEffect } from 'react'
 import styles from '../../features/onlineStore/styles/builder.module.css'
 import StorefrontPreview from '../../features/onlineStore/components/builder/StorefrontPreview'
@@ -290,7 +289,7 @@ export default function OnlineStore() {
       {/* ── Topbar ───────────────────────────────────────────── */}
       <div className={styles.topbar}>
         // In the topbar, add a back button:
-          <button className={styles.backBtn} onClick={() => navigate('/online-store')}>
+          <button className={styles.backBtn} onClick={() => navigate('/online-store/themes')}>
            ← Themes
           </button>
         <div className={styles.topLeft}>

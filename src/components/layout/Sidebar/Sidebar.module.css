@@ -1,21 +1,33 @@
-.sidebar {
-  --navy:      #1b3b5f;
-  --navy-lt:   #e8eef5;
-  --green:     #2DBD97;
-  --green-lt:  #E6F7F2;
-  --green-dk:  #22a080;
-  --gold:      #E8C547;
-  --ink:       #111827;
-  --ink2:      #374151;
-  --ink3:      #6B7280;
-  --ink4:      #9CA3AF;
-  --border:    #F0F0F3;
-  --surface:   #F9FAFB;
-  --white:     #FFFFFF;
 
-  width: 220px;
+.sidebar {
+  /* Brand palette */
+  --color-primary:        #1b3b5f;
+  --color-primary-hover:  #14304d;
+  --color-primary-soft:   #dcfbf9;
+  --color-accent:         #2D9B82;
+  --color-accent-strong:  #1f7a66;
+
+  /* Neutral surfaces */
+  --bg-base:    #FFFFFF;
+  --bg-subtle:  #F7F8FA;
+  --bg-hover:   #F1F4F8;
+  --border:     #E8ECF1;
+  --border-strong: #D5DCE5;
+
+  /* Text */
+  --text-strong: #0F1B2D;
+  --text-base:   #3A4658;
+  --text-muted:  #7A8699;
+  --text-faint:  #A6AEBC;
+
+  /* Elevation & motion */
+  --shadow-sm: 0 1px 2px rgba(15, 27, 45, 0.04);
+  --shadow-md: 0 8px 24px rgba(15, 27, 45, 0.08);
+  --ease:      cubic-bezier(0.4, 0, 0.2, 1);
+
+  width: 240px;
   height: calc(100vh - 56px);
-  background: var(--white);
+  background: var(--bg-base);
   border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
@@ -24,153 +36,115 @@
   top: 56px;
   z-index: 49;
 
-  /* ── THE collapse transition ── */
-  transition: width 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: width 0.28s var(--ease), transform 0.28s var(--ease);
   overflow: hidden;
 }
 
-/* ── Collapsed state ─────────────────────────────────────── */
+/* Collapsed (icon rail) */
 .sidebarCollapsed {
-  width: 60px;
+  width: 64px;
 }
 
-/* ── Mobile open (drawer) ────────────────────────────────── */
+/* Mobile drawer open */
 .sidebarOpen {
-  width: 220px !important;
+  width: 240px !important;
 }
 
-/* ── Store header ────────────────────────────────────────── */
-
-.logoMini {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  background: var(--navy);
-  color: #fff;
-  font-weight: 800;
-  font-size: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Bricolage Grotesque', 'DM Sans', sans-serif;
-  flex-shrink: 0;
-}
-
-.notifBtn {
-  width: 28px;
-  height: 28px;
-  border-radius: 7px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--ink4);
-  cursor: pointer;
-  flex-shrink: 0;
-  border: none;
-  background: none;
-  transition: background 0.15s, color 0.15s;
-}
-.notifBtn:hover { background: var(--surface); color: var(--ink); }
-
-/* ── Collapse toggle button ──────────────────────────────── */
-.collapseBtn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  /* width: calc(100% - 16px); */
-  margin: 8px 8px 4px;
-  padding: 7px 4px;
-  border: 1.5px solid var(--border);
-  border-radius: 8px;
-  background: var(--surface);
-  color: var(--ink4);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.15s;
-  white-space: nowrap;
-  overflow: hidden;
-  flex-shrink: 0;
-}
-.collapseBtn:hover { background: var(--green-lt); color: var(--navy); border-color: var(--surface); }
-
-/* When collapsed — only show the icon, centered */
-.sidebarCollapsed .collapseBtn {
-  width: 36px;
-  margin: 8px auto 4px;
-  padding: 2px;
-  justify-content: center;
-  border-radius: 8px;
-}
-
-/* ── Nav ─────────────────────────────────────────────────── */
+/* ─── Nav scroll area ──────────────────────────────────────── */
 .nav {
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 6px 8px;
-  scrollbar-width: none;
+  padding: 16px 10px 8px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
 }
-.nav::-webkit-scrollbar { display: none; }
+.nav::-webkit-scrollbar { width: 4px; }
+.nav::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 2px;
+}
+.nav::-webkit-scrollbar-track { background: transparent; }
 
 .navGroup {
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  gap: 2px;
   margin-bottom: 4px;
 }
 
 .sectionTitle {
   font-size: 10.5px;
-  color: var(--ink4);
-  padding: 10px 8px 4px;
-  letter-spacing: 0.06em;
+  color: var(--text-faint);
+  padding: 14px 10px 6px;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   font-weight: 600;
   margin: 0;
   white-space: nowrap;
   overflow: hidden;
-  transition: opacity 0.2s ease;
+  font-family: 'DM Sans', sans-serif;
 }
 
 .sectionDivider {
   height: 1px;
   background: var(--border);
-  margin: 8px 8px 4px;
+  margin: 12px 12px 8px;
   flex-shrink: 0;
 }
 
-/* ── Nav item ────────────────────────────────────────────── */
+/* ─── Nav item ─────────────────────────────────────────────── */
 .navItem {
   display: flex;
   align-items: center;
-  gap: 9px;
-  padding: 7px 10px;
+  gap: 11px;
+  padding: 8px 10px;
   border-radius: 8px;
   font-size: 13px;
-  color: var(--ink3);
+  font-weight: 500;
+  color: var(--text-base);
   text-decoration: none;
   cursor: pointer;
-  transition: background 0.15s, color 0.15s;
+  transition: background 0.15s var(--ease), color 0.15s var(--ease);
   font-family: 'DM Sans', sans-serif;
   white-space: nowrap;
   overflow: hidden;
   position: relative;
 }
-.navItem:hover { background: var(--surface); color: var(--ink); }
+
+.navItem:hover {
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+}
+
 .navItem.active {
-  background: var(--green-lt);
-  color: var(--green-dk);
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
   font-weight: 600;
 }
 
-/* Collapsed nav item — centered icon only */
+.navItem.active::before {
+  content: '';
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 18px;
+  border-radius: 0 3px 3px 0;
+  background: var(--color-primary);
+}
+
 .navItemCollapsed {
   justify-content: center;
-  padding: 9px 0;
+  padding: 10px 0;
   width: 44px;
   margin: 0 auto;
+}
+.navItemCollapsed.active::before { display: none; }
+.navItemCollapsed.active {
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
 }
 
 .navIcon {
@@ -179,33 +153,34 @@
   flex-shrink: 0;
   color: inherit;
 }
+
 .navLabel {
   flex: 1;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.2s var(--ease);
 }
 
 .badge {
   background: #FEE2E2;
   color: #991B1B;
   font-size: 10.5px;
-  padding: 1px 6px;
-  border-radius: 99px;
+  padding: 2px 7px;
+  border-radius: 999px;
   font-weight: 600;
+  line-height: 1.4;
 }
 
-/* Red dot badge for collapsed mode */
 .badgeDot {
   position: absolute;
-  top: 6px;
-  right: 8px;
+  top: 7px;
+  right: 9px;
   width: 7px;
   height: 7px;
   border-radius: 50%;
   background: #EF4444;
-  border: 1.5px solid var(--white);
+  border: 1.5px solid var(--bg-base);
 }
 
-/* ── Tooltip ─────────────────────────────────────────────── */
+/* ─── Tooltip (collapsed mode) ─────────────────────────────── */
 .tooltipWrap {
   position: relative;
   display: flex;
@@ -213,23 +188,23 @@
 
 .tooltip {
   position: absolute;
-  left: calc(100% + 10px);
+  left: calc(100% + 12px);
   top: 50%;
-  transform: translateY(-50%);
-  background: var(--navy);
+  background: var(--color-primary);
   color: #fff;
   font-family: 'DM Sans', sans-serif;
   font-size: 12px;
-  font-weight: 600;
-  padding: 5px 10px;
-  border-radius: 7px;
+  font-weight: 500;
+  padding: 6px 11px;
+  border-radius: 6px;
   white-space: nowrap;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.15s ease, transform 0.15s ease;
   transform: translateY(-50%) translateX(-4px);
+  transition: opacity 0.15s var(--ease), transform 0.15s var(--ease);
   z-index: 200;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+  box-shadow: var(--shadow-md);
+  letter-spacing: 0.01em;
 }
 .tooltip::before {
   content: '';
@@ -238,16 +213,18 @@
   top: 50%;
   transform: translateY(-50%);
   border: 5px solid transparent;
-  border-right-color: var(--navy);
+  border-right-color: var(--color-primary);
 }
-
 .tooltipWrap:hover .tooltip {
   opacity: 1;
   transform: translateY(-50%) translateX(0);
 }
 
-/* ── Expandable group ────────────────────────────────────── */
-.navExpandGroup { display: flex; flex-direction: column; }
+/* ─── Expandable group ─────────────────────────────────────── */
+.navExpandGroup {
+  display: flex;
+  flex-direction: column;
+}
 
 .navExpandBtn {
   width: 100%;
@@ -259,148 +236,203 @@
 .expandLink {
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: 11px;
   flex: 1;
   text-decoration: none;
   color: inherit;
   min-width: 0;
   overflow: hidden;
+  /* reset when rendered as <button> on mobile */
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
 }
 
 .arrowBtn {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 2px 3px;
+  padding: 3px;
   display: flex;
   align-items: center;
-  color: inherit;
+  justify-content: center;
+  color: var(--text-muted);
   border-radius: 4px;
   flex-shrink: 0;
+  transition: background 0.15s var(--ease), color 0.15s var(--ease);
 }
-.arrowBtn:hover { background: rgba(0,0,0,0.06); }
+.arrowBtn:hover {
+  background: rgba(27, 59, 95, 0.08);
+  color: var(--color-primary);
+}
 
 .navArrow {
   display: flex;
   align-items: center;
   color: inherit;
-  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  flex-shrink: 0;
+  transition: transform 0.25s var(--ease);
 }
 .navArrowOpen { transform: rotate(180deg); }
 
-/* ── Sub-nav ─────────────────────────────────────────────── */
+/* ─── Sub-nav ──────────────────────────────────────────────── */
 .subNav {
   display: flex;
   flex-direction: column;
   overflow: hidden;
   max-height: 0;
   opacity: 0;
-  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
-  margin-left: 18px;
-  border-left: 2px solid var(--gold);
+  transition: max-height 0.3s var(--ease), opacity 0.2s var(--ease);
+  margin: 2px 0 4px 22px;
+  padding-left: 10px;
+  border-left: 1.5px solid var(--border);
+  gap: 1px;
 }
-.subNavOpen { max-height: 220px; opacity: 1; }
+.subNavOpen {
+  max-height: 260px;
+  opacity: 1;
+}
 
 .subNavItem {
   display: flex;
   align-items: center;
   gap: 9px;
-  padding: 0.42rem 0.75rem 0.42rem 0.85rem;
+  padding: 7px 10px;
   font-size: 12.5px;
-  color: var(--ink3);
+  color: var(--text-muted);
   text-decoration: none;
-  border-radius: 0 6px 6px 0;
-  transition: background 0.15s, color 0.15s;
-  margin: 1px 0;
+  border-radius: 6px;
+  transition: background 0.15s var(--ease), color 0.15s var(--ease);
   font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
   white-space: nowrap;
   overflow: hidden;
+  position: relative;
 }
-.subNavItem:hover { background: var(--green-lt); color: var(--ink); }
-.subNavActive { color: var(--green-dk) !important; font-weight: 600; background: var(--green-lt); }
+.subNavItem:hover {
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+}
+.subNavActive {
+  color: var(--color-primary) !important;
+  font-weight: 600;
+  background: var(--color-primary-soft);
+}
 
-/* Collapsed sub-nav items */
 .subNavCollapsed {
   justify-content: center;
-  padding: 8px 0;
+  padding: 9px 0;
   width: 44px;
   margin: 1px auto;
-  border-left: none;
   border-radius: 8px;
 }
 
-/* ── Footer ──────────────────────────────────────────────── */
+/* ─── Footer ───────────────────────────────────────────────── */
 .sidebarFooter {
-  padding: 8px;
+  padding: 10px;
   border-top: 1px solid var(--border);
   flex-shrink: 0;
+  background: var(--bg-base);
 }
 
-/* ── Hamburger (mobile only) ─────────────────────────────── */
+/* ─── Hamburger (mobile only) ──────────────────────────────── */
+/* Sits inside the topbar visually — transparent on navy, never floats over page */
 .hamburger {
   display: none;
   position: fixed;
-  top: 14px;
-  left: 14px;
+  top: 10px;
+  left: 12px;
   z-index: 100;
-  width: 25px;
-  height: 25px;
-  flex-direction: column;
-  justify-content: center;
+  width: 36px;
+  height: 36px;
   align-items: center;
-  gap: 5px;
-  background: var(--border);
-  border: 1.5px solid var(--border);
+  justify-content: center;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 8px;
+  color: #fff;
   cursor: pointer;
   padding: 0;
-  transition: background 0.15s;
+  transition: background 0.15s var(--ease), border-color 0.15s var(--ease);
 }
-.hamburger:hover { background: var(--surface); }
+.hamburger:hover {
+  background: rgba(255, 255, 255, 0.10);
+  border-color: rgba(255, 255, 255, 0.35);
+}
 
-
+/* ─── Backdrop (mobile) ────────────────────────────────────── */
 .backdrop {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.35);
-  backdrop-filter: blur(2px);
+  background: rgba(15, 27, 45, 0.42);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
   z-index: 48;
-  animation: fadeIn 0.2s ease;
+  animation: fadeIn 0.2s var(--ease);
 }
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
 
-/* ── Responsive ──────────────────────────────────────────── */
+/* ─── Responsive ───────────────────────────────────────────── */
 
 /* Tablet: auto-collapse to icon rail */
 @media (max-width: 1024px) {
-  .sidebar { width: 60px; }
-  .sidebarOpen { width: 220px !important; }
+  .sidebar { width: 64px; }
+  .sidebarOpen { width: 240px !important; }
 }
 
-/* Mobile: hide sidebar entirely, show hamburger + backdrop */
+/* Mobile: hide sidebar entirely, hamburger + backdrop */
 @media (max-width: 768px) {
   .hamburger { display: flex; }
   .backdrop  { display: block; }
 
   .sidebar {
-    width: 220px;
+    width: 240px;
     transform: translateX(-100%);
-    transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: none;
   }
   .sidebarOpen {
     transform: translateX(0) !important;
-    box-shadow: 4px 0 24px rgba(0,0,0,0.12);
-    width: 220px !important;
+    box-shadow: var(--shadow-md);
+    width: 240px !important;
   }
   .sidebarCollapsed {
-    width: 220px;
+    width: 240px;
   }
 
-  /* On mobile open drawer, show full labels */
-  .sidebarOpen .navItemCollapsed { justify-content: flex-start; padding: 7px 10px; width: auto; margin: 0; }
-  .sidebarOpen .subNavCollapsed  { justify-content: flex-start; padding: 0.42rem 0.75rem 0.42rem 0.85rem; width: auto; margin: 1px 0; border-radius: 0 6px 6px 0; }
-  .sidebarOpen .collapseBtn { width: calc(100% - 16px); margin: 8px 8px 4px; padding: 7px 10px; justify-content: flex-start; }
+  .sidebarOpen .navItemCollapsed {
+    justify-content: flex-start;
+    padding: 8px 10px;
+    width: auto;
+    margin: 0;
+  }
+  .sidebarOpen .navItemCollapsed.active::before {
+    display: block;
+  }
+  .sidebarOpen .subNavCollapsed {
+    justify-content: flex-start;
+    padding: 7px 10px;
+    width: auto;
+    margin: 1px 0;
+    border-radius: 6px;
+  }
+
+  /* Bigger tap targets on mobile per WCAG 2.1 — chevron becomes 44x44 */
+  .sidebarOpen .arrowBtn {
+    padding: 12px;
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .sidebarOpen .navItem {
+    padding: 10px;
+  }
+  .sidebarOpen .subNavItem {
+    padding: 10px;
+  }
 }

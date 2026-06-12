@@ -16,7 +16,7 @@ export const BillingTab = ({ showToast }) => {
         <div className={styles.cardBody}>
           <div className={styles.planRow}>
             <div>
-              <div className={styles.planName}>Taja Pro</div>
+              <div className={styles.planName}>taoja Pro</div>
               <div className={styles.planMeta}>N15,000 / month · Renews June 1, 2026</div>
             </div>
             <Button variant="outline" onClick={() => showToast('Upgrade flow coming soon!', 'success')}>

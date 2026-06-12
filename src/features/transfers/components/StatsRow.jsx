@@ -1,5 +1,5 @@
 import { useAnimatedCounter } from '@/features/products/hooks/useAnimatedCounter';
-import SparkLine from '@/components/shared/SparkLine';
+// import SparkLine from '@/components/shared/SparkLine';
 import s from '../Transfers.module.css';
 
 
@@ -20,7 +20,7 @@ export default function StatsRow({ stats }) {
 
   return (
     <div className={s.statsRow}>
-      {stats.map((stat, i) => (
+      {stats.map((stat, ) => (
         <div key={stat.label} className={s.statCard}>
           <div className={s.statLabel}>{stat.label}</div>
           <div className={s.statValue} style={{ color: stat.accent }}>

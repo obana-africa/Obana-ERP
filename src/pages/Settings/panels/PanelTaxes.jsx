@@ -70,7 +70,7 @@ const TAX_REGIONS = [
   { id:'NG', name:'Nigeria',              flag:'🇳🇬', collecting:'Taxes', service:'Manual Tax', rate:7.5,  vatNum:'' },
   { id:'AU', name:'Australia',            flag:'🇦🇺', collecting:null,    service:'Basic Tax',  rate:10,   vatNum:'' },
   { id:'CA', name:'Canada',               flag:'🇨🇦', collecting:null,    service:'Basic Tax',  rate:5,    vatNum:'' },
-  { id:'EU', name:'European Union',       flag:'🇪🇺', collecting:null,    service:'Taja Tax',   rate:20,   vatNum:'' },
+  { id:'EU', name:'European Union',       flag:'🇪🇺', collecting:null,    service:'taoja Tax',   rate:20,   vatNum:'' },
   { id:'HK', name:'Hong Kong SAR',        flag:'🇭🇰', collecting:null,    service:'Manual Tax', rate:0,    vatNum:'' },
   { id:'IL', name:'Israel',               flag:'🇮🇱', collecting:null,    service:'Manual Tax', rate:17,   vatNum:'' },
   { id:'JP', name:'Japan',                flag:'🇯🇵', collecting:null,    service:'Manual Tax', rate:10,   vatNum:'' },
@@ -81,13 +81,13 @@ const TAX_REGIONS = [
   { id:'KR', name:'South Korea',          flag:'🇰🇷', collecting:null,    service:'Manual Tax', rate:10,   vatNum:'' },
   { id:'CH', name:'Switzerland',          flag:'🇨🇭', collecting:null,    service:'Basic Tax',  rate:7.7,  vatNum:'' },
   { id:'AE', name:'United Arab Emirates', flag:'🇦🇪', collecting:null,    service:'Manual Tax', rate:5,    vatNum:'' },
-  { id:'GB', name:'United Kingdom',       flag:'🇬🇧', collecting:null,    service:'Taja Tax',   rate:20,   vatNum:'' },
+  { id:'GB', name:'United Kingdom',       flag:'🇬🇧', collecting:null,    service:'taoja Tax',   rate:20,   vatNum:'' },
 ]
 
 const SERVICE_COLORS = {
   'Manual Tax': { bg:'#F3F4F6', color:'#374151' },
   'Basic Tax':  { bg:'#EFF6FF', color:'#1D4ED8' },
-  'Taja Tax':   { bg:'#E6F7F2', color:'#047857' },
+  'taoja Tax':   { bg:'#E6F7F2', color:'#047857' },
 }
 
 const APP_PARTNERS = [
@@ -122,9 +122,9 @@ function ViewTaxService({ onBack, showToast }) {
     <div className={styles.panel}>
       <Breadcrumb crumbs={['Taxes & Duties', 'Tax service']} onBack={onBack} />
 
-      {/* Built by Taja */}
+      {/* Built by taoja */}
       <div className={styles.section}>
-        <div className={styles.builtByLabel}>Built by Taja</div>
+        <div className={styles.builtByLabel}>Built by taoja</div>
         <div className={styles.serviceRow}>
           <div className={styles.serviceLogo}>
             <svg width="22" height="22" viewBox="0 0 24 24" fill="#2DBD97">
@@ -133,7 +133,7 @@ function ViewTaxService({ onBack, showToast }) {
           </div>
           <div className={styles.serviceInfo}>
             <div className={styles.serviceNameRow}>
-              <span className={styles.serviceName}>Taja tax services</span>
+              <span className={styles.serviceName}>taoja tax services</span>
               <span className={styles.activeBadge}><span className={styles.activeDot} /> Active</span>
             </div>
             <div className={styles.serviceDesc}>
@@ -361,7 +361,7 @@ export default function PanelTaxes() {
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9H13V8.5a1.5 1.5 0 0 0-3 0V11H7.5a1.5 1.5 0 0 0 0 3H10v2.5a1.5 1.5 0 0 0 3 0V14h2.5a1.5 1.5 0 0 0 0-3z"/>
               </svg>
             </div>
-            <span className={styles.tsName}>Taja tax services</span>
+            <span className={styles.tsName}>taoja tax services</span>
             <span className={styles.activeDot} />
             <span className={styles.tsActive}>Active</span>
           </div>

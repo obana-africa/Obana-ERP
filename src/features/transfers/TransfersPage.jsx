@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { useTransfers } from './hooks/useTransfers';
 import { useTransferFilters } from './hooks/useTransferFilters';
 import StatsRow from './components/StatsRow';
@@ -8,12 +8,12 @@ import EmptyState from './components/EmptyState';
 import CreateTransferModal from './components/CreateTransferModal';
 import TransferDetailModal from './components/TransferDetailModal';
 import Icon from '@/components/ui/Icon/Icon';
-import SearchDropdown from '@/components/shared/SearchDropdown';
+// import SearchDropdown from '@/components/shared/SearchDropdown';
 import { fmt } from '@/utils/formatters';
 import s from './Transfers.module.css';
 
 export default function TransfersPage() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { transfers, loading, error, addTransfer, receiveTransfer } = useTransfers();
 
   const [search, setSearch] = useState('');
