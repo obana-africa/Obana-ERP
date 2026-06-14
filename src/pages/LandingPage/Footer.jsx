@@ -41,6 +41,7 @@ export default function Footer() {
             </a>
           </div>
         </div>
+        
 
         {/* Nav link columns */}
         <div className={styles.footerCols}>
