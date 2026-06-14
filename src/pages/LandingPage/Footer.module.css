@@ -9,27 +9,29 @@
   color: rgba(255,255,255,0.75);
 }
 
-/* ── TOP: brand col (left) + nav links (right) ── */
+/* ── TOP: logo+socials (left) · nav links (right) ── */
 .footerTop {
   display: flex;
   align-items: flex-start;
   gap: 80px;
-  padding: 40px 60px 32px;
+  padding: 36px 60px 28px;
   max-width: 1500px;
   margin: 0 auto;
 }
 
+/* Brand col — logo directly above socials, no gap */
 .footerBrandCol {
   display: flex;
   flex-direction: column;
-  /* gap: 4px; */
   flex-shrink: 0;
   width: 180px;
+  gap: 0;
 }
 
 .footerLogo {
-  height: auto;
-  width: 160px;
+  height: 40px;           /* fixed height — ignores any transparent PNG padding */
+  width: auto;
+  max-width: 160px;
   object-fit: contain;
   object-position: left center;
   display: block;
@@ -39,9 +41,9 @@
 
 .footerSocials {
   display: flex;
-  gap: 10px;
+  gap: 12px;
   align-items: center;
-  margin-top: -8px; /* compensates for transparent padding in logo PNG */
+  margin-top: 8px;        /* intentional small gap after logo */
 }
 
 .footerSocial {
@@ -99,13 +101,13 @@
   margin: 0 60px;
 }
 
-/* ── BOTTOM: copyright (left) + newsletter (right) ── */
+/* ── BOTTOM: copyright (left) · newsletter (right) ── */
 .footerBottom {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 48px;
-  padding: 24px 60px 40px;
+  padding: 20px 60px 36px;
   max-width: 1500px;
   margin: 0 auto;
 }
@@ -113,7 +115,7 @@
 .footerBottomLeft {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .footerCopy {
@@ -149,8 +151,8 @@
 .footerNewsletter {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  width: 320px;
+  gap: 6px;
+  width: 300px;
   flex-shrink: 0;
 }
 
@@ -212,9 +214,9 @@
    RESPONSIVE — tablet
    ══════════════════════════════════════════════════════════ */
 @media (max-width: 1024px) {
-  .footerTop     { padding: 36px 32px 28px; gap: 48px; }
+  .footerTop     { padding: 32px 32px 24px; gap: 48px; }
   .footerDivider { margin: 0 32px; }
-  .footerBottom  { padding: 20px 32px 36px; }
+  .footerBottom  { padding: 18px 32px 32px; }
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -223,8 +225,8 @@
 @media (max-width: 768px) {
   .footerTop {
     flex-direction: column;
-    padding: 36px 24px 28px;
-    gap: 28px;
+    padding: 32px 24px 24px;
+    gap: 24px;
   }
   .footerBrandCol {
     flex-direction: row;
@@ -233,18 +235,11 @@
     width: 100%;
     gap: 0;
   }
-  .footerCols {
-    flex-wrap: wrap;
-    gap: 24px;
-    width: 100%;
-  }
-  .footerCol     { min-width: calc(50% - 12px); flex: 1; }
-  .footerDivider { margin: 0 24px; }
-  .footerBottom  {
-    flex-direction: column;
-    padding: 20px 24px 40px;
-    gap: 24px;
-  }
+  .footerSocials  { margin-top: 0; }
+  .footerCols     { flex-wrap: wrap; gap: 24px; width: 100%; }
+  .footerCol      { min-width: calc(50% - 12px); flex: 1; }
+  .footerDivider  { margin: 0 24px; }
+  .footerBottom   { flex-direction: column; padding: 18px 24px 36px; gap: 20px; }
   .footerNewsletter     { width: 100%; }
   .footerNewsletterForm { width: 100%; }
 }
@@ -253,10 +248,6 @@
    RESPONSIVE — small mobile
    ══════════════════════════════════════════════════════════ */
 @media (max-width: 480px) {
-  .footerBrandCol {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-  .footerCol { min-width: 100%; }
+  .footerBrandCol { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .footerCol      { min-width: 100%; }
 }
