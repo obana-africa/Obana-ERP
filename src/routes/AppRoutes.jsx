@@ -19,9 +19,9 @@ import RouteFallback from '../components/common/RouteFallback'
 
 // ── Lazy (Main app) ────────────────────────────────────────
 const ProductsPage    = lazy(() => import('../features/products/ProductsPage'))
-const CollectionsPage = lazy(() => import('../features/Collections/CollectionsPage'))
+// const CollectionsPage = lazy(() => import('../features/Collections/CollectionsPage'))
 const Inventory       = lazy(() => import('../pages/Inventory/Inventory'))
-const TransfersPage   = lazy(() => import('../features/Transfers/TransfersPage'))
+// const TransfersPage   = lazy(() => import('../features/Transfers/TransfersPage'))
 
 const Orders             = lazy(() => import('../pages/Orders/Orders'))
 const Drafts             = lazy(() => import('../pages/Orders/Drafts'))
