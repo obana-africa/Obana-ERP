@@ -1,13 +1,19 @@
-import styles from './LandingPage.module.css'
+import styles from './Footer.module.css'
 
 export default function Footer() {
   return (
     <footer className={styles.footer}>
+
+      {/* ── TOP: logo + nav links ── */}
       <div className={styles.footerTop}>
 
-        {/* Brand + socials */}
+        {/* Brand col — logo + socials */}
         <div className={styles.footerBrandCol}>
-          <img src="/logos/taojaLogo_white.png" alt="taoja" className={styles.footerLogo} />
+          <img
+            src="/logos/taoja_logo.png"
+            alt="ta'oja"
+            className={styles.footerLogo}
+          />
           <div className={styles.footerSocials}>
             <a href="https://facebook.com" target="_blank" rel="noreferrer" className={styles.footerSocial} aria-label="Facebook">
               <svg width={18} height={18} viewBox="0 0 24 24" fill="currentColor">
@@ -36,10 +42,10 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Link columns */}
+        {/* Nav link columns */}
         <div className={styles.footerCols}>
           <div className={styles.footerCol}>
-            <p className={styles.footerColTitle}>About taja</p>
+            <p className={styles.footerColTitle}>About ta'oja</p>
             <a href="#" className={styles.footerLink}>About Us</a>
             <a href="#" className={styles.footerLink}>Blog</a>
             <a href="#" className={styles.footerLink}>FAQs</a>
@@ -68,22 +74,25 @@ export default function Footer() {
 
       <hr className={styles.footerDivider} />
 
+      {/* ── BOTTOM: copyright + newsletter ── */}
       <div className={styles.footerBottom}>
         <div className={styles.footerBottomLeft}>
           <p className={styles.footerCopy}>
             © 2025 Obana.Africa (An ICON Tech &amp; Ecom Services Ltd Trademark).<br />
-            All Rights Reserved.{' '}
-            <br />
-            <a href="#" className={styles.footerBottomLink}>Terms &amp; Conditions</a>
-            {' | '}
-            <a href="#" className={styles.footerBottomLink}>Privacy Policy</a>
+            All Rights Reserved.
           </p>
+          <div className={styles.footerLegalLinks}>
+            <a href="#" className={styles.footerBottomLink}>Terms &amp; Conditions</a>
+            <span className={styles.footerLegalSep}>·</span>
+            <a href="#" className={styles.footerBottomLink}>Privacy Policy</a>
+          </div>
         </div>
 
         <div className={styles.footerNewsletter}>
           <p className={styles.footerNewsletterTitle}>Stay Connected</p>
           <p className={styles.footerNewsletterSub}>
-            Subscribe for updates on sourcing opportunities, vendor programmes, and African market trends.
+            Subscribe for updates on sourcing opportunities, vendor programmes,
+            and African market trends.
           </p>
           <form className={styles.footerNewsletterForm} onSubmit={e => e.preventDefault()}>
             <input
@@ -100,6 +109,7 @@ export default function Footer() {
           </form>
         </div>
       </div>
+
     </footer>
   )
 }

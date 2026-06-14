@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap');
 
-* { 
+:root { 
   padding: 0; 
   margin: 0; 
   box-sizing: border-box; 
@@ -163,7 +163,9 @@
 }
 
 @media (max-width: 768px) {
-  .section { padding: 64px 20px; }
+  .section { 
+    padding: 64px 20px; 
+  }
   .title   { font-size: 28px; }
   .grid    { grid-template-columns: 1fr; max-width: 480px; }
 }

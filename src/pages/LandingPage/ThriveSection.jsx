@@ -118,6 +118,7 @@ export default function ThriveSection({ setShowNavModal }) {
               <h3 className={styles.cardTitle}>{card.title}</h3>
               <p className={styles.cardDesc}>{card.desc}</p>
               <button
+                type="button"
                 className={
                   card.ctaStyle === 'gold'
                     ? styles.ctaGold

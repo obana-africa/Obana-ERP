@@ -6,6 +6,7 @@ import EverythingSection from './EverythingSection'
 import ThriveSection from './ThriveSection'
 // import PricingSection   from './PricingSection'
 import GetStartedSection from './GetStartedSection'
+import ObanaAdvantageSection from './ObanaAdvantageSection'
 import Footer from './Footer'
 
 // ── Static data ───────────────────────────────────────────
@@ -348,10 +349,10 @@ export default function LandingPage() {
         <div className={styles.navInner}>
           <div className={styles.brand}>
             <div className={styles.brandLogo}>
-              <img src="/logos/taojaLogo_white.png" alt="taoja" className={styles.brandLogoImg} />
+              <img src="/logos/taoja_logo.png" alt="taoja" className={styles.brandLogoImg} />
             </div>
-            <div className={styles.navLinks}>
-              {/* Features dropdown */}
+            {/* <div className={styles.navLinks}>
+             
               <div className={styles.navItem}>
                 <button className={styles.navLink}>Features <span className={styles.navChevron}>▾</span></button>
                 <div className={styles.dropdown}>
@@ -382,7 +383,7 @@ export default function LandingPage() {
                 </div>
               </div>
 
-              {/* Why Us dropdown */}
+            
               <div className={styles.navItem}>
                 <button className={styles.navLink}>Why Us <span className={styles.navChevron}>▾</span></button>
                 <div className={styles.dropdown}>
@@ -424,7 +425,7 @@ export default function LandingPage() {
                 </div>
               </div>
 
-              {/* Reviews dropdown */}
+             
               <div className={styles.navItem}>
                 <button className={styles.navLink}>Reviews <span className={styles.navChevron}>▾</span></button>
                 <div className={styles.dropdown}>
@@ -456,7 +457,7 @@ export default function LandingPage() {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
           <div className={styles.navActions}>
             <button className={styles.btnOutline} onClick={() => setShowNavModal(true)}>Learn more</button>
@@ -496,10 +497,11 @@ export default function LandingPage() {
           </div>
         ))}
       </section>
-
       <FeaturesSection />
       <EverythingSection setShowNavModal={setShowNavModal} />
       <ThriveSection setShowNavModal={setShowNavModal} />
+      <ObanaAdvantageSection onCtaClick={() => setShowNavModal(true)} />
+      
       {/* <PricingSection    onCtaClick={() => setShowNavModal(true)} /> */}
       <GetStartedSection onCtaClick={() => setShowNavModal(true)} />
       <Footer />

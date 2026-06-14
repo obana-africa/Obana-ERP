@@ -27,7 +27,7 @@ export default function EverythingSection({ setShowNavModal }) {
   }, [])
   return (
 
-    <section className={styles.section}>
+    <section className={styles.section} ref={sectionRef}>
       
       {/* ── Header ── */}
       <div className={styles.header}>
