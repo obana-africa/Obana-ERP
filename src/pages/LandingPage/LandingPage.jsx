@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import styles from './LandingPage.module.css'
 
-import Navbar                from './Navbar'
+import Navbar                from './NavBar'
 import WaitlistForm          from './WaitlistForm'
 import FeaturesSection       from './FeaturesSection'
 import EverythingSection     from './EverythingSection'
