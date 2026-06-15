@@ -78,7 +78,7 @@ export default function ObanaAdvantageSection({ onCtaClick }) {
         {/* Stat strip */}
         <div className={styles.statStrip}>
           <div className={styles.stat}>
-            <span className={styles.statValue}>100+</span>
+            <span className={styles.statValue}>10,000+</span>
             <span className={styles.statLabel}>Businesses on the network</span>
           </div>
           <div className={styles.statDivider} />
@@ -87,6 +87,56 @@ export default function ObanaAdvantageSection({ onCtaClick }) {
             <span className={styles.statLabel}>To get started</span>
           </div>
         </div>
+
+        {/* Trust indicators — fill remaining left panel space */}
+        <div className={styles.trustGrid}>
+          <div className={styles.trustItem}>
+            <span className={styles.trustIcon}>
+              <svg width={28} height={28} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                <line x1="12" y1="22.08" x2="12" y2="12"/>
+              </svg>
+            </span>
+            <div className={styles.trustText}>
+              <span className={styles.trustLabel}>Linked Inventory</span>
+              <span className={styles.trustSub}>Auto-synced with your shop</span>
+            </div>
+          </div>
+          <div className={styles.trustItem}>
+            <span className={styles.trustIcon}>
+              <svg width={28} height={28} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+                <rect x={1} y={4} width={22} height={16} rx={2} ry={2}/>
+                <line x1="1" y1="10" x2="23" y2="10"/>
+              </svg>
+            </span>
+            <div className={styles.trustText}>
+              <span className={styles.trustLabel}>Inventory Financing</span>
+              <span className={styles.trustSub}>Stock now, pay as you sell</span>
+            </div>
+          </div>
+          <div className={styles.trustItem}>
+            <span className={styles.trustIcon}>
+              <svg width={28} height={28} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="2" y1="12" x2="22" y2="12"/>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
+            </span>
+            <div className={styles.trustText}>
+              <span className={styles.trustLabel}>Africa-First</span>
+              <span className={styles.trustSub}>₦, mobile money & more</span>
+            </div>
+          </div>
+          {/* <div className={styles.trustItem}>
+            <span className={styles.trustIcon}>🔒</span>
+            <div className={styles.trustText}>
+              <span className={styles.trustLabel}>Bank-Grade Security</span>
+              <span className={styles.trustSub}>Encrypted transactions</span>
+            </div>
+          </div> */}
+        </div>
+
       </div>
 
       {/* ── Right: advantage cards ── */}

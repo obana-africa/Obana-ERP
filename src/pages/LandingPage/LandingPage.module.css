@@ -73,15 +73,17 @@
 
 .brandLogoImg {
   height: auto;
-  width: 150px;
+  width: 120px;
   object-fit: contain;
   display: block;
 }
 
-.navLinks { display: none; display: flex; gap: 24px; }
+.navLinks { 
+  display: none; 
+  /* display: flex;  */
+  gap: 24px; }
 
 .navLink {
-  display: none;
   font-size: 14px;
   color: #fff;
   text-decoration: none;
