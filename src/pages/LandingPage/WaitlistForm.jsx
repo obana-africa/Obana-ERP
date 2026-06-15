@@ -18,7 +18,7 @@
  *   {{business_name}}  — their business name
  */
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import emailjs from '@emailjs/browser'
 import styles from './LandingPage.module.css'
 
@@ -27,11 +27,6 @@ const isValidPhone  = (v) => !v || /^\+?[\d\s-]{8,}$/.test(v.trim())
 
 const FORMSPREE_URL = 'https://formspree.io/f/mbdeprda'
 
-/**
- * Sends a confirmation email to the user via EmailJS.
- * Non-fatal — if it fails we don't surface the error to the user
- * because their waitlist entry was already saved by Formspree.
- */
 async function sendUserConfirmation({ fullName, email, businessName }) {
   try {
     await emailjs.send(
@@ -126,7 +121,6 @@ export default function WaitlistForm({
       // 3️⃣  Success
       setStatus('success')
       setFormData({ fullName: '', email: '', businessName: '', phone: '' })
-      onSuccess?.()
 
     } catch (err) {
       setStatus('error')
@@ -134,18 +128,61 @@ export default function WaitlistForm({
     }
   }
 
-  // Auto-reset success message after 4 s
-  useEffect(() => {
-    if (status !== 'success') return
-    const t = setTimeout(() => setStatus('idle'), 4000)
-    return () => clearTimeout(t)
-  }, [status])
+  // Success screen stays visible until the modal is closed manually
 
-  // ── Success state ─────────────────────────────────────
+  // ── Success screen ────────────────────────────────────
   if (status === 'success') {
     return (
-      <div className={styles.successMsg} role="status">
-        🎉 You're on the list! Check your inbox for a confirmation email.
+      <div className={styles.successScreen} role="status" aria-live="polite">
+
+        {/* Animated checkmark */}
+        <div className={styles.successIconWrap}>
+          <svg
+            className={styles.successIcon}
+            viewBox="0 0 52 52"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle className={styles.successCircle} cx="26" cy="26" r="25" />
+            <path className={styles.successCheck} d="M14 27l8 8 16-16" />
+          </svg>
+        </div>
+
+        {/* Heading */}
+        <h3 className={styles.successTitle}>You're on the list!</h3>
+
+        {/* Subtext */}
+        <p className={styles.successSub}>
+          Welcome to ta'oja early access,{' '}
+          <strong>{formData.fullName.split(' ')[0] || 'friend'}</strong>. We've sent a
+          confirmation to <strong>{formData.email}</strong>. We'll be in
+          touch when we launch.
+        </p>
+
+        {/* What happens next */}
+        <div className={styles.successSteps}>
+          <div className={styles.successStep}>
+            <span className={styles.successStepIcon}></span>
+            <span>Check your inbox for a confirmation email</span>
+          </div>
+          <div className={styles.successStep}>
+            <span className={styles.successStepIcon}></span>
+            <span>Get early access before the public launch</span>
+          </div>
+          <div className={styles.successStep}>
+            <span className={styles.successStepIcon}></span>
+            <span>Receive exclusive early-bird pricing</span>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          className={styles.successCloseBtn}
+          onClick={() => onSuccess?.()}
+        >
+          Close
+        </button>
+
       </div>
     )
   }
