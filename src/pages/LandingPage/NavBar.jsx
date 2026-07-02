@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 import styles from './LandingPage.module.css'
 
 const NAV_FEATURES = [
@@ -31,7 +31,7 @@ const NAV_REVIEWS = [
 ]
 
 export default function Navbar({ scrolled, onWaitlistClick }) {
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
   return (
     <nav className={`${styles.navbar} ${scrolled ? styles.navScrolled : ''}`}>
@@ -40,7 +40,7 @@ export default function Navbar({ scrolled, onWaitlistClick }) {
         {/* ── Brand + nav links ── */}
         <div className={styles.brand}>
           <div className={styles.brandLogo}>
-            <img src="/logos/taoja_logo.png" alt="ta'oja" className={styles.brandLogoImg} />
+            <img src="/logos/taoja-logo-white.png" alt="ta'oja" className={styles.brandLogoImg} />
           </div>
 
           <div className={styles.navLinks}>
@@ -159,17 +159,18 @@ export default function Navbar({ scrolled, onWaitlistClick }) {
 
         {/* ── CTA buttons ── */}
         <div className={styles.navActions}>
-          <button
+          {/* <button
             type="button"
             className={styles.btnOutline}
             onClick={onWaitlistClick}
           >
             Learn more
-          </button>
+          </button> */}
           <button
             type="button"
             className={styles.btnPrimary}
-            onClick={() => navigate('/register')}
+            // onClick={() => navigate('/register')}
+            onClick={onWaitlistClick}
           >
             Get started for free
           </button>

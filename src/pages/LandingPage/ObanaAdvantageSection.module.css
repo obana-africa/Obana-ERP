@@ -1,23 +1,20 @@
 .section {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: 600px;
   background: #fff;
 }
 
 /* ══════════════════════════════════════════════════════════
-   LEFT PANEL — navy background, sticky headline
+   LEFT PANEL — navy background, full height
    ══════════════════════════════════════════════════════════ */
 .left {
   background: #1A324D;
   padding: 72px 52px 72px 60px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 24px;
-  position: sticky;
-  top: 0;
-  align-self: start;
+  justify-content: space-between;  /* spread content to fill full height */
+  gap: 32px;
+  /* removed sticky — let it stretch naturally */
 }
 
 /* "Powered by" badge */
@@ -118,6 +115,51 @@
   height: 36px;
   background: rgba(255,255,255,0.15);
   flex-shrink: 0;
+}
+
+/* ── Trust indicators ── */
+.trustGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding-top: 8px;
+}
+
+.trustItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 14px 12px;
+}
+
+.trustIcon {
+  font-size: 20px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.trustText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.trustLabel {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.3;
+}
+
+.trustSub {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.4;
 }
 
 /* ══════════════════════════════════════════════════════════

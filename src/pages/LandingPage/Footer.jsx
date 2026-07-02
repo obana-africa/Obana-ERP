@@ -10,7 +10,7 @@ export default function Footer() {
         {/* Brand col — logo + socials */}
         <div className={styles.footerBrandCol}>
           <img
-            src="/logos/taoja_logo.png"
+            src="/logos/taoja-logo-white.png"
             alt="ta'oja"
             className={styles.footerLogo}
           />

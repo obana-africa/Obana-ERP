@@ -184,7 +184,7 @@ export default function LandingPage() {
             <button type="button" className={styles.btnWaitlist} onClick={openModal}>
               Join waitlist
             </button>
-            <NotifyForm />
+            {/* <NotifyForm /> */}
           </div>
         </div>
       </section>
