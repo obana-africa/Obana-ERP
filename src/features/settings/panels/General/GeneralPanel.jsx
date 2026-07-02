@@ -220,7 +220,7 @@ export default function GeneralPanel() {
           </div>
           <div>
             <p className={styles.cardTitle}>Hire a Partner</p>
-            <p className={styles.cardSub}>Find a certified taoja development partner</p>
+            <p className={styles.cardSub}>Find a certified thaja development partner</p>
           </div>
         </Card>
         <Card chevron onClick={() => {}}>

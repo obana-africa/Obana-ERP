@@ -36,7 +36,7 @@ async function sendUserConfirmation({ fullName, email, businessName }) {
         to_email:      email,
         to_name:       fullName,
         business_name: businessName,
-        reply_to:      'hello@taoja.africa',   // update to your support email
+        reply_to:      'hello@thaja.africa',   // update to your support email
       },
       import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
     )

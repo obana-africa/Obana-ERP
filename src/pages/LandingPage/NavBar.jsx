@@ -2,19 +2,19 @@
 import styles from './LandingPage.module.css'
 
 const NAV_FEATURES = [
-  { icon: '🛒', title: 'Online Store',       desc: 'Launch a branded storefront in minutes'   },
-  { icon: '⚡', title: 'Point of Sale',       desc: 'Fast, reliable in-person checkout'        },
-  { icon: '📦', title: 'Inventory Tracking', desc: 'Real-time stock across all locations'     },
-  { icon: '📊', title: 'Sales Analytics',    desc: 'Revenue trends and smart insights'        },
-  { icon: '💳', title: 'Multiple Payments',  desc: 'Cash, card, mobile money & more'          },
-  { icon: '🔗', title: 'ERP Integration',    desc: 'CRM, accounting and POS unified'          },
+  { icon: '', title: 'Online Store',       desc: 'Launch a branded storefront in minutes'   },
+  { icon: '', title: 'Point of Sale',       desc: 'Fast, reliable in-person checkout'        },
+  { icon: '', title: 'Inventory Tracking', desc: 'Real-time stock across all locations'     },
+  { icon: '', title: 'Sales Analytics',    desc: 'Revenue trends and smart insights'        },
+  { icon: '', title: 'Multiple Payments',  desc: 'Cash, card, mobile money & more'          },
+  { icon: '', title: 'ERP Integration',    desc: 'CRM, accounting and POS unified'          },
 ]
 
 const NAV_WHY_US = [
-  { icon: '⚡', title: 'Built for Speed',     desc: '99.9% uptime, sub-second load times'          },
-  { icon: '🌍', title: 'Africa-First Design', desc: 'Supports ₦, mobile money, local logistics'    },
-  { icon: '🔒', title: 'Enterprise Security', desc: 'Bank-grade encryption on all transactions'    },
-  { icon: '🖥️', title: 'Omnichannel Ready',   desc: 'Online, in-store, and mobile — one dashboard' },
+  { icon: '', title: 'Built for Speed',     desc: '99.9% uptime, sub-second load times'          },
+  { icon: '', title: 'Africa-First Design', desc: 'Supports ₦, mobile money, local logistics'    },
+  { icon: '', title: 'Enterprise Security', desc: 'Bank-grade encryption on all transactions'    },
+  { icon: '', title: 'Omnichannel Ready',   desc: 'Online, in-store, and mobile — one dashboard' },
 ]
 
 const NAV_STATS = [
@@ -25,7 +25,7 @@ const NAV_STATS = [
 ]
 
 const NAV_REVIEWS = [
-  { name: 'Amaka O.',  role: 'Fashion Retailer, Lagos',    stars: 5, text: 'Taoja transformed how I manage my store. Orders, inventory, payments — all in one place.'                  },
+  { name: 'Amaka O.',  role: 'Fashion Retailer, Lagos',    stars: 5, text: 'thaja transformed how I manage my store. Orders, inventory, payments — all in one place.'                  },
   { name: 'Emeka D.',  role: 'Electronics Vendor, Abuja',  stars: 5, text: 'The POS is incredibly fast. My checkout time dropped by 60% in the first week.'                            },
   { name: 'Fatima B.', role: 'Food Business, Kano',        stars: 5, text: 'Finally an ERP that understands Nigerian business. The mobile money integration alone is worth it.'         },
 ]
@@ -40,7 +40,7 @@ export default function Navbar({ scrolled, onWaitlistClick }) {
         {/* ── Brand + nav links ── */}
         <div className={styles.brand}>
           <div className={styles.brandLogo}>
-            <img src="/logos/taoja-logo-white.png" alt="ta'oja" className={styles.brandLogoImg} />
+            <img src="/logos/thaja_white.png" alt="ta'oja" className={styles.brandLogoImg} />
           </div>
 
           <div className={styles.navLinks}>

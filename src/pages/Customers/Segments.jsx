@@ -13,15 +13,15 @@ const Ic = ({ d, size = 16, stroke = 'currentColor', sw = 1.8 }) => (
 
 /* ── Seed data ─────────────────────────────────────────────────── */
 const SEED_SEGMENTS = [
-  { id: 1,  name: 'Customers added to companies',          pct: 0,   lastActivity: 'Created on 9 Apr 2026',    createdBy: 'taoja',    icon: '#2DBD97' },
-  { id: 2,  name: 'Customers not added to companies',      pct: 100, lastActivity: 'Created on 9 Apr 2026',    createdBy: 'taoja',    icon: '#2DBD97' },
+  { id: 1,  name: 'Customers added to companies',          pct: 0,   lastActivity: 'Created on 9 Apr 2026',    createdBy: 'thaja',    icon: '#2DBD97' },
+  { id: 2,  name: 'Customers not added to companies',      pct: 100, lastActivity: 'Created on 9 Apr 2026',    createdBy: 'thaja',    icon: '#2DBD97' },
   { id: 3,  name: 'Ecomsend',                              pct: 3,   lastActivity: 'Created on 3 Feb 2026',    createdBy: 'SendWILL',icon: '#8B5CF6' },
-  { id: 4,  name: 'Active Email List',                     pct: 63,  lastActivity: 'Edited on 7 Jul 2025',     createdBy: 'taoja',    icon: '#E8C547' },
-  { id: 5,  name: 'Customers who have purchased at least once', pct: 42, lastActivity: 'Edited on 5 Nov 2024', createdBy: 'taoja',    icon: '#2DBD97' },
-  { id: 6,  name: 'Email subscribers',                     pct: 64,  lastActivity: 'Edited on 5 Nov 2024',    createdBy: 'taoja',    icon: '#2DBD97' },
-  { id: 7,  name: 'Abandoned checkouts in the last 30 days', pct: 0,  lastActivity: 'Edited on 5 Nov 2024',   createdBy: 'taoja',    icon: '#EF4444' },
-  { id: 8,  name: 'Customers who have purchased more than once', pct: 13, lastActivity: 'Edited on 5 Nov 2024', createdBy: 'taoja',  icon: '#2DBD97' },
-  { id: 9,  name: "Customers who haven't purchased",       pct: 58,  lastActivity: 'Edited on 5 Nov 2024',    createdBy: 'taoja',    icon: '#F59E0B' },
+  { id: 4,  name: 'Active Email List',                     pct: 63,  lastActivity: 'Edited on 7 Jul 2025',     createdBy: 'thaja',    icon: '#E8C547' },
+  { id: 5,  name: 'Customers who have purchased at least once', pct: 42, lastActivity: 'Edited on 5 Nov 2024', createdBy: 'thaja',    icon: '#2DBD97' },
+  { id: 6,  name: 'Email subscribers',                     pct: 64,  lastActivity: 'Edited on 5 Nov 2024',    createdBy: 'thaja',    icon: '#2DBD97' },
+  { id: 7,  name: 'Abandoned checkouts in the last 30 days', pct: 0,  lastActivity: 'Edited on 5 Nov 2024',   createdBy: 'thaja',    icon: '#EF4444' },
+  { id: 8,  name: 'Customers who have purchased more than once', pct: 13, lastActivity: 'Edited on 5 Nov 2024', createdBy: 'thaja',  icon: '#2DBD97' },
+  { id: 9,  name: "Customers who haven't purchased",       pct: 58,  lastActivity: 'Edited on 5 Nov 2024',    createdBy: 'thaja',    icon: '#F59E0B' },
 ]
 
 /* ── Create segment modal ──────────────────────────────────────── */
@@ -173,7 +173,7 @@ export default function Segments() {
     name:         data.name,
     pct:          0,
     lastActivity: `Created on ${new Date().toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' })}`,
-    createdBy:    'taoja',
+    createdBy:    'thaja',
     icon:         '#2DBD97',
   }])
 
@@ -296,8 +296,8 @@ export default function Segments() {
                 <td>
                   <div className={s.createdByCell}>
                     <div className={s.creatorAvatar}
-                      style={{ background: seg.createdBy === 'taoja' ? '#1b3b5f18' : '#8B5CF618',
-                               color: seg.createdBy === 'taoja' ? '#1b3b5f' : '#8B5CF6' }}>
+                      style={{ background: seg.createdBy === 'thaja' ? '#1b3b5f18' : '#8B5CF618',
+                               color: seg.createdBy === 'thaja' ? '#1b3b5f' : '#8B5CF6' }}>
                       {seg.createdBy[0]}
                     </div>
                     <span>{seg.createdBy}</span>

@@ -321,7 +321,7 @@ export default function PanelCheckout() {
         )}
 
         <ConfigCard
-          name="taoja configuration"
+          name="thaja configuration"
           liveAt="Today at 0:17"
           onDuplicate={() => showToast('Configuration duplicated')}
           onCustomize={() => navigate('/settings/checkout/customize')}

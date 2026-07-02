@@ -5,7 +5,7 @@ const ADVANTAGES = [
     id: 'inventory',
     eyebrow: 'Linked inventory',
     title: 'Your shop and stock, always in sync',
-    desc: 'When you sign up to Taoja, your store is directly connected to Obana.Africa\'s inventory network. Products you sell are tracked in real time — no manual updates, no mismatched stock counts.',
+    desc: 'When you sign up to thaja, your store is directly connected to Obana.Africa\'s inventory network. Products you sell are tracked in real time — no manual updates, no mismatched stock counts.',
     icon: (
       <svg width={28} height={28} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
         <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
@@ -18,7 +18,7 @@ const ADVANTAGES = [
     id: 'financing',
     eyebrow: 'Inventory financing',
     title: 'Stock up now, pay as you sell',
-    desc: 'Get access to inventory financing through Obana.Africa — so you can restock faster, take on larger orders, and grow without waiting on cash flow. Your sales history on Taoja builds your eligibility automatically.',
+    desc: 'Get access to inventory financing through Obana.Africa — so you can restock faster, take on larger orders, and grow without waiting on cash flow. Your sales history on thaja builds your eligibility automatically.',
     icon: (
       <svg width={28} height={28} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
         <rect x={1} y={4} width={22} height={16} rx={2} ry={2}/>
@@ -30,7 +30,7 @@ const ADVANTAGES = [
     id: 'network',
     eyebrow: 'Obana.Africa network',
     title: 'Backed by Africa\'s commerce infrastructure',
-    desc: 'Taoja is powered by Obana.Africa — a sourcing, logistics, and trade network built for Nigerian and African businesses. That means better supplier access, smarter restocking, and a platform that grows with you.',
+    desc: 'thaja is powered by Obana.Africa — a sourcing, logistics, and trade network built for Nigerian and African businesses. That means better supplier access, smarter restocking, and a platform that grows with you.',
     icon: (
       <svg width={28} height={28} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
         <circle cx="12" cy="12" r="10"/>
@@ -49,8 +49,8 @@ export default function ObanaAdvantageSection({ onCtaClick }) {
       <div className={styles.left}>
         <div className={styles.poweredBadge}>
           <img
-            src="/logos/taojaLogo_white.png"
-            alt="Taoja"
+            src="/logos/thajaLogo_white.png"
+            alt="thaja"
             className={styles.poweredLogo}
             onError={e => { e.currentTarget.style.display = 'none' }}
           />
@@ -63,7 +63,7 @@ export default function ObanaAdvantageSection({ onCtaClick }) {
         </h2>
 
         <p className={styles.leftSub}>
-          Signing up to Taoja connects you to infrastructure that most businesses
+          Signing up to thaja connects you to infrastructure that most businesses
           don't get until they're much bigger.
         </p>
 

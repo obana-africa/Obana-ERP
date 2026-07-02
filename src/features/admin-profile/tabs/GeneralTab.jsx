@@ -37,7 +37,7 @@ export const GeneralTab = ({ profile, onProfileUpdate, showToast }) => {
   }, [profile, reset]);
 
   // Placeholder for store name (should come from profile)
-  const storeName = profile?.storeName || 'taoja Store';
+  const storeName = profile?.storeName || 'thaja Store';
 
   return (
     <div>
@@ -79,7 +79,7 @@ export const GeneralTab = ({ profile, onProfileUpdate, showToast }) => {
       <Card className={styles.card}>
         <div className={styles.cardHeader}>
           <div className={styles.cardTitle}>Login service</div>
-          <div className={styles.cardDesc}>Connect an external login service to quickly and securely access your taoja account.</div>
+          <div className={styles.cardDesc}>Connect an external login service to quickly and securely access your thaja account.</div>
         </div>
         <div className={styles.cardBodyFlush}>
           {LOGIN_SERVICES.map((service) => (

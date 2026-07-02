@@ -10,7 +10,7 @@ export default function Footer() {
         {/* Brand col — logo + socials */}
         <div className={styles.footerBrandCol}>
           <img
-            src="/logos/taoja-logo-white.png"
+            src="/logos/thaja_white.png"
             alt="ta'oja"
             className={styles.footerLogo}
           />
@@ -79,7 +79,7 @@ export default function Footer() {
       <div className={styles.footerBottom}>
         <div className={styles.footerBottomLeft}>
           <p className={styles.footerCopy}>
-            © 2025 Obana.Africa (An ICON Tech &amp; Ecom Services Ltd Trademark).<br />
+            © {new Date().getFullYear()} Obana.Africa (An ICON Tech &amp; Ecom Services Ltd Trademark).<br />
             All Rights Reserved.
           </p>
           <div className={styles.footerLegalLinks}>

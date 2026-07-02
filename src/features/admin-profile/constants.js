@@ -16,7 +16,7 @@ export const NOTIFICATION_ITEMS = [
   { key: 'lowStock', label: 'Low stock alert', sub: 'When a product has fewer than 5 units left' },
   { key: 'newCustomer', label: 'New customer registered', sub: 'When someone signs up via the store or WhatsApp' },
   { key: 'orderShipped', label: 'Order status updates', sub: 'Shipped, delivered, and returned' },
-  { key: 'marketing', label: 'Marketing & promotions', sub: 'Tips, product updates, and offers from taoja' },
+  { key: 'marketing', label: 'Marketing & promotions', sub: 'Tips, product updates, and offers from thaja' },
   { key: 'weeklyReport', label: 'Weekly performance report', sub: "Summary of your store's activity every Monday" },
 ];
 

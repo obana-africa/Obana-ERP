@@ -86,8 +86,8 @@ const Topbar = ({ storeName = '', storeInitial = '' }) => {
       {/* Logo */}
       <div className={styles.logo}>
         <img
-          src="/public/logos/taoja logo blue.png"
-          alt="taoja"
+          src="/public/logos/thaja logo blue.png"
+          alt="thaja"
           className={styles.logoImg}
           onError={e => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'block' }}
         />

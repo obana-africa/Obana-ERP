@@ -1,6 +1,6 @@
 /**
  * OnlineStoreThemes.jsx
- * Themes management page — styled to match taoja dashboard palette.
+ * Themes management page — styled to match thaja dashboard palette.
  * Route: /online-store/themes
  *
  * "Edit theme" → navigates to /online-store (the full builder)
@@ -65,11 +65,11 @@ const INITIAL_DRAFTS = [
 ]
 
 const FREE_THEMES = [
-  { id: 'horizon',  name: 'Horizon',       by: 'taoja', primary: '#1b3b5f', accent: '#fbbf24', bg: '#fff'    },
-  { id: 'tinker',   name: 'Tinker',        by: 'taoja', primary: '#78350f', accent: '#d97706', bg: '#fffbf5' },
-  { id: 'savor',    name: 'Savor',         by: 'taoja', primary: '#7f1d1d', accent: '#ef4444', bg: '#fff'    },
-  { id: 'atelier',  name: 'Atelier',       by: 'taoja', primary: '#1e1b4b', accent: '#8b5cf6', bg: '#fafafa' },
-  { id: 'ritual',   name: 'Ritual',        by: 'taoja', primary: '#292524', accent: '#f43f5e', bg: '#fff1f2' },
+  { id: 'horizon',  name: 'Horizon',       by: 'thaja', primary: '#1b3b5f', accent: '#fbbf24', bg: '#fff'    },
+  { id: 'tinker',   name: 'Tinker',        by: 'thaja', primary: '#78350f', accent: '#d97706', bg: '#fffbf5' },
+  { id: 'savor',    name: 'Savor',         by: 'thaja', primary: '#7f1d1d', accent: '#ef4444', bg: '#fff'    },
+  { id: 'atelier',  name: 'Atelier',       by: 'thaja', primary: '#1e1b4b', accent: '#8b5cf6', bg: '#fafafa' },
+  { id: 'ritual',   name: 'Ritual',        by: 'thaja', primary: '#292524', accent: '#f43f5e', bg: '#fff1f2' },
 ]
 
 const PERF_METRICS = [

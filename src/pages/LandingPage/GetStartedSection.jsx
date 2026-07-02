@@ -39,7 +39,7 @@ export default function GetStartedSection({ onCtaClick }) {
           <div className={styles.getStartedPhoneWrap}>
             <img
               src="/images/pos-phone.png"
-              alt="Taoja POS on mobile"
+              alt="thaja POS on mobile"
               className={styles.getStartedPhone}
               onError={e => { e.target.style.display = 'none' }}
             />

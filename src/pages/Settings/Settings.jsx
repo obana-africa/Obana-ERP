@@ -345,7 +345,7 @@ function PanelGeneral() {
     </div>
     <div>
       <p className={styles.cardTitle}>Hire a Partner</p>
-      <p className={styles.cardSub}>Find a certified taoja development partner</p>
+      <p className={styles.cardSub}>Find a certified thaja development partner</p>
     </div>
     <button className={styles.resourceBtn}>Hire a Partner</button>
   </Card>
@@ -724,7 +724,7 @@ function PanelNotifications() {
         <div className={styles.notifRow}>
           <div>
             <p className={styles.notifLabel}>Marketing emails</p>
-            <p className={styles.notifDesc}>Receive product updates, tips and offers from taoja</p>
+            <p className={styles.notifDesc}>Receive product updates, tips and offers from thaja</p>
           </div>
           <Toggle value={notifs.emailMarketing} onChange={() => toggle('emailMarketing')} />
         </div>

@@ -52,7 +52,7 @@ export default function FeaturesSection() {
         </div>
         <p className={styles.featuresSectionSub}>
           From a single market stall to a multi-location store,<br />
-          taoja has you covered.
+          thaja has you covered.
         </p>
       </div>
 
